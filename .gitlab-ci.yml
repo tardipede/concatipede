@@ -10,6 +10,8 @@ buildAndTest:
     - R -e 'install.packages(c("ape", "xlsx"))'
     # Install pkgdown
     - R -e 'install.packages("pkgdown")'
+    # Debug
+    - R -e "library(xlsx)"
     # Install package
     - make install
     # Build website
