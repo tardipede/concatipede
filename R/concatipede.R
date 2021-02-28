@@ -31,7 +31,9 @@ concatipede = function(filename="seqnames.txt",
     colnames(df)=unlist(lapply(colnames(df),.colname.clean))
     df=as.data.frame(apply(df,2,.clean.NA))
   }
-  lR=alignments
+
+  # this allow to not to use all the genes in the concatenations
+  lR=alignments[names(alignments) %in% colnames(df)[-1]]
 
   #rename sequences in each alignment with the final sequence name
   for (j in 1:length(lR)){
@@ -44,12 +46,14 @@ concatipede = function(filename="seqnames.txt",
 
   if(remove.gaps == TRUE){lR = lapply(lR,ape::del.colgapsonly)}
 
+  if (length(lR) == 1){conc = lR}
+  if (length(lR) != 1){
   #concatenate alignments by name
   conc=cbind(lR[[1]],lR[[2]],fill.with.gaps=T)
   if(length(lR)>2){
     for (i in 3:length(lR)){
       conc=cbind(conc,lR[[i]],fill.with.gaps=T)
-    }}
+    }}}
 
   #Create data frame with partitions lenghts and limits
   v=vector()
@@ -57,14 +61,21 @@ concatipede = function(filename="seqnames.txt",
     v[i]=max(unlist(lapply(lR[[i]],length)))}
   len.df=data.frame(alignment=names(lR),lenght=v)
 
+
   len.df$from=rep(0,nrow(len.df))
   len.df$to=rep(0,nrow(len.df))
   len.df$from[1]=1
   len.df$to[1]=len.df$lenght[1]
 
+  if (length(lR) != 1){
   for (i in 2:nrow(len.df)){
     len.df$from[i]=len.df$to[i-1]+1
-    len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}
+    len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}}
+
+  # just to make sure it will be in the right format to be saved
+  if (length(lR) == 1){conc = conc[[1]]}
+
+
 
   if (write.outputs == T){
 
