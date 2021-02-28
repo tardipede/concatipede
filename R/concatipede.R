@@ -1,19 +1,20 @@
-#' COncatenate alignments
+#' Concatenate alignments
 #'
-#' This function concatenate sequences from alignments based on a correspondence table
+#' This function concatenate sequences from alignments based on a correspondence table and saves the output in a new directory
 #'
 #' @param filename filename of correspondence table
 #' @param alignments output from concatipede_prepare() function
 #' @param format a string specifying in what formats you want the alignment
 #' @param plotimg return a graphical representation of the alignment in pdf format
 #' @param return.aln return the concatenate alignment inside R workspace
+#' @param remove.gaps remove gap only columns (useful if not using all sequences in the alignments)
 #' @param out specify outputs filename
 #' @return Can return alignment in the workspace if return.aln is set to TRUE
 #' @export
 
 
 concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexus","phylip"),
-                       plotimg=T,return.aln=F,out=NULL){
+                       plotimg=T,return.aln=F,out=NULL,remove.gaps=TRUE){
   #filename: specify the saved translation table
   #alignments: output from concatipede_prepare() function
   #format: a string specifying in what formats you want the alignment
@@ -37,7 +38,10 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
     lR[[j]]=.rename.seqs(lR[[j]],table=df,align=align)
     lR[[j]]=lR[[j]][!is.na(names(lR[[j]]))]} #this delete all sequences not present in the translation table
 
+
   lR=lapply(lR,as.matrix)
+
+  if(remove.gaps == TRUE){lR = lapply(lR,ape::del.colgapsonly)}
 
   #concatenate alignments by name
   conc=cbind(lR[[1]],lR[[2]],fill.with.gaps=T)
@@ -46,15 +50,35 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
       conc=cbind(conc,lR[[i]],fill.with.gaps=T)
     }}
 
+
+
+  #Create directory where to save outputs file
+
+  if(!is.null(out)){dir_name = out}
+  if(is.null(out)){dir_name = "concatenated"}
+
+  # this part will check if a directory already exists and to avoid overwrite it append
+  #a progressive number to the name of the new folder
+  base_dir_name = dir_name
+  N = 0
+  while (dir.exists(dir_name)) {
+    N = N+1
+    dir_name = paste0(base_dir_name,"_",N)
+  }
+
+  dir.create(dir_name)
+
+
+
   # save alignment
-  if(is.null(out)){write.alignment(conc,name="concatenated",format=format)}
-  if(!is.null(out)){write.alignment(conc,name=out,format=format)}
+  if(is.null(out)){write.alignment(conc,name=paste0(dir_name,"/concatenated"),format=format)}
+  if(!is.null(out)){write.alignment(conc,name=paste0(dir_name,"/",out),format=format)}
 
   #Create data frame with partitions lenghts and limits
   v=vector()
-  for (i in 1:length(alignments)){
-    v[i]=max(unlist(lapply(alignments[[i]],length)))}
-  len.df=data.frame(alignment=names(alignments),lenght=v)
+  for (i in 1:length(lR)){
+    v[i]=max(unlist(lapply(lR[[i]],length)))}
+  len.df=data.frame(alignment=names(lR),lenght=v)
 
   len.df$from=rep(0,nrow(len.df))
   len.df$to=rep(0,nrow(len.df))
@@ -65,15 +89,17 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
     len.df$from[i]=len.df$to[i-1]+1
     len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}
 
+
+
   #Save partition lenghts table
-  if(is.null(out)){filename="length_summary.txt"}
-  if(!is.null(out)){filename=paste0(out,"_length_summary.txt")}
+  if(is.null(out)){filename=paste0(dir_name,"/length_summary.txt")}
+  if(!is.null(out)){filename=paste0(dir_name,"/",out,"_length_summary.txt")}
   write.table(len.df,file=filename,sep="\t",quote=FALSE,row.names=FALSE)
 
 
   #alignment plotting option
-  if(is.null(out)){filename="concatenated_alignment.pdf"}
-  if(!is.null(out)){filename=paste0(out,"_concatenated_alignment.pdf")}
+  if(is.null(out)){filename=paste0(dir_name,"/concatenated_alignment.pdf")}
+  if(!is.null(out)){filename=paste0(dir_name,"/",out,"_concatenated_alignment.pdf")}
 
   if (plotimg==T){pdf(filename)
     img=image(conc,cex=0.3)
