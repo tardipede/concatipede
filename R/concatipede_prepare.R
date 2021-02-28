@@ -11,12 +11,10 @@
 #' @return List object containing alignments, this object is one of the input for concatipede() function
 #' @export
 
-concatipede_prepare = function(filename="seqnames",writetable=T,excel=F,exclude="concatenated"){
-  #filename: specify the filename of the raw translation table to be created
-  #writetable: do not write the translation table, only generate input object for concatenat.part2() function
-  #excel: output table as excel file
-  #exclude: exclude fasta files with a keyword
-
+concatipede_prepare = function(filename="seqnames",
+                               writetable=T,
+                               excel=T,
+                               exclude="concatenated"){
 
   #read files in the foldes and create a list
   files=list.files(pattern = "\\.fas")
@@ -48,10 +46,12 @@ concatipede_prepare = function(filename="seqnames",writetable=T,excel=F,exclude=
     df[,i+1]=seqnames
   }
 
+
+
   # save the template for the translation table as txt or excel
   if (writetable==T) {
     if(excel==F){write.table(df,sep="\t",file=paste0(filename,".txt"),row.names=FALSE,quote=FALSE)}
-    if(excel==T){xlsx::write.xlsx(df,file=paste0(filename,".xlsx"),col.names=T,row.names=F,append=F)}
+    if(excel==T){writexl::write_xlsx(df,path=paste0(filename,".xlsx"),col_names=T,format_headers=T)}
   }
   return(l)
 }

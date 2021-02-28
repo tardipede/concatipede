@@ -3,30 +3,31 @@
 #' This function concatenate sequences from alignments based on a correspondence table and saves the output in a new directory
 #'
 #' @param filename filename of correspondence table
-#' @param alignments output from concatipede_prepare() function
+#' @param alignments output from concatipede_prepare function
 #' @param format a string specifying in what formats you want the alignment
 #' @param plotimg return a graphical representation of the alignment in pdf format
 #' @param return.aln return the concatenate alignment inside R workspace
-#' @param remove.gaps remove gap only columns (useful if not using all sequences in the alignments)
+#' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
+#' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
+#' @param excel.sheet specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param out specify outputs filename
 #' @return Can return alignment in the workspace if return.aln is set to TRUE
 #' @export
 
-
-concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexus","phylip"),
-                       plotimg=T,return.aln=F,out=NULL,remove.gaps=TRUE){
-  #filename: specify the saved translation table
-  #alignments: output from concatipede_prepare() function
-  #format: a string specifying in what formats you want the alignment
-  #plotimg: return a graphical representation of the alignment in pdf format
-  #return.aln: return the concatenate alignment inside R workspace
-  #out: can specify an output name
-  #deletegapcols: delete columns with only gaps, useful if not all sequences from an alignment are used
+concatipede = function(filename="seqnames.txt",
+                       alignments,
+                       format=c("fasta","nexus","phylip"),
+                       plotimg=T,
+                       return.aln=F,
+                       out=NULL,
+                       remove.gaps=TRUE,
+                       write.outputs=TRUE,
+                       excel.sheet=1){
 
   # check if the translation table is in text format or in excel
   if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
   if(grepl(".xlsx",filename)==TRUE){
-    df=xlsx::read.xlsx(filename, sheetIndex=1, header=TRUE)
+    df=readxl::read_xlsx(path=filename, sheet=excel.sheet, col_names=TRUE)
     colnames(df)=unlist(lapply(colnames(df),.colname.clean))
     df=as.data.frame(apply(df,2,.clean.NA))
   }
@@ -50,7 +51,22 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
       conc=cbind(conc,lR[[i]],fill.with.gaps=T)
     }}
 
+  #Create data frame with partitions lenghts and limits
+  v=vector()
+  for (i in 1:length(lR)){
+    v[i]=max(unlist(lapply(lR[[i]],length)))}
+  len.df=data.frame(alignment=names(lR),lenght=v)
 
+  len.df$from=rep(0,nrow(len.df))
+  len.df$to=rep(0,nrow(len.df))
+  len.df$from[1]=1
+  len.df$to[1]=len.df$lenght[1]
+
+  for (i in 2:nrow(len.df)){
+    len.df$from[i]=len.df$to[i-1]+1
+    len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}
+
+  if (write.outputs == T){
 
   #Create directory where to save outputs file
 
@@ -68,34 +84,15 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
 
   dir.create(dir_name)
 
-
-
   # save alignment
   if(is.null(out)){write.alignment(conc,name=paste0(dir_name,"/concatenated"),format=format)}
   if(!is.null(out)){write.alignment(conc,name=paste0(dir_name,"/",out),format=format)}
-
-  #Create data frame with partitions lenghts and limits
-  v=vector()
-  for (i in 1:length(lR)){
-    v[i]=max(unlist(lapply(lR[[i]],length)))}
-  len.df=data.frame(alignment=names(lR),lenght=v)
-
-  len.df$from=rep(0,nrow(len.df))
-  len.df$to=rep(0,nrow(len.df))
-  len.df$from[1]=1
-  len.df$to[1]=len.df$lenght[1]
-
-  for (i in 2:nrow(len.df)){
-    len.df$from[i]=len.df$to[i-1]+1
-    len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}
-
 
 
   #Save partition lenghts table
   if(is.null(out)){filename=paste0(dir_name,"/length_summary.txt")}
   if(!is.null(out)){filename=paste0(dir_name,"/",out,"_length_summary.txt")}
   write.table(len.df,file=filename,sep="\t",quote=FALSE,row.names=FALSE)
-
 
   #alignment plotting option
   if(is.null(out)){filename=paste0(dir_name,"/concatenated_alignment.pdf")}
@@ -104,6 +101,7 @@ concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexu
   if (plotimg==T){pdf(filename)
     img=image(conc,cex=0.3)
     dev.off()}
+  }
 
   #return concatenated alignment in R option
   if(return.aln==T) {return(conc)}
