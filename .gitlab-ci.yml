@@ -6,6 +6,8 @@ buildAndTest:
   image: rocker/tidyverse
   stage: build
   script:
+    # Install system dependencies for rJava
+    - apt-get update && apt-get -y install default-jre default-jdk
     # Install package dependencies
     - R -e 'install.packages(c("ape", "xlsx"))'
     # Install pkgdown
