@@ -2,7 +2,7 @@
 % Please edit documentation in R/concatipede.R
 \name{concatipede}
 \alias{concatipede}
-\title{COncatenate alignments}
+\title{Concatenate alignments}
 \usage{
 concatipede(
   filename = "seqnames.txt",
@@ -10,7 +10,8 @@ concatipede(
   format = c("fasta", "nexus", "phylip"),
   plotimg = T,
   return.aln = F,
-  out = NULL
+  out = NULL,
+  remove.gaps = TRUE
 )
 }
 \arguments{
@@ -25,10 +26,12 @@ concatipede(
 \item{return.aln}{return the concatenate alignment inside R workspace}
 
 \item{out}{specify outputs filename}
+
+\item{remove.gaps}{remove gap only columns (useful if not using all sequences in the alignments)}
 }
 \value{
 Can return alignment in the workspace if return.aln is set to TRUE
 }
 \description{
-This function concatenate sequences from alignments based on a correspondence table
+This function concatenate sequences from alignments based on a correspondence table and saves the output in a new directory
 }

@@ -1,0 +1,16 @@
+---
+title: "Dummy vignette"
+date: "`r Sys.Date()`"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+options(scipen = 6, width = 85)
+```
+
+This is a dummy vignette, to be replaced by one or several nice vignettes demonstrating the use of the package.
+
+```{r }
+library(concatipede)
+# Then some amazing example code
+```
