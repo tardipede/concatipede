@@ -1,0 +1,85 @@
+#' COncatenate alignments
+#'
+#' This function concatenate sequences from alignments based on a correspondence table
+#'
+#' @param filename filename of correspondence table
+#' @param alignments output from concatipede_prepare() function
+#' @param format a string specifying in what formats you want the alignment
+#' @param plotimg return a graphical representation of the alignment in pdf format
+#' @param return.aln return the concatenate alignment inside R workspace
+#' @param out specify outputs filename
+#' @return Can return alignment in the workspace if return.aln is set to TRUE
+#' @export
+
+
+concatipede = function(filename="seqnames.txt",alignments,format=c("fasta","nexus","phylip"),
+                       plotimg=T,return.aln=F,out=NULL){
+  #filename: specify the saved translation table
+  #alignments: output from concatipede_prepare() function
+  #format: a string specifying in what formats you want the alignment
+  #plotimg: return a graphical representation of the alignment in pdf format
+  #return.aln: return the concatenate alignment inside R workspace
+  #out: can specify an output name
+  #deletegapcols: delete columns with only gaps, useful if not all sequences from an alignment are used
+
+  # check if the translation table is in text format or in excel
+  if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
+  if(grepl(".xlsx",filename)==TRUE){
+    df=xlsx::read.xlsx(filename, sheetIndex=1, header=TRUE)
+    colnames(df)=unlist(lapply(colnames(df),.colname.clean))
+    df=as.data.frame(apply(df,2,.clean.NA))
+  }
+  lR=alignments
+
+  #rename sequences in each alignment with the final sequence name
+  for (j in 1:length(lR)){
+    align=names(lR[j])
+    lR[[j]]=.rename.seqs(lR[[j]],table=df,align=align)
+    lR[[j]]=lR[[j]][!is.na(names(lR[[j]]))]} #this delete all sequences not present in the translation table
+
+  lR=lapply(lR,as.matrix)
+
+  #concatenate alignments by name
+  conc=cbind(lR[[1]],lR[[2]],fill.with.gaps=T)
+  if(length(lR)>2){
+    for (i in 3:length(lR)){
+      conc=cbind(conc,lR[[i]],fill.with.gaps=T)
+    }}
+
+  # save alignment
+  if(is.null(out)){write.alignment(conc,name="concatenated",format=format)}
+  if(!is.null(out)){write.alignment(conc,name=out,format=format)}
+
+  #Create data frame with partitions lenghts and limits
+  v=vector()
+  for (i in 1:length(alignments)){
+    v[i]=max(unlist(lapply(alignments[[i]],length)))}
+  len.df=data.frame(alignment=names(alignments),lenght=v)
+
+  len.df$from=rep(0,nrow(len.df))
+  len.df$to=rep(0,nrow(len.df))
+  len.df$from[1]=1
+  len.df$to[1]=len.df$lenght[1]
+
+  for (i in 2:nrow(len.df)){
+    len.df$from[i]=len.df$to[i-1]+1
+    len.df$to[i]=len.df$to[i-1]+len.df$lenght[i]}
+
+  #Save partition lenghts table
+  if(is.null(out)){filename="length_summary.txt"}
+  if(!is.null(out)){filename=paste0(out,"_length_summary.txt")}
+  write.table(len.df,file=filename,sep="\t",quote=FALSE,row.names=FALSE)
+
+
+  #alignment plotting option
+  if(is.null(out)){filename="concatenated_alignment.pdf"}
+  if(!is.null(out)){filename=paste0(out,"_concatenated_alignment.pdf")}
+
+  if (plotimg==T){pdf(filename)
+    img=image(conc,cex=0.3)
+    dev.off()}
+
+  #return concatenated alignment in R option
+  if(return.aln==T) {return(conc)}
+
+}
