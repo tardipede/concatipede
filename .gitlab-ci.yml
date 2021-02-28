@@ -1,0 +1,27 @@
+stages:
+  - build
+  - deploy
+
+buildAndTest:
+  image: rocker/tidyverse
+  stage: build
+  script:
+    # Install package dependencies
+    - R -e 'install.packages(c("ape, "xlsx"))'
+    # Install pkgdown
+    - R -e 'install.packages("pkgdown")'
+    # Install package
+    - make install
+    # Build website
+    - make pkgdown
+  artifacts:
+    paths:
+      - docs
+
+pages:
+  stage: deploy
+  script:
+    - mv docs public
+  artifacts:
+    paths:
+      - public
