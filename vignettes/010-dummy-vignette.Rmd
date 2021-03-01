@@ -1,5 +1,5 @@
 ---
-title: "Dummy vignette"
+title: "Example of package usage"
 date: "`r Sys.Date()`"
 ---
 
@@ -8,9 +8,27 @@ knitr::opts_chunk$set(fig.align = "center")
 options(scipen = 6, width = 85)
 ```
 
-This is a dummy vignette, to be replaced by one or several nice vignettes demonstrating the use of the package.
+This package needs to have the alignments in fasta files to concatenate all placed in the working directory. Only fasta files to concatenate should be present in the working directory. If other fasta files are present, see the concatipede_prepare(exclude = "") option.  
 
+
+The first step is to generate a template correspondence table with all the sequence names. DO it with the function concatipede_prepare().  
 ```{r }
 library(concatipede)
-# Then some amazing example code
+align = concatipede_prepare()
 ```
+
+Once it is done, an excel file should be saved in your working directory. Modify it to reflect the sequences you want to concatenate. It is important that the first cell of the first row is not modified. You can copy and save different versions of the table in different sheets of the excel file, they can be then selected with the specific option.
+
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotidae_4genes",excel.sheet = 1)
+```
+This will create a new folder with the concatenated alignment in different formats.
+
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotus_4genes",excel.sheet = 2)
+```
+
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotidae_COI",excel.sheet = 3)
+```
+
