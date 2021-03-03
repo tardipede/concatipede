@@ -1,6 +1,6 @@
 #' Concatenate alignments
 #'
-#' This function concatenate sequences from alignments based on a correspondence table and saves the output in a new directory
+#' This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 #'
 #' @param filename filename of correspondence table
 #' @param alignments output from concatipede_prepare function
@@ -10,19 +10,20 @@
 #' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
 #' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
 #' @param excel.sheet specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
+#' @param exclude fasta files with this text in the working directory will be ingnored by the function
 #' @param out specify outputs filename
 #' @return Can return alignment in the workspace if return.aln is set to TRUE
 #' @export
 
 concatipede = function(filename="seqnames.txt",
-                       alignments,
                        format=c("fasta","nexus","phylip"),
                        plotimg=T,
                        return.aln=F,
                        out=NULL,
                        remove.gaps=TRUE,
                        write.outputs=TRUE,
-                       excel.sheet=1){
+                       excel.sheet=1,
+                       exclude="concatenated"){
 
   # check if the translation table is in text format or in excel
   if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
@@ -31,6 +32,29 @@ concatipede = function(filename="seqnames.txt",
     colnames(df)=unlist(lapply(colnames(df),.colname.clean))
     df=as.data.frame(apply(df,2,.clean.NA))
   }
+
+
+  #read files in the foldes and create a list
+  files=list.files(pattern = "\\.fas")
+
+  #exclude the files containing the "excluded" word in the filename
+  if (!is.null(exclude)){
+    toKeep=!grepl(exclude,files)
+    files=files[toKeep]}
+
+  # load the fasta alignments, do some quality check and rename them with the original file name
+  l=list()
+  maxlen=0
+  for (i in 1:length(files)){
+    dataset=ape::read.FASTA(files[i])
+    a=sd(unlist(lapply(dataset,length)))
+    if(a!=0){cat("ATTENTION! In file ",files[i]," not all sequences of same length \n")}
+    l[[i]]=assign(files[i],dataset)
+    if(length(names(dataset))>maxlen){maxlen=length(names(dataset))}
+  }
+  names(l)=files
+
+  alignments = l
 
   # this allow to not to use all the genes in the concatenations
   lR=alignments[names(alignments) %in% colnames(df)[-1]]

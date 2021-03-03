@@ -12,23 +12,33 @@ This package needs to have the alignments in fasta files to concatenate all plac
 
 
 The first step is to generate a template correspondence table with all the sequence names. DO it with the function concatipede_prepare().  
+But first let's check what fasta files are in our directory:
+
+```{r }
+list.files(pattern = "\\.fas")
+```
+
+Those are alignments for 4 markers of tardigrades from the family Macrobiotidae  
+With the function concatipede_prepare we will generate an excel table with the sequence names in the order they are found in each alignment.  
+The function also load all the alignments in the R workspace and put them in a list that will be one of the inputs for the concatipede function.  
+
 ```{r }
 library(concatipede)
-align = concatipede_prepare()
+concatipede_prepare()
 ```
 
 Once it is done, an excel file should be saved in your working directory. Modify it to reflect the sequences you want to concatenate. It is important that the first cell of the first row is not modified. You can copy and save different versions of the table in different sheets of the excel file, they can be then selected with the specific option.
 
 ```{r }
-concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotidae_4genes",excel.sheet = 1)
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1)
 ```
 This will create a new folder with the concatenated alignment in different formats.
 
 ```{r }
-concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotus_4genes",excel.sheet = 2)
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
 ```
 
 ```{r }
-concatipede("Macrobiotidae_seqnames.xlsx",align,out="Macrobiotidae_COI",excel.sheet = 3)
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
 ```
 

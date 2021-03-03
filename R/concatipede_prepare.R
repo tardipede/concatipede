@@ -2,7 +2,6 @@
 #'
 #' This function loads all the fasta files present in the working directory,
 #' creates a template correspondence table that is saved in the working directory.
-#' This function also output an object (list) that is the input for the concatenate () function.
 #'
 #' @param filename filename of the saved correspondence table template
 #' @param writetable logic indicating if saving the template correspondence table file in the working directory
@@ -53,5 +52,4 @@ concatipede_prepare = function(filename="seqnames",
     if(excel==F){write.table(df,sep="\t",file=paste0(filename,".txt"),row.names=FALSE,quote=FALSE)}
     if(excel==T){writexl::write_xlsx(df,path=paste0(filename,".xlsx"),col_names=T,format_headers=T)}
   }
-  return(l)
 }
