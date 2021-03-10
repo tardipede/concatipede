@@ -37,6 +37,7 @@ library(tidyverse)
 readxl::read_xlsx("seqnames.xlsx",sheet=1,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
+                           rownames= F,
                            buttons = c('excel'),
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
@@ -50,6 +51,7 @@ The first sheet of the example excel file now looks like this:
 readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=1,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
+                           rownames = F,
                            buttons = c('excel'),
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
@@ -61,7 +63,8 @@ concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet
 ```
 This will create a new folder with the concatenated alignment in different formats.
 ```{r, echo=FALSE}
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1,return.aln=T))
+par(mar=c(1,12,1,1))
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1,return.aln=T),cex=0.5)
 ```
 
 
@@ -70,6 +73,7 @@ We can also choose only a subset of the taxa from a correspondence table saved a
 readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=2,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
+                           rownames = F,
                            buttons = c('excel'),
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
@@ -80,7 +84,8 @@ concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet =
 ```
 
 ```{r, echo=FALSE}
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2,return.aln=T))
+par(mar=c(1,12,1,1))
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2,return.aln=T),cex=0.5)
 ```
 
 
@@ -99,6 +104,7 @@ concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 
 ```
 
 ```{r, echo=FALSE}
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3,return.aln=T))
+par(mar=c(1,12,1,1))
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3,return.aln=T),cex=0.5)
 ```
 
