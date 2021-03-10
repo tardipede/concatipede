@@ -17,6 +17,17 @@ This package needs to have the alignments in fasta files to concatenate all plac
 
 
 # How to use concatipede
+
+## Prepare the example files
+Now we are going to load the example files and save them in a newly created working directory.  
+```{r }
+dir.create("concatipede_test")
+setwd("concatipede_test")
+
+example_files = list.files(system.file("extdata", package="concatipede"),full.names=T)
+file.copy(from = example_files, to = getwd())
+```
+
 ## Set up the template for the correspondece table
 
 The first step is to generate a template correspondence table with all the sequence names. DO it with the function concatipede_prepare().  
