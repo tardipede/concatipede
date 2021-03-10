@@ -36,15 +36,19 @@ concatipede_prepare()
 
 
 Once it is done, an excel file should be saved in your working directory. The template excel file looks like this:  
-```{r, echo=FALSE}
+```{r, echo=FALSE, results="hide", message=FALSE, warning =FALSE}
+# load the libraries without having any message printed
 library(DT)
 library(tidyverse)
+```
 
+```{r, echo=FALSE}
 
 readxl::read_xlsx("seqnames.xlsx",sheet=1,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
                            rownames= F,
+                           scrollX=TRUE,
                            buttons = c('excel'),
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
@@ -63,6 +67,7 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=1,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
                            rownames = F,
+                           scrollX=TRUE,
                            buttons = c('excel'),
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
@@ -90,6 +95,7 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=2,col_names=T)%>%
             options = list(dom = 'Blfrtip',
                            rownames = F,
                            buttons = c('excel'),
+                           scrollX=TRUE,
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
 ```
@@ -110,6 +116,7 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=3,col_names=T)%>%
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
                            buttons = c('excel'),
+                           scrollX=TRUE,
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
 ```
