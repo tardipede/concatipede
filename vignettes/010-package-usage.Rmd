@@ -1,0 +1,104 @@
+---
+title: "Example of package usage"
+date: "`r Sys.Date()`"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+options(scipen = 6, width = 85)
+```
+
+This package needs to have the alignments in fasta files to concatenate all placed in the working directory. Only fasta files to concatenate should be present in the working directory. If other fasta files are present, see the concatipede_prepare(exclude = "") option.  
+
+
+The first step is to generate a template correspondence table with all the sequence names. DO it with the function concatipede_prepare().  
+But first let's check what fasta files are in our directory:
+
+```{r }
+list.files(pattern = "\\.fas")
+```
+
+Those are alignments for 4 markers of tardigrades from the family Macrobiotidae  
+With the function concatipede_prepare we will generate an excel table with the sequence names in the order they are found in each alignment.  
+The function also load all the alignments in the R workspace and put them in a list that will be one of the inputs for the concatipede function.  
+
+```{r }
+library(concatipede)
+concatipede_prepare()
+```
+
+
+Once it is done, an excel file should be saved in your working directory. The template excel file looks like this:  
+```{r, echo=FALSE}
+library(DT)
+library(tidyverse)
+
+
+readxl::read_xlsx("seqnames.xlsx",sheet=1,col_names=T)%>%
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('excel'),
+                           lengthMenu = list(c(nrow(.),25,50,-1),
+                                             c(nrow(.),25,50,"All"))))
+
+```
+
+Modify it to reflect the sequences you want to concatenate. It is important that the first cell of the first row is not modified. You can copy and save different versions of the table in different sheets of the excel file, they can be then selected with the specific option.  
+
+The first sheet of the example excel file now looks like this:  
+```{r, echo=FALSE}
+readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=1,col_names=T)%>%
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('excel'),
+                           lengthMenu = list(c(nrow(.),25,50,-1),
+                                             c(nrow(.),25,50,"All"))))
+```
+
+Now we input this excel to the concatipede function:  
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1)
+```
+This will create a new folder with the concatenated alignment in different formats.
+```{r, echo=FALSE}
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1,return.aln=T))
+```
+
+
+We can also choose only a subset of the taxa from a correspondence table saved as separate sheet in the excel file.  
+```{r, echo=FALSE}
+readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=2,col_names=T)%>%
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('excel'),
+                           lengthMenu = list(c(nrow(.),25,50,-1),
+                                             c(nrow(.),25,50,"All"))))
+```
+
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
+```
+
+```{r, echo=FALSE}
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2,return.aln=T))
+```
+
+
+And another one but in this case we select only one marker
+```{r, echo=FALSE}
+readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=3,col_names=T)%>%
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('excel'),
+                           lengthMenu = list(c(nrow(.),25,50,-1),
+                                             c(nrow(.),25,50,"All"))))
+```
+
+```{r }
+concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
+```
+
+```{r, echo=FALSE}
+image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3,return.aln=T))
+```
+
