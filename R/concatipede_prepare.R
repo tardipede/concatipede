@@ -4,7 +4,6 @@
 #' creates a template correspondence table that is saved in the working directory.
 #'
 #' @param filename filename of the saved correspondence table template
-#' @param writetable logic indicating if saving the template correspondence table file in the working directory
 #' @param excel logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)
 #' @param exclude fasta files with this text in the working directory will be ingnored by the function
 #' @return List object containing alignments, this object is one of the input for concatipede() function
@@ -48,8 +47,6 @@ concatipede_prepare = function(filename="seqnames",
 
 
   # save the template for the translation table as txt or excel
-  if (writetable==T) {
     if(excel==F){write.table(df,sep="\t",file=paste0(filename,".txt"),row.names=FALSE,quote=FALSE)}
     if(excel==T){writexl::write_xlsx(df,path=paste0(filename,".xlsx"),col_names=T,format_headers=T)}
-  }
 }

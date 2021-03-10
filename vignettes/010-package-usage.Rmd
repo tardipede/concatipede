@@ -8,8 +8,16 @@ knitr::opts_chunk$set(fig.align = "center")
 options(scipen = 6, width = 85)
 ```
 
-This package needs to have the alignments in fasta files to concatenate all placed in the working directory. Only fasta files to concatenate should be present in the working directory. If other fasta files are present, see the concatipede_prepare(exclude = "") option.  
+# Concatipede requirements and worlflow
 
+This package needs to have the alignments in fasta files to concatenate all placed in the working directory. Only fasta files to concatenate should be present in the working directory. If other fasta files are present and you don´t want to include them, see the concatipede_prepare(exclude = "") option.  
+
+
+![Concatipede workflow](concatipede_scheme.png "Concatipede workflow")
+
+
+# How to use concatipede
+## Set up the template for the correspondece table
 
 The first step is to generate a template correspondence table with all the sequence names. DO it with the function concatipede_prepare().  
 But first let's check what fasta files are in our directory:
@@ -20,7 +28,6 @@ list.files(pattern = "\\.fas")
 
 Those are alignments for 4 markers of tardigrades from the family Macrobiotidae  
 With the function concatipede_prepare we will generate an excel table with the sequence names in the order they are found in each alignment.  
-The function also load all the alignments in the R workspace and put them in a list that will be one of the inputs for the concatipede function.  
 
 ```{r }
 library(concatipede)
@@ -44,7 +51,11 @@ readxl::read_xlsx("seqnames.xlsx",sheet=1,col_names=T)%>%
 
 ```
 
-Modify it to reflect the sequences you want to concatenate. It is important that the first cell of the first row is not modified. You can copy and save different versions of the table in different sheets of the excel file, they can be then selected with the specific option.  
+## Modify the correspondece table
+
+Modify the generated excel correspondence table to reflect how you want to concatenate the sequences in the different alignments. It is important that the first cell of the first row (**name**) is not modified and the other column names are the filenames of the fasta alignments. 
+In the **name** column you must set the name of the concatenated sequences.  
+You can copy and save different versions of the correspondence table in different sheets of the excel file, they can be then selected with the specific option.  
 
 The first sheet of the example excel file now looks like this:  
 ```{r, echo=FALSE}
@@ -57,11 +68,15 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=1,col_names=T)%>%
                                              c(nrow(.),25,50,"All"))))
 ```
 
+
+## Concatenate the alignents
+
 Now we input this excel to the concatipede function:  
 ```{r }
 concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1)
 ```
-This will create a new folder with the concatenated alignment in different formats.
+This will create a new folder with the concatenated alignment in different formats.  
+Here it is the concatenated alignment:
 ```{r, echo=FALSE}
 par(mar=c(1,12,1,1))
 image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1,return.aln=T),cex=0.5)
