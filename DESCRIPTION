@@ -25,6 +25,7 @@ Imports:
 Suggests: DT,
         knitr,
         rmarkdown,
-        tidyverse
+        tidyverse,
+        qpdf
 VignetteBuilder: knitr, rmarkdown
 SystemRequirements: GNU make
