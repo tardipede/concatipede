@@ -4,3 +4,6 @@
 ^\.gitlab-ci\.yml$
 ^doc$
 ^Meta$
+^.run_check_and_get_badge.R$
+^Makefile$
+^_pkgdown.yml$

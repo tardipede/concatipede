@@ -3,12 +3,15 @@ Title: Concatenate multiple sequence alignments based on excel table
 Version: 0.1
 Date: 2021-02-21
 year: 2021
-Authors@R: 
+Authors@R: c(
     person(given = "Matteo",
            family = "Vecchi",
            role = c("aut", "cre"),
            email = "matteo.vecchi15@gmail.com",
-           comment = c(ORCID = "0000-0002-7995-6827"))
+           comment = c(ORCID = "0000-0002-7995-6827")),
+    person(given = "Mattieu",
+           family = "Bruneaux",
+           role = c("aut")))
 Description: This package allows to concatenate sequences of multiple MSAs based on a translation table that can be edited in excel.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -24,3 +27,4 @@ Suggests: DT,
         rmarkdown,
         tidyverse
 VignetteBuilder: knitr, rmarkdown
+SystemRequirements: GNU make
