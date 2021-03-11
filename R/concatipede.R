@@ -26,7 +26,7 @@ concatipede = function(filename="seqnames.txt",
                        write.outputs=TRUE,
                        excel.sheet=1,
                        exclude="concatenated"){
-  require("ape")
+
   # check if the translation table is in text format or in excel
   if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
   if(grepl(".xlsx",filename)==TRUE){

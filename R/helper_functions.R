@@ -1,7 +1,6 @@
 .rename.seqs=function(dataset,table,align){
   #this function takes as input a list of alignments (dataset), a translation table (table) and the name of the alignment (align)
   #inside the list in which change the names
-  require("ape")
 
   col=match(align,colnames(table))
 
@@ -23,7 +22,6 @@
 #this function is a wrapper to write alignments in 3 different formats
 #save one alignment file for each format specified
 write.alignment=function(align,name,format=c("fasta","nexus","phylip")){
-  require("ape")
 
   if("fasta" %in% format){ape::write.FASTA(align,file=paste0(name,".fasta"))}
   if("nexus" %in% format){ape::write.nexus.data(align,file=paste0(name,".nexus"),interleaved=F)}
