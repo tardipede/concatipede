@@ -2,7 +2,7 @@
 
 This package allows to concatenate sequences of multiple MSAs based on a translation table that can be edited in excel.
 
-This is convenient in case of **(to fill in...)**.
+This is convenient in case of concatenation of no more than few hundred terminals and a few tens on markers. Once created the correspondence table it makes very easy and fast to include or exclude taxa and markers from the concatenated alignment, as well as update it with new sequences.  
 
 ## How to install concatipede
 
@@ -21,5 +21,4 @@ Please let us know if you encounter any issues during the package installation!
 You can get started with this [example vignette](https://tardipede.gitlab.io/concatipede/articles/010-package-usage.html).
 
 ## Contact
-
-**(Put your contact email here.)**
+matteo.vecchi15g@gmail.com
