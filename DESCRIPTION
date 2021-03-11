@@ -19,3 +19,5 @@ Imports:
 	ape,
 	writexl,
 	readxl
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr

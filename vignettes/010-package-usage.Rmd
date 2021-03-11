@@ -1,6 +1,11 @@
 ---
 title: "Example of package usage"
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{"Example of package usage"}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r, include = FALSE}
