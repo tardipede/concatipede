@@ -2,3 +2,9 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^\.gitlab-ci\.yml$
+^Makefile$
+^\.run_check_and_get_badge\.R$
+^R-CMD-check_output\.txt$
+^R-CMD-check_badge\.svg$
+^_pkgdown\.yml$
+^docs$
