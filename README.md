@@ -23,7 +23,7 @@ Please let us know if you encounter any issues during the package installation!
 
 ## How to use concatipede
 
-You can get started with this [example vignette](https://tardipede.gitlab.io/concatipede/articles/010-package-usage.html).
+You can get started with this [example vignette](https://tardipede.gitlab.io/concatipede/articles/Package-usage.html).
 
 ## Contact
 matteo.vecchi15@gmail.com
