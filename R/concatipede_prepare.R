@@ -10,10 +10,9 @@
 #' @export
 
 concatipede_prepare = function(filename="seqnames",
-                               writetable=T,
                                excel=T,
                                exclude="concatenated"){
-
+  require("ape")
   #read files in the foldes and create a list
   files=list.files(pattern = "\\.fas")
 

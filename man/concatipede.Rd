@@ -34,8 +34,6 @@ concatipede(
 \item{excel.sheet}{specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
 
 \item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
-
-\item{alignments}{output from concatipede_prepare function}
 }
 \value{
 Can return alignment in the workspace if return.aln is set to TRUE

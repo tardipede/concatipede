@@ -4,12 +4,7 @@
 \alias{concatipede_prepare}
 \title{Load alignments and prepare template correspondence table for concatenate () function}
 \usage{
-concatipede_prepare(
-  filename = "seqnames",
-  writetable = T,
-  excel = T,
-  exclude = "concatenated"
-)
+concatipede_prepare(filename = "seqnames", excel = T, exclude = "concatenated")
 }
 \arguments{
 \item{filename}{filename of the saved correspondence table template}

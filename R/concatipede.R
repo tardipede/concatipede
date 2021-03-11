@@ -3,7 +3,6 @@
 #' This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 #'
 #' @param filename filename of correspondence table
-#' @param alignments output from concatipede_prepare function
 #' @param format a string specifying in what formats you want the alignment
 #' @param plotimg return a graphical representation of the alignment in pdf format
 #' @param return.aln return the concatenate alignment inside R workspace
@@ -24,7 +23,7 @@ concatipede = function(filename="seqnames.txt",
                        write.outputs=TRUE,
                        excel.sheet=1,
                        exclude="concatenated"){
-
+  require("ape")
   # check if the translation table is in text format or in excel
   if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
   if(grepl(".xlsx",filename)==TRUE){
