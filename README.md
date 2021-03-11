@@ -23,4 +23,4 @@ Please let us know if you encounter any issues during the package installation!
 You can get started with this [example vignette](https://tardipede.gitlab.io/concatipede/articles/010-package-usage.html).
 
 ## Contact
-matteo.vecchi15g@gmail.com
+matteo.vecchi15@gmail.com
