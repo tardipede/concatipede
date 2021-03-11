@@ -12,8 +12,14 @@ buildAndTest:
     - R -e 'install.packages("pkgdown")'
     # Install package
     - make install
+    # R CMD check
+    - make check
+    - mkdir -p check
+    - cp R-CMD-check_output.txt R-CMD-check_badge.svg check/
     # Build website
     - make pkgdown
+    # Copy R CMD check results
+    - cp check/* docs/
   artifacts:
     paths:
       - docs
