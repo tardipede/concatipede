@@ -6,18 +6,18 @@
 \usage{
 concatipede(
   filename = "seqnames.txt",
-  alignments,
   format = c("fasta", "nexus", "phylip"),
   plotimg = T,
   return.aln = F,
   out = NULL,
-  remove.gaps = TRUE
+  remove.gaps = TRUE,
+  write.outputs = TRUE,
+  excel.sheet = 1,
+  exclude = "concatenated"
 )
 }
 \arguments{
 \item{filename}{filename of correspondence table}
-
-\item{alignments}{output from concatipede_prepare() function}
 
 \item{format}{a string specifying in what formats you want the alignment}
 
@@ -27,11 +27,19 @@ concatipede(
 
 \item{out}{specify outputs filename}
 
-\item{remove.gaps}{remove gap only columns (useful if not using all sequences in the alignments)}
+\item{remove.gaps}{remove gap only columns. Useful if not using all sequences in the alignments}
+
+\item{write.outputs}{save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg}
+
+\item{excel.sheet}{specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
+
+\item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
+
+\item{alignments}{output from concatipede_prepare function}
 }
 \value{
 Can return alignment in the workspace if return.aln is set to TRUE
 }
 \description{
-This function concatenate sequences from alignments based on a correspondence table and saves the output in a new directory
+This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 }
