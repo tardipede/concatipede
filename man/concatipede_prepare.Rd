@@ -7,14 +7,12 @@
 concatipede_prepare(
   filename = "seqnames",
   writetable = T,
-  excel = F,
+  excel = T,
   exclude = "concatenated"
 )
 }
 \arguments{
 \item{filename}{filename of the saved correspondence table template}
-
-\item{writetable}{logic indicating if saving the template correspondence table file in the working directory}
 
 \item{excel}{logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)}
 
@@ -26,5 +24,4 @@ List object containing alignments, this object is one of the input for concatipe
 \description{
 This function loads all the fasta files present in the working directory,
 creates a template correspondence table that is saved in the working directory.
-This function also output an object (list) that is the input for the concatenate () function.
 }
