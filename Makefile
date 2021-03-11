@@ -59,6 +59,16 @@ pkgdown:
 	@printf "\n"
 	@Rscript -e 'pkgdown::build_site()'
 
+### ** check
+
+## check : run R CMD CHECK through devtools check() function
+.PHONY: check
+check:
+	@printf "\n"
+	@printf "$(GREEN)*** Running 'devtools::check()' ***$(NC)\n"
+	@printf "\n"
+	@Rscript .run_check_and_get_badge.R
+
 ### ** clean
 
 ## clean : delete all files and folders automatically generated
