@@ -7,7 +7,7 @@
 concatipede(
   filename = "seqnames.txt",
   format = c("fasta", "nexus", "phylip"),
-  plotimg = T,
+  plotimg = F,
   return.aln = F,
   out = NULL,
   remove.gaps = TRUE,
