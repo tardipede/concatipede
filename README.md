@@ -1,6 +1,5 @@
-# Concatipede: an R package to concatenate fasta sequences easily 
-<img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
-
+Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
+==============================================================
 
 This package allows to concatenate sequences of multiple MSAs based on a translation table that can be edited in excel.
 
