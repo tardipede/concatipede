@@ -1,3 +1,7 @@
+[![GitLab pipeline status](https://gitlab.com/tardipede/concatipede/badges/master/pipeline.svg)](https://gitlab.com/tardipede/concatipede/commits/master)
+[![R_CMD_CHECK](https://tardipede.gitlab.io/concatipede/r-cmd-check-badge.svg)](https://tardipede.gitlab.io/concatipede/R_CMD_CHECK.txt)
+[![Lifecycle Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/)
+
 Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
 ==============================================================
 
