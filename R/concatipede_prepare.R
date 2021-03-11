@@ -3,6 +3,8 @@
 #' This function loads all the fasta files present in the working directory,
 #' creates a template correspondence table that is saved in the working directory.
 #'
+#' @importFrom stats sd
+#' @importFrom utils write.table
 #' @param filename filename of the saved correspondence table template
 #' @param excel logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)
 #' @param exclude fasta files with this text in the working directory will be ingnored by the function

@@ -2,6 +2,9 @@
 #'
 #' This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 #'
+#' @importFrom grDevices dev.off pdf
+#' @importFrom graphics image
+#' @importFrom utils read.table
 #' @param filename filename of correspondence table
 #' @param format a string specifying in what formats you want the alignment
 #' @param plotimg return a graphical representation of the alignment in pdf format

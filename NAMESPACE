@@ -2,3 +2,9 @@
 
 export(concatipede)
 export(concatipede_prepare)
+importFrom(grDevices,dev.off)
+importFrom(grDevices,pdf)
+importFrom(graphics,image)
+importFrom(stats,sd)
+importFrom(utils,read.table)
+importFrom(utils,write.table)
