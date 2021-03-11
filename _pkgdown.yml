@@ -17,3 +17,10 @@ template:
 
 toc:
   depth: 3
+
+### * navbar
+
+navbar:
+  right:
+    - icon: fa fa-gitlab fa-lg
+      href: https://gitlab.com/tardipede/concatipede
