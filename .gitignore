@@ -4,5 +4,5 @@
 .httr-oauth
 .DS_Store
 docs/
-R-CMD-check_badge.svg
-R-CMD-check_output.txt
+doc
+Meta

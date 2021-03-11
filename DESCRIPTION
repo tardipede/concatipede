@@ -18,9 +18,8 @@ RoxygenNote: 7.1.1
 Imports:
 	ape,
 	writexl,
-	readxl
-Suggests: DT,
-        knitr,
-        rmarkdown,
-        tidyverse
-VignetteBuilder: knitr
+	readxl,
+	DT,
+	tidyverse
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr, rmarkdown
