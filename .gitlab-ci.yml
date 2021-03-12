@@ -6,6 +6,8 @@ buildAndTest:
   image: rocker/tidyverse
   stage: build
   script:
+    # Install the qpdf dependency using the Debian `apt-get` package manager
+    - apt-get update && apt-get -y install qpdf
     # Install package dependencies
     - R -e 'install.packages(c("ape", "readxl", "writexl"))'
     # Install pkgdown
