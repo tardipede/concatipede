@@ -43,3 +43,36 @@ write.alignment=function(align,name,format=c("fasta","nexus","phylip")){
   return(x)
 
 }
+
+#Checks if a text string containg a genbank accession number - helper for get_genbank_table
+.contains_accnos=function(x){
+  if(length(x)==1){y = length(grep("[A-Z]{2}[0-9]{6}",x,value=F))}
+  if(length(x)>1){
+    y=c()
+    for (i in 1:length(x)){
+      y[i] = length(grep("[A-Z]{2}[0-9]{6}",x[i],value=F))
+    }
+  }
+  return(y)
+}
+
+# Extract accession number froma  single object - helper for get_genbank_table
+.extract_accnos_single = function(x){
+  x = as.character(x)
+  if(.contains_accnos(x)==0){y = "NA"}
+  if(.contains_accnos(x)==1){y = as.character(stringr::str_extract_all(x,"[A-Z]{2}[0-9]{6}",simplify=T))}
+  return(y)
+}
+
+# Extract accession numbers from a vector - helper for get_genbank_table
+.extract_accnos = function(x){
+  if(length(x) == 1){y = .extract_accnos_single(x)}
+  if(length(x) > 1){
+    y=c()
+    for (i in 1:length(x)){
+      y[i] = .extract_accnos_single(x[i])
+    }
+  }
+  return(y)
+}
+

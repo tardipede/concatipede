@@ -2,6 +2,7 @@
 
 export(concatipede)
 export(concatipede_prepare)
+export(get_genbank_table)
 importFrom(grDevices,dev.off)
 importFrom(grDevices,pdf)
 importFrom(graphics,image)
