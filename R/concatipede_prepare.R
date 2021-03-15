@@ -5,16 +5,15 @@
 #'
 #' @importFrom stats sd
 #' @importFrom utils write.table
+#' 
 #' @param filename filename of the saved correspondence table template
 #' @param excel logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)
+#' @param tibble Boolean, should the function return the correspondence table as a tibble instead of saving it as a file? Default is \code{FALSE}. If set to \code{TRUE}, the values of \code{filename} and \code{excel} are disregarded.
 #' @param exclude fasta files with this text in the working directory will be ingnored by the function
-#' @return List object containing alignments, this object is one of the input for concatipede() function
+#' @return If \code{tibble} is \code{TRUE}, a tibble with the correspondence table template.
 #' @export
 
-concatipede_prepare = function(filename="seqnames",
-                               excel=T,
-                               exclude="concatenated"){
-
+concatipede_prepare = function(filename="seqnames", excel = TRUE, tibble = FALSE, exclude="concatenated"){
   #read files in the foldes and create a list
   files=list.files(pattern = "\\.fas")
 
@@ -45,7 +44,10 @@ concatipede_prepare = function(filename="seqnames",
     df[,i+1]=seqnames
   }
 
-
+    # Return df as a tibble if required
+    if (tibble) {
+        return(tibble::as_tibble(df))
+    }
 
   # save the template for the translation table as txt or excel
     if(excel==F){write.table(df,sep="\t",file=paste0(filename,".txt"),row.names=FALSE,quote=FALSE)}
