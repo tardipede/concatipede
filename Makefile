@@ -39,6 +39,28 @@ document:
 	@printf "\n"
 	@ Rscript -e 'devtools::document()'
 
+### ** test
+
+## test : run package tests
+.PHONY: test
+test:
+	@printf "\n"
+	@printf "$(GREEN)*** Running package tests ***$(NC)\n"
+	@printf "\n"
+	@Rscript -e "library(devtools); test()"
+	@cd tests/testthat; rm -f Rplots.pdf
+
+### ** coverage
+
+## coverage : determine test coverage
+.PHONY: coverage
+coverage:
+	@printf "\n"
+	@printf "$(GREEN)*** Determining test coverage ***$(NC)\n"
+	@printf "\n"
+	@mkdir -p docs/coverage/
+	@Rscript -e "library(covr); cov = package_coverage(); report(cov, \"$(TOP_DIR)/docs/coverage/coverage.html\"); print(paste(\"Coverage_percent: --\", round(percent_coverage(cov), 2), \"--\"))"
+
 ### ** install
 
 ## install : install the package (also runs "document")
