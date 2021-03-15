@@ -52,6 +52,7 @@ test_that("concatipede() does not crash and can produce an output file", {
 })
 
 test_that("concatipede() can accept a tibble as an input", {
+    # Input tibble
     df <- structure(list(name = c("Macrobiotus_hannae", "Macrobiotus_wandae", 
                                   "Macrobiotus_caelestis", "Macrobiotus_polonicus", "Macrobiotus_kamilae", 
                                   "Macrobiotus_noongaris", "Sisubiotus_spectabilis", "Mesobiotus_romani", 
@@ -101,6 +102,13 @@ test_that("concatipede() can accept a tibble as an input", {
     z <- ape::read.FASTA(file.path("my-output-df", "my-output-df.fasta"))
     expect_true(length(z) == 13)
     expect_true(length(z[[1]]) == 2945)
+})
+
+test_that("concatipede() throws errors when the input is problematic", {
+    expect_error(concatipede(out = "my-output"),
+                 "Either `filename` or `df` must be provided.")
+    expect_error(concatipede(filename = "my-file", df = mtcars, out = "my-output"),
+                 "Only one of `filename` or `df` must be provided, not both.")
 })
 
 ### * Clean-up

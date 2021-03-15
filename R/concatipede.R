@@ -35,7 +35,7 @@ concatipede = function(filename=NULL,
       stop("Either `filename` or `df` must be provided.")
   }  
   if (!is.null(df) & !is.null(filename)) {
-      stop("Only one of `filename` or `df` must be provided.")
+      stop("Only one of `filename` or `df` must be provided, not both.")
   }
   # If `filename`was provided
   if (!is.null(filename)) {
@@ -52,6 +52,10 @@ concatipede = function(filename=NULL,
   } else {
       # Check: was `df` provided by the user?
       stopifnot(!is.null(df))
+      # Forcing df to be a data frame (things do not work properly in the rest
+      # of the function is df was given as a tibble and is not converted to a
+      # data frame)
+      df <- as.data.frame(df)
   }
 
   #read files in the foldes and create a list
