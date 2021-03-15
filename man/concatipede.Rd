@@ -5,7 +5,8 @@
 \title{Concatenate alignments}
 \usage{
 concatipede(
-  filename = "seqnames.txt",
+  filename = NULL,
+  df = NULL,
   format = c("fasta", "nexus", "phylip"),
   plotimg = F,
   return.aln = F,
@@ -17,7 +18,9 @@ concatipede(
 )
 }
 \arguments{
-\item{filename}{filename of correspondence table}
+\item{filename}{Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.}
+
+\item{df}{The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.}
 
 \item{format}{a string specifying in what formats you want the alignment}
 
@@ -31,7 +34,7 @@ concatipede(
 
 \item{write.outputs}{save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg}
 
-\item{excel.sheet}{specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
+\item{excel.sheet}{specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
 
 \item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
 }

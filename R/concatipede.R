@@ -5,19 +5,22 @@
 #' @importFrom grDevices dev.off pdf
 #' @importFrom graphics image
 #' @importFrom utils read.table
-#' @param filename filename of correspondence table
+#' 
+#' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
+#' @param df The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.
 #' @param format a string specifying in what formats you want the alignment
 #' @param plotimg return a graphical representation of the alignment in pdf format
 #' @param return.aln return the concatenate alignment inside R workspace
 #' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
 #' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
-#' @param excel.sheet specify what sheet from the exce spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
+#' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param exclude fasta files with this text in the working directory will be ingnored by the function
 #' @param out specify outputs filename
 #' @return Can return alignment in the workspace if return.aln is set to TRUE
 #' @export
 
-concatipede = function(filename="seqnames.txt",
+concatipede = function(filename=NULL,
+                       df=NULL,
                        format=c("fasta","nexus","phylip"),
                        plotimg=F,
                        return.aln=F,
@@ -27,14 +30,29 @@ concatipede = function(filename="seqnames.txt",
                        excel.sheet=1,
                        exclude="concatenated"){
 
-  # check if the translation table is in text format or in excel
-  if(grepl(".txt",filename)==TRUE){df=read.table(filename,header=T,sep="\t",check.names=F)}
-  if(grepl(".xlsx",filename)==TRUE){
-    df=readxl::read_xlsx(path=filename, sheet=excel.sheet, col_names=TRUE)
-    colnames(df)=unlist(lapply(colnames(df),.colname.clean))
-    df=as.data.frame(apply(df,2,.clean.NA))
+  # Check that exactly one of `filename` or `df` is provided
+  if (is.null(df) & is.null(filename)) {
+      stop("Either `filename` or `df` must be provided.")
+  }  
+  if (!is.null(df) & !is.null(filename)) {
+      stop("Only one of `filename` or `df` must be provided.")
   }
-
+  # If `filename`was provided
+  if (!is.null(filename)) {
+      # check if the translation table is in text format or in excel
+      if(grepl(".txt$",filename)==TRUE){
+          df=read.table(filename,header=T,sep="\t",check.names=F)
+      } else if(grepl(".xlsx$",filename)==TRUE){
+          df=readxl::read_xlsx(path=filename, sheet=excel.sheet, col_names=TRUE)
+          colnames(df)=unlist(lapply(colnames(df),.colname.clean))
+          df=as.data.frame(apply(df,2,.clean.NA))
+      } else {
+          stop("Input file format not recognized. `filename` must end with \".txt\" or \".xlsx\".")
+      }
+  } else {
+      # Check: was `df` provided by the user?
+      stopifnot(!is.null(df))
+  }
 
   #read files in the foldes and create a list
   files=list.files(pattern = "\\.fas")
