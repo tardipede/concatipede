@@ -4,17 +4,24 @@
 \alias{concatipede_prepare}
 \title{Load alignments and prepare template correspondence table for concatenate () function}
 \usage{
-concatipede_prepare(filename = "seqnames", excel = T, exclude = "concatenated")
+concatipede_prepare(
+  filename = "seqnames",
+  excel = TRUE,
+  tibble = FALSE,
+  exclude = "concatenated"
+)
 }
 \arguments{
 \item{filename}{filename of the saved correspondence table template}
 
 \item{excel}{logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)}
 
+\item{tibble}{Boolean, should the function return the correspondence table as a tibble instead of saving it as a file? Default is \code{FALSE}. If set to \code{TRUE}, the values of \code{filename} and \code{excel} are disregarded.}
+
 \item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
 }
 \value{
-List object containing alignments, this object is one of the input for concatipede() function
+If \code{tibble} is \code{TRUE}, a tibble with the correspondence table template.
 }
 \description{
 This function loads all the fasta files present in the working directory,
