@@ -21,8 +21,9 @@ RoxygenNote: 7.1.1
 Imports:
 	ape,
 	writexl,
+        tibble,
 	readxl,
-        tibble
+        stringr
 Suggests: 
     DT,
     knitr,
