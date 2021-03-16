@@ -4,7 +4,7 @@
 \alias{get_genbank_table}
 \title{Extract GenBank accession number from correspondence table}
 \usage{
-get_genbank_table(corr_table, writetable = F, out = "")
+get_genbank_table(corr_table, writetable = F, out = "", excel.sheet = 1)
 }
 \arguments{
 \item{corr_table}{a correlation table. Can be both a dataframe or a character string indicating the file path o the correspondence table in excel format}
@@ -12,6 +12,8 @@ get_genbank_table(corr_table, writetable = F, out = "")
 \item{writetable}{if TRUE save the Genbank table as excel file in the working directory}
 
 \item{out}{if writetable == T, the name to be attached to the excel filename}
+
+\item{excel.sheet}{specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
 }
 \value{
 Table with GenBank accession numbers

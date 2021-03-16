@@ -4,17 +4,21 @@
 #'
 #' @param corr_table a correlation table. Can be both a dataframe or a character string indicating the file path o the correspondence table in excel format
 #' @param writetable if TRUE save the Genbank table as excel file in the working directory
+#' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param out if writetable == T, the name to be attached to the excel filename
 #' @return Table with GenBank accession numbers
 #' @export
 
-get_genbank_table = function(corr_table, writetable = F, out = ""){
+get_genbank_table = function(corr_table, writetable = F, out = "", excel.sheet = 1){
 
   if (is.character(corr_table)){
-    corr_table=readxl::read_xlsx(path=corr_table, col_names=TRUE)
+    corr_table=readxl::read_xlsx(path=corr_table, col_names=TRUE, sheet = excel.sheet)
     colnames(corr_table)=unlist(lapply(colnames(corr_table),.colname.clean))
     corr_table=as.data.frame(apply(corr_table,2,.clean.NA))
   }
+
+  #remove all the dataframe columns before the "name" columns
+  corr_table = corr_table[,which(colnames(corr_table)=="name"):ncol(corr_table)]
 
   g_table = data.frame(lapply(corr_table,.extract_accnos))
   g_table$name = corr_table$name
