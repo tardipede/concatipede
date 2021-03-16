@@ -5,7 +5,7 @@
 #' @importFrom grDevices dev.off pdf
 #' @importFrom graphics image
 #' @importFrom utils read.table
-#' 
+#'
 #' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param df The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.
 #' @param format a string specifying in what formats you want the alignment
@@ -33,7 +33,7 @@ concatipede = function(filename=NULL,
   # Check that exactly one of `filename` or `df` is provided
   if (is.null(df) & is.null(filename)) {
       stop("Either `filename` or `df` must be provided.")
-  }  
+  }
   if (!is.null(df) & !is.null(filename)) {
       stop("Only one of `filename` or `df` must be provided, not both.")
   }
@@ -57,6 +57,9 @@ concatipede = function(filename=NULL,
       # data frame)
       df <- as.data.frame(df)
   }
+
+  #remove all the dataframe columns before the "name" columns
+  df = df[,which(colnames(df)=="name"):ncol(df)]
 
   #read files in the foldes and create a list
   files=list.files(pattern = "\\.fas")
