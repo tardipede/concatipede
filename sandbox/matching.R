@@ -6,7 +6,9 @@
 
 library(tidyverse)
 
-### * Modified from Matteo's comments on the issue #6 in Gitlab repo on 2021-03-16
+### * Code from Matteo
+
+### ** Modified from Matteo's comments on the issue #6 in Gitlab repo on 2021-03-16
 
 # [The corresponding sequences.xlsx is saved in sandbox/]
 
@@ -35,7 +37,7 @@ for (i in 1:nrow(good_matches)){
     matched_names[i] <- GrpString::CommonPatt(unlist(to_match),low=100)[1, 1]
 }
 
-### * Modified from e-mail from Matteo (2021-03-16)
+### ** Modified from e-mail from Matteo (2021-03-16)
 
 ## I made a function to match sequence names between two vectors.
 
@@ -97,7 +99,7 @@ match_seqnames <- function(V1,V2){
 
 matches <- match_seqnames(V1, V2)
 
-### * E-mail from Matteo (2021-03-16)
+### ** Modified from e-mail from Matteo (2021-03-16)
 
 ## I attach another snippet of code I make in how to put together all the
 ## different alignments, but I couldn´t manage to complete it
@@ -122,7 +124,6 @@ for (i in 1:nrow(col_numbers)){
 # bind all the tables together
 binded_tables <- bind_rows(correspondences)
 
-
 # Create a network and identify all the separate clusters
 gD <- igraph::simplify(igraph::graph.data.frame(binded_tables[,1:2],
                                                 directed = FALSE))
@@ -142,3 +143,62 @@ lou2 <- igraph::cluster_louvain(gD2)
 # Ideally only the clusters with a cyclic structure should be kept and then
 # their components mapped to the original columns.  But I have no idea on how
 # to do it.
+
+### * Suggestion of an algorithm
+
+# Let's assume a situation with N fasta files, with each fasta file i having
+# n_i sequence names.
+
+# The problem of matching the names in the best possible way across fasta files
+# is similar to that of identifying homologous proteins across species, using
+# e.g. reciprocal blast.
+
+# Suggested steps:
+
+# 1 - For each pair of fasta files, identify matching names using a reciprocal
+# match approach: two names match if and only if they are their reciprocal best
+# match.
+
+# 2 - Those matches across fasta files define a graph.
+
+# 3 - We want to identify sub-graphs such that (i) they contain at most one
+# sequence name per fasta file and (ii) all nodes in a given sub-graph are
+# fully connected (i.e., they are all their best reciprocal matches across any
+# pair of fasta files).
+
+### ** reciprocal_matches()
+
+#' Find the best reciprocal matches between x and y
+#'
+#' @param x,y Character vectors. They do not need to have the same length.
+#' @param method Method for string distance calculation. See
+#'     \code{?stringdist::stringdist-metrics}.
+#' 
+
+reciprocal_matches <- function(x, y, method = "lv") {
+    # Calculate the string distance matrix
+    z <- stringdist::stringdistmatrix(x, y, method = "lv")
+    # Find best matches in each direction
+    bm1 <- apply(z, 1, function(w) {
+        best <- min(w)
+        if (sum(w == best) > 1) return(NA)
+        which.min(w)
+    })
+    bm2 <- apply(z, 2, function(w) {
+        best <- min(w)
+        if (sum(w == best) > 1) return(NA)
+        which.min(w)
+    })
+    # Find reciprocal best matches
+    bm1 <- tibble(x = x,
+                  best_y_for_x = y[bm1])
+    bm2 <- tibble(y = y,
+                  best_x_for_y = x[bm2])
+    bm <- dplyr::left_join(bm1, bm2, by = c("best_y_for_x" = "y"))
+    kept <- which(bm$x == bm$best_x_for_y)
+    bm <- bm[kept, ]
+    bm <- bm[, c("x", "best_y_for_x")]
+    colnames(bm) <- c("x", "y")
+    # Return
+    return(bm)
+}
