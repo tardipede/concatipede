@@ -144,7 +144,7 @@ lou2 <- igraph::cluster_louvain(gD2)
 # their components mapped to the original columns.  But I have no idea on how
 # to do it.
 
-### * Suggestion of an algorithm
+### * Prototype for automatic matching across several fasta files
 
 # Let's assume a situation with N fasta files, with each fasta file i having
 # n_i sequence names.
@@ -202,3 +202,100 @@ reciprocal_matches <- function(x, y, method = "lv") {
     # Return
     return(bm)
 }
+
+### * Workbench
+
+# Function to generate a random, unique id
+uuid <- function(...) {
+    paste0(sample(c(0:9, letters, toupper(letters)), 32, TRUE), collapse = "")
+}
+
+seqtable <- as_tibble(data.frame(readxl::read_xlsx("sequences.xlsx")))
+ffiles <- colnames(seqtable)[2:ncol(seqtable)]
+
+# Build a tidy table with unique ids for each sequence name
+ftibs <- lapply(ffiles, function(f) tibble(fasta_file = f,
+                                           seq_name = na.omit(unique(seqtable[[f]])),
+                                           id = sapply(seq_name, uuid)))
+ftib <- bind_rows(ftibs)
+# TODO Add a step where duplicates in sequence names within a file raise a
+# warning or an error.
+
+# Pairwise reciprocal matches
+pairs <- data.frame(t(combn(ffiles, m = 2)))
+colnames(pairs) <- c("file1", "file2")
+pairs <- as_tibble(pairs)
+pairs$best_matches <- lapply(1:nrow(pairs), function(i) {
+    f1 <- pairs$file1[i]
+    f2 <- pairs$file2[i]
+    v1 <- ftib$seq_name[ftib$fasta_file == f1]
+    v2 <- ftib$seq_name[ftib$fasta_file == f2]
+    bm <- reciprocal_matches(v1, v2)
+    bm
+})
+pairs$best_matches_id <- lapply(1:nrow(pairs), function(i) {
+    f1 <- pairs$file1[i]
+    f2 <- pairs$file2[i]
+    bm <- pairs$best_matches[[i]]
+    x <- ftib[ftib$fasta_file == f1, c("seq_name", "id")]
+    colnames(x)[2] <- "id1"
+    y <- ftib[ftib$fasta_file == f2, c("seq_name", "id")]
+    colnames(y)[2] <- "id2"
+    z <- dplyr::left_join(bm, x, by = c("x" = "seq_name"))
+    z <- dplyr::left_join(z, y, by = c("y" = "seq_name"))
+    z[, c("id1", "id2")]
+})
+
+# Build a graph containing all the reciprocal best matches
+g <- igraph::graph.data.frame(bind_rows(pairs$best_matches_id), directed = FALSE)
+
+# Examine each subgraph of g to accept/reject it
+sg <- igraph::decompose(g)
+validated <- list()
+k <- 1
+for (i in seq_along(sg)) {
+    m <- igraph::as_adjacency_matrix(sg[[i]])
+    nodes <- colnames(m)
+    # Check that there is at most one node from each fasta file
+    nodes_ff <- ftib[ftib$id %in% nodes, ]
+    valid <- (length(unique(nodes_ff$fasta_file)) == length(nodes_ff$fasta_file))
+    # Check that all nodes are reciprocal best matches
+    edges <- sum(m)
+    expected_edges <- nrow(m) * (nrow(m) - 1)
+    valid <- valid && (edges == expected_edges)
+    if (valid) {
+        validated[[k]] <- nodes
+        k <- k + 1
+    }
+}
+# Check that each node is present only once in the final matches
+z <- unlist(validated)
+stopifnot(length(z) == length(unique(z)))
+
+# Convert the `validated` list into a clean tibble
+rows <- list()
+id_to_ffile <- setNames(ftib$fasta_file, nm = ftib$id)
+id_to_seqname <- setNames(ftib$seq_name, nm = ftib$id)
+for (i in seq_along(validated)) {
+    ids <- validated[[i]]
+    seqnames <- id_to_seqname[ids]
+    names(seqnames) <- id_to_ffile[ids]
+    rows[[i]] <- seqnames[ffiles]
+    names(rows[[i]]) <- ffiles
+}
+z <- bind_rows(rows)
+
+# Add missing seq names
+for (f in ffiles) {
+    file_seqnames <- ftib$seq_name[ftib$fasta_file == f]
+    matched_seqnames <- na.omit(z[[f]])
+    unmatched_seqnames <- file_seqnames[!file_seqnames %in% matched_seqnames]
+    if (length(unmatched_seqnames) > 0) {
+        new_rows <- tibble(x = unmatched_seqnames)
+        colnames(new_rows) <- f
+        z <- bind_rows(z, new_rows)
+    }
+}
+
+# Save as an Excel file
+writexl::write_xlsx(z, path = "prototype-matching-output.xlsx")
