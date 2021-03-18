@@ -85,7 +85,7 @@ match_seqnames <- function(V1,V2){
     good_matches_2 <- tibble(V1 = good_matches_2$closest_match,
                              V2 = good_matches_2$string_to_match,
                              distance = good_matches_2$distance)
-    
+
     # Combine the two dataframes and filter them for duplicate entries
     good_matches_comb <- rbind(good_matches_1, good_matches_2)
     good_matches_comb <- good_matches_comb[!duplicated(good_matches_comb), ]
@@ -173,7 +173,7 @@ lou2 <- igraph::cluster_louvain(gD2)
 #' @param x,y Character vectors. They do not need to have the same length.
 #' @param method Method for string distance calculation. See
 #'     \code{?stringdist::stringdist-metrics}.
-#' 
+#'
 
 reciprocal_matches <- function(x, y, method = "lv") {
     # Calculate the string distance matrix
@@ -296,6 +296,21 @@ for (f in ffiles) {
         z <- bind_rows(z, new_rows)
     }
 }
+
+
+# Try to extract names from matching table
+extracted_names =  split(z, seq(nrow(z))) %>%
+  lapply(function(x){x = unlist(x[!is.na(x)])}) %>%
+  lapply(GrpString::CommonPatt,low=100) %>%
+  lapply(function(x){x = x[1,1]}) %>%
+  lapply(function(x){if(substring(x, 1, 1) == "_"){x = substring(x, 2)}else{x = x}}) %>%
+  lapply(function(x){if(substring(x, nchar(x), nchar(x)) == "_"){x = substring(x, 1,nchar(x)-1)}else{x = x}}) %>%
+  unlist
+
+
+z = data.frame(name = extracted_names, z)
+
+
 
 # Save as an Excel file
 writexl::write_xlsx(z, path = "prototype-matching-output.xlsx")
