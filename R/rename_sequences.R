@@ -75,16 +75,22 @@ lR=alignments[names(alignments) %in% colnames(df)[-1]]
 new_names = get_genbank_table(df)
 for (i in 2:ncol(new_names)){
   new_names[,i] = paste0(unlist(new_names[,i]),"_",unlist(new_names[,1]),"_",rep(marker_names[i-1],length(unlist(new_names[,1]))))
-  }  # Matthieu I have to find a tidy way to remove the first "_" if there is not a genbank accession number
+  }  # Matthieu I have to find a tidy way to remove the first "NA_" that gets putted at the beginning of the name if there is not a genbank accession number
 
 
-#rename sequences in each alignment with the final sequence name based ont the new_names table
+#rename sequences in each alignment with the final sequence name based on the new_names table
 for (j in 1:length(lR)){
   align=names(lR[j])
   lR[[j]]=.rename.seqs(lR[[j]],table=data.frame(name = new_names[,colnames(new_names)==align],df[,2:ncol(df)]),align=align)
   lR[[j]]=lR[[j]][!is.na(names(lR[[j]]))]#this delete all sequences not present in the correspondence table
   if (unalign){lR[[j]] = ape::del.gaps(lR[[j]])}
   }
+
+# clean the newname table to keep onyl the sequences name that are really present in the alignment
+for (i in 2:ncol(new_names)){
+  sequences_in_alignments = new_names[,i] %in% names(lR[[match(colnames(new_names)[i],names(lR))]])
+  new_names[!sequences_in_alignments,i] = ""
+}
 
 
 #Create directory where to save outputs file
@@ -103,8 +109,14 @@ while (dir.exists(dir_name)) {
 
 dir.create(dir_name)
 
-# save renamed alignments
+# save renamed alignments and update the names of the alignments in the new_names dataframe that will be saved as new correspondence table
 for (i in 1:length(lR)){
+ original_alignment_name = names(lR)[i]
  write.alignment(lR[[i]],name=paste0(dir_name,"/renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*")),format=format)
+ colnames(new_names)[match(original_alignment_name,colnames(new_names))]=paste0("renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*"),".fasta")
 }
+
+#save new correspondence table
+writexl::write_xlsx(new_names,paste0(dir_name,"/renamed_correspondence_table.xlsx"))
+
 }
