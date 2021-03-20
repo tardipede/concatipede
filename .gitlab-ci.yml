@@ -10,6 +10,7 @@ buildAndTest:
     - apt-get update && apt-get -y install qpdf
     # Install package dependencies
     - R -e 'install.packages(c("ape", "readxl", "writexl", "testthat", "stringdist", "qualV", "igraph"))'
+    - R -e 'library(igraph)'
     # Install pkgdown
     - R -e 'install.packages("pkgdown")'
     # Test package
