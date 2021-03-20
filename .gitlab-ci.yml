@@ -7,10 +7,9 @@ buildAndTest:
   stage: build
   script:
     # Install the qpdf dependency using the Debian `apt-get` package manager
-    - apt-get update && apt-get -y install qpdf
+    - apt-get update && apt-get -y install qpdf libglpk-dev
     # Install package dependencies
     - R -e 'install.packages(c("ape", "readxl", "writexl", "testthat", "stringdist", "qualV", "igraph"))'
-    - R -e 'library(igraph)'
     # Install pkgdown
     - R -e 'install.packages("pkgdown")'
     # Test package
