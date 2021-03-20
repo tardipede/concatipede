@@ -310,7 +310,5 @@ extracted_names =  split(z, seq(nrow(z))) %>%
 
 z = data.frame(name = extracted_names, z)
 
-
-
 # Save as an Excel file
 writexl::write_xlsx(z, path = "prototype-matching-output.xlsx")
