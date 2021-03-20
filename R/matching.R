@@ -3,6 +3,9 @@
 # Functions in this file are responsible for automatic matching of sequence
 # names across fasta files
 
+# TODO Move dependencies for this file to the Suggests field of DESCRIPTION
+# instead of Imports?
+
 ### * uuid()
 
 #' Generate random unique identifiers
@@ -167,7 +170,7 @@ auto_match <- function(x, method = "lv", xlsx) {
         z[, c("id1", "id2")]
     })
     # Build a graph containing all the reciprocal best matches
-    g <- igraph::graph.data.frame(bind_rows(pairs$best_matches_id), directed = FALSE)
+    g <- igraph::graph.data.frame(dplyr::bind_rows(pairs$best_matches_id), directed = FALSE)
     # Examine each subgraph of g to accept/reject it
     sg <- igraph::decompose(g)
     validated <- list()
@@ -201,7 +204,7 @@ auto_match <- function(x, method = "lv", xlsx) {
         rows[[i]] <- seqnames[ffiles]
         names(rows[[i]]) <- ffiles
     }
-    z <- bind_rows(rows)
+    z <- dplyr::bind_rows(rows)
     # Add missing seq names
     for (f in ffiles) {
         file_seqnames <- ftib$seq_name[ftib$fasta_file == f]
@@ -238,7 +241,7 @@ auto_match <- function(x, method = "lv", xlsx) {
         paste0(lcs, collapse = "")
     }
     find_lcs <- function(a) {
-        reduce(a, my_lcs)
+        Reduce(my_lcs, a)
     }
     trim_special <- function(x, specials = c("-_")) {
         specials <- strsplit(specials, "")[[1]]
