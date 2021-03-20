@@ -90,7 +90,7 @@ concatipede = function(filename=NULL,
   for (j in 1:length(lR)){
     align=names(lR[j])
     lR[[j]]=.rename.seqs(lR[[j]],table=df,align=align)
-    lR[[j]]=lR[[j]][!is.na(names(lR[[j]]))]} #this delete all sequences not present in the translation table
+    lR[[j]]=lR[[j]][!is.na(names(lR[[j]]))]} #this delete all sequences not present in the correspondence table
 
 
   lR=lapply(lR,as.matrix)
