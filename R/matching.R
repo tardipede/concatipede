@@ -58,6 +58,10 @@
 #'     table. The first column, "name", contains a suggested name for the row
 #'     (not guaranteed to be unique). If a path was provided to hte \code{xlsx}
 #'     argument, an Excel file is saved and the table is returned invisibly.
+#'
+#' @importFrom stats na.omit
+#' @importFrom stats setNames
+#' @importFrom utils combn
 #' 
 #' @examples
 #' xlsx_file <- system.file("extdata", "sequences-test-matching.xlsx",
@@ -79,8 +83,9 @@ auto_match <- function(x, method = "lv", xlsx) {
     ffiles <- colnames(seqtable)[2:ncol(seqtable)]
     # Build a tidy table with unique ids for each sequence name
     ftibs <- lapply(ffiles, function(f) {
-        tibble::tibble(fasta_file = f, seq_name = na.omit(unique(seqtable[[f]])),
-                       id = sapply(seq_name, uuid))
+        out <- tibble::tibble(fasta_file = f, seq_name = na.omit(unique(seqtable[[f]])))
+        out[["id"]] <- sapply(out[["seq_name"]], uuid)
+        out
     })
     ftib <- dplyr::bind_rows(ftibs)
     # TODO Add a step where duplicates in sequence names within a file raise a

@@ -13,7 +13,7 @@ This is an Excel file (extension .xlsx) typically used to test or
 demonstrate the automatic matching capabilities of the concatipede package.
 
 This file represents the Excel template that could be produced by
-\code{\link{concatipe_prepare}} after detecting the fasta files present in a
+\code{\link{concatipede_prepare}} after detecting the fasta files present in a
 working directory.
 }
 
@@ -22,7 +22,7 @@ working directory.
 if (requireNamespace("readxl")) {
   path <- system.file("extdata", "sequences-test-matching.xlsx",
                       package = "concatipede")
-  seqs <- read_xlsx(path)
+  seqs <- readxl::read_xlsx(path)
   seqs
 }
 }
