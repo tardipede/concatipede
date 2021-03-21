@@ -20,10 +20,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
 	ape,
-	writexl,
+        dplyr,
+        igraph,
+        qualV,
         tibble,
 	readxl,
-        stringr
+        stringdist,
+        stringr,
+        writexl
 Suggests: 
     DT,
     knitr,
