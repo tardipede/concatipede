@@ -1,0 +1,96 @@
+---
+title: "Proposition for an updated concatipede workflow"
+date: "`r Sys.Date()`"
+---
+
+```{r include = FALSE}
+knitr::opts_knit$set(verbose = TRUE)
+knitr::opts_chunk$set(fig.align = "center", eval = FALSE)
+options(scipen = 6, width = 85)
+```
+
+This is a vignette to brainstorm more flexible inputs for concatipede. No code is actually run, so we can just write the interface we'd like to have and experiment, and once we settle on something we can go to the coding phase!
+
+## Preparing the template
+
+If we want to give the user a bit more control and flexiblity over the collection of fasta file names, instead of just using the files in the current working directory, we could separate the **filename collection** step and the **template preparation** step. For example:
+
+```{r }
+# Collect the filenames
+ff <- find_fasta(dir = "path/to/fasta-files/")
+
+# Prepare the template
+tpl <- concatipede_prepare(ff)
+
+# Save the template
+write_xl(tpl)
+```
+
+We could put this easily into a pipeline:
+
+```{r }
+fasta_dir <- "path/to/fasta-files/"
+
+find_fasta(dir = fasta_dir) %>%
+  concatipede_prepare() %>%
+  write_xl("my-template.xslx")
+```
+
+`concatipede_prepare()` would be modified to accept a vector of file paths. The `find_fasta()` function would provide the "automatic detection" feature (taken out from `concatipede_prepare()`). The user could provide their own vector of file paths:
+
+```{r }
+fasta_files <- c("project-COI/file1.fa", "project/16S/file-32.fa")
+
+concatipede_prepare(fasta_files) %>%
+  write_xl("my_template.xslx")
+```
+
+We could also adapt the matching code so that someone could write something like:
+
+```{r }
+concatipede_prepare(fasta_files) %>%
+  auto_match_seqs() %>%
+  write_xl("my_template.xslx")
+```
+
+Basically, the idea would be to have one nice function for each distinct step (`concatipede_prepare`, `auto_match_seqs`, `write_xl`) and allow the user to combine them as they see fit.
+
+## Merging the sequences
+
+Once the user has checked and adjusted the template in Excel or another spreadsheet software, the merging could be done with:
+
+```{r }
+read_xl("my_final_template.xlsx") %>%
+  concatipede() %>%
+  write_faste("merged-seqs.fasta")
+```
+
+Here `concatipede()` would just do the merging and return an alignment (for example using the **ape** package formats). This would allow for things like:
+
+```{r }
+read_xl("my_final_template.xlsx") %>%
+  concatipede() %>%
+  plot_align() %>%
+  write_faste("merged-seqs.fasta")
+```
+
+Of course, it would still be possible to keep a `out` argument to `concatipede()` to simply write:
+
+```{r }
+read_xl("my_final_template.xlsx") %>%
+  concatipede(out = "merged-seqs.fasta") %>%
+```
+
+If we follow the pipe `%>%` philosophy as suggested above, it means that in the simpler cases, or if the user has been very careful about the sequence naming, something like this could be written:
+
+```{r }
+# Probably not used very often, but given flexible functions the only limit is
+# the user's ideas!
+find_fasta(dir = fasta_dir) %>%
+  concatipede_prepare() %>%
+  auto_match_seqs() %>%
+  concatipede() %>%
+  plot_align() %>%
+  write_fasta("merged-seqs.fasta")
+```
+
