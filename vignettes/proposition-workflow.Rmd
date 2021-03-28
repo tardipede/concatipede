@@ -94,3 +94,23 @@ find_fasta(dir = fasta_dir) %>%
   write_fasta("merged-seqs.fasta")
 ```
 
+`write_xl()` could return its input invisibly, so that we could use it to save Excel tables as checkpoints:
+
+```{r }
+find_fasta(dir = fasta_dir) %>%
+  concatipede_prepare() %>%
+  write_xl("template.xslx") %>%
+  auto_match_seqs() %>%
+  write_xl("template_automatched.xlsx") %>%
+  concatipede() %>%
+  plot_align() %>%
+  write_fasta("merged-seqs.fasta")
+```
+
+What about storing the directory information? What are the functions that need a directory information?
+
+- `find_fasta()` needs a directory, and returns full path information.
+- `concatipede_prepare()` needs full path information (or at least a directory), and saves a file or returns a tibble with basenames only. Directory information is lost. It could stored as an attribute to the tibble (but it would still be lost from the written file).
+- `auto_match_seqs()` needs a tibble or an Excel file as an input.
+- `concatipede()` needs a directory information. If provided a tibble without a directory attribute, then the directory should be passed as an argument. If it loads the table from a file, then the directory should also be provided by the user. When directory information is missing, the function could assume that the current working directory should be used (but it should also issue a warning about that so that it is not silent, and there could be an option `use_current = TRUE` to remove the warning).
+
