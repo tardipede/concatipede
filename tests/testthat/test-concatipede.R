@@ -15,9 +15,9 @@ file.copy(from = example_files, to = getwd())
 
 test_that("concatipede() does not crash and can produce an output file", {
     # Check that the function completes without crashing
-    expect_error(concatipede(filename = "Macrobiotidae_seqnames.xlsx",
-                             out = "my-output"),
-                 NA)
+    expect_message(concatipede(filename = "Macrobiotidae_seqnames.xlsx",
+                               out = "my-output"),
+                   "Loading the fasta files from the current directory")
     # Check that an output folder was created
     expect_true(dir.exists("my-output"))
     expect_true(file.exists(file.path("my-output", "my-output.fasta")))
@@ -68,9 +68,9 @@ test_that("concatipede() can accept a tibble as an input", {
                                                    )),
                     row.names = c(NA, -13L), class = c("tbl_df", "tbl", "data.frame"))
     # Check that the function completes without crashing
-    expect_error(concatipede(df = df,
-                             out = "my-output-df"),
-                 NA)
+    expect_warning(concatipede(df = df,
+                               out = "my-output-df"),
+                   "The `df` input did not have a \"dir_name\" attribute and no `dir` argument was passed: loading the fasta files from the current directory by default")
     # Check that an output folder was created
     expect_true(dir.exists("my-output-df"))
     expect_true(file.exists(file.path("my-output-df", "my-output-df.fasta")))

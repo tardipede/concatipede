@@ -96,7 +96,7 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=1,col_names=T)%>%
 
 Now we input this excel to the `concatipede()` function:
 ```{r message = FALSE}
-concatipede("Macrobiotidae_seqnames.xlsx", out = "Macrobiotidae_4genes", excel.sheet = 1)
+concatipede(filename = "Macrobiotidae_seqnames.xlsx", out = "Macrobiotidae_4genes", excel.sheet = 1)
 ```
 
 This will create a new folder with the concatenated alignment in different formats.
@@ -104,7 +104,7 @@ This will create a new folder with the concatenated alignment in different forma
 Here is the concatenated alignment:
 ```{r, echo=FALSE, fig.width = 10, fig.height = 3}
 par(mar=c(1,12,1,1))
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1,return.aln=T),cex=0.5)
+image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1),cex=0.5)
 ```
 
 We can also choose only a subset of the taxa from a correspondence table saved as separate sheet in the excel file.
@@ -120,12 +120,12 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=2,col_names=T)%>%
 ```
 
 ```{r }
-concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
+concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
 ```
 
 ```{r, echo=FALSE, fig.width = 10, fig.height = 1.5}
 par(mar=c(1,12,1,1))
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2,return.aln=T),cex=0.5)
+image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2),cex=0.5)
 ```
 
 And another one but in this case we select only one marker:
@@ -140,11 +140,11 @@ readxl::read_xlsx("Macrobiotidae_seqnames.xlsx",sheet=3,col_names=T)%>%
 ```
 
 ```{r }
-concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
+concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
 ```
 
 ```{r, echo=FALSE, fig.width = 10, fig.height = 3}
 par(mar=c(1,12,1,1))
-image(concatipede("Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3,return.aln=T),cex=0.5)
+image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3),cex=0.5)
 ```
 

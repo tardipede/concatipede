@@ -57,6 +57,25 @@ test_that("Functions work well together (medium pipeline)", {
     expect_true(attr(z, "dir_name") == tmp_dir)
 })
 
+test_that("Functions work well together (medium pipeline 2)", {
+    stopifnot(!file.exists("my-template.xlsx"))
+    stopifnot(!file.exists("matched-template.xlsx"))
+    # Short pipeline
+    expect_message({z <- find_fasta() %>%
+                        concatipede_prepare() %>%
+                        write_xl("my-template.xlsx") %>%
+                        auto_match_seqs() %>%
+                        write_xl("matched-template.xlsx") %>%
+                        concatipede() },
+                   "Loading the fasta files from the directory stored in the \"dir_name\" attribute of `df`")
+    expect_true(file.exists("my-template.xlsx"))
+    expect_true(file.exists("matched-template.xlsx"))
+    unlink("my-template.xlsx")
+    unlink("matched-template.xlsx")
+    # Check that the output is as expected
+    expect_s3_class(z, "DNAbin")
+})
+
 ### * Clean-up
 
 # Delete temporary directory

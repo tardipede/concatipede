@@ -6,29 +6,31 @@
 #' @importFrom graphics image
 #' @importFrom utils read.table
 #'
-#' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param df The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.
+#' @param filename Filename of input correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param format a string specifying in what formats you want the alignment
+#' @param dir Optional, path to the directory containing the fasta files. This argument has an effect only if fasta files names are taken from the columns of the \code{df} argument, and that \code{df} does not have an attribute \code{dir_name} itself. If no \code{dir} is provided and \code{df} does not have a \code{dir_name} attribute, the current working directory is ued with a warning.
 #' @param plotimg return a graphical representation of the alignment in pdf format
-#' @param return.aln return the concatenate alignment inside R workspace
 #' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
 #' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
 #' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param exclude fasta files with this text in the working directory will be ingnored by the function
 #' @param out specify outputs filename
-#' @return Can return alignment in the workspace if return.aln is set to TRUE
+#' 
+#' @return The concatenated alignment (invisibly if \code{out} is not NULL).
+#' 
 #' @export
 
-concatipede = function(filename=NULL,
-                       df=NULL,
-                       format=c("fasta","nexus","phylip"),
-                       plotimg=F,
-                       return.aln=F,
-                       out=NULL,
-                       remove.gaps=TRUE,
-                       write.outputs=TRUE,
-                       excel.sheet=1,
-                       exclude="concatenated"){
+concatipede <- function(df = NULL,
+                        filename = NULL,
+                        format = c("fasta","nexus","phylip"),
+                        dir,
+                        plotimg = FALSE,
+                        out = NULL,
+                        remove.gaps = TRUE,
+                        write.outputs = TRUE,
+                        excel.sheet = 1,
+                        exclude = "concatenated"){
 
   # Check that exactly one of `filename` or `df` is provided
   if (is.null(df) & is.null(filename)) {
@@ -49,6 +51,8 @@ concatipede = function(filename=NULL,
       } else {
           stop("Input file format not recognized. `filename` must end with \".txt\" or \".xlsx\".")
       }
+      message("Loading the fasta files from the current directory (", getwd(), ").")
+      fasta_dir_name <- getwd()
   } else {
       # Check: was `df` provided by the user?
       stopifnot(!is.null(df))
@@ -56,6 +60,21 @@ concatipede = function(filename=NULL,
       # of the function is df was given as a tibble and is not converted to a
       # data frame)
       df <- as.data.frame(df)
+      # Check the dir_name attribute
+      fasta_dir_name <- attr(df, "dir_name")
+      if (is.null(fasta_dir_name) & missing(dir)) {
+          warning("The `df` input did not have a \"dir_name\" attribute and no `dir` argument was passed: loading the fasta files from the current directory by default (", getwd(), ").")
+          fasta_dir_name <- getwd()
+      } else if (!is.null(fasta_dir_name) & missing(dir)) {
+          message("Loading the fasta files from the directory stored in the \"dir_name\" attribute of `df` (", fasta_dir_name, ").")
+      } else if (!is.null(fasta_dir_name) & !missing(dir)) {
+          warning("A `dir` argument was passed and overrides the \"dir_name\" attribute of `df`. The `dir` argument is ", dir, " and it will be used to load the fasta files, while the \"dir_name\" attribute of `df` was ", fasta_dir_name, " and it will be ignored.")
+          fasta_dir_name <- dir
+      } else {
+          stopifnot(is.null(fasta_dir_name) & !missing(dir))
+          message("Loading the fasta files from the directory provided by the `dir` argument (", dir, ").")
+          fasta_dir_name <- dir
+      }
   }
 
   #remove all the dataframe columns before the "name" columns
@@ -73,7 +92,7 @@ concatipede = function(filename=NULL,
   l=list()
   maxlen=0
   for (i in 1:length(files)){
-    dataset=ape::read.FASTA(files[i])
+    dataset=ape::read.FASTA(file.path(fasta_dir_name, files[i]))
     a=sd(unlist(lapply(dataset,length)))
     if(a!=0){cat("ATTENTION! In file ",files[i]," not all sequences of same length \n")}
     l[[i]]=assign(files[i],dataset)
@@ -165,7 +184,9 @@ concatipede = function(filename=NULL,
     dev.off()}
   }
 
-  #return concatenated alignment in R option
-  if(return.aln==T) {return(conc)}
-
+    # Return concatenated alignment
+    if (!is.null(out)) {
+        return(invisible(conc))
+    }
+    conc
 }
