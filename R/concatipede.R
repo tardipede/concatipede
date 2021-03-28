@@ -165,9 +165,12 @@ concatipede <- function(df = NULL,
 
   dir.create(dir_name)
 
-  # save alignment
-  if(is.null(out)){write.alignment(conc,name=paste0(dir_name,"/concatenated"),format=format)}
-  if(!is.null(out)){write.alignment(conc,name=paste0(dir_name,"/",out),format=format)}
+      # Save alignment
+      if (is.null(out)) {
+          write.alignment(conc, name = paste0(dir_name, "/concatenated"), format = format)
+      } else {
+          write.alignment(conc, name = paste0(dir_name, "/", out), format = format)
+      }
 
 
   #Save partition lenghts table

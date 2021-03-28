@@ -76,6 +76,38 @@ test_that("Functions work well together (medium pipeline 2)", {
     expect_s3_class(z, "DNAbin")
 })
 
+test_that("Functions work well together (long pipeline)", {
+    stopifnot(!file.exists("my-template.xlsx"))
+    stopifnot(!file.exists("matched-template.xlsx"))
+    stopifnot(!file.exists("toto.fasta"))
+    stopifnot(!file.exists("toto.nexus"))
+    stopifnot(!file.exists("toto.phy"))
+    # Short pipeline
+    expect_message({z <- find_fasta() %>%
+                        concatipede_prepare() %>%
+                        write_xl("my-template.xlsx") %>%
+                        auto_match_seqs() %>%
+                        write_xl("matched-template.xlsx") %>%
+                        concatipede() %>%
+                        write_fasta("toto")},
+                   "Loading the fasta files from the directory stored in the \"dir_name\" attribute of `df`")
+    expect_true(file.exists("my-template.xlsx"))
+    expect_true(file.exists("matched-template.xlsx"))
+    expect_true(file.exists("toto.fasta"))
+    unlink("my-template.xlsx")
+    unlink("matched-template.xlsx")
+    unlink("toto.fasta")
+    # Check that the output is as expected
+    expect_s3_class(z, "DNAbin")
+    # Test the other alignment writers
+    write_nexus(z, "toto")
+    expect_true(file.exists("toto.nexus"))
+    unlink("toto.nexus")
+    write_phylip(z, "toto")
+    expect_true(file.exists("toto.phy"))
+    unlink("toto.phy")
+})
+
 ### * Clean-up
 
 # Delete temporary directory
