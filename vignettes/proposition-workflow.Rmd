@@ -1,6 +1,10 @@
 ---
 title: "Proposition for an updated concatipede workflow"
 date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Proposition for an updated concatipede workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r include = FALSE}
