@@ -7,7 +7,7 @@ dir.create(tmp_dir)
 old_dir <- getwd()
 setwd(tmp_dir)
 # Copy the package fasta files into this directory
-example_files = list.files(system.file("extdata", package="concatipede"),
+example_files <- list.files(system.file("extdata", package="concatipede"),
                            full.names = TRUE)
 file.copy(from = example_files, to = getwd())
 
