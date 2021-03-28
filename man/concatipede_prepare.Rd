@@ -29,6 +29,7 @@ This function creates a template correspondence table that can also be saved in 
 \examples{
 dir <- system.file("extdata", package = "concatipede")
 fasta_files <- find_fasta(dir)
-concatipede_prepare(fasta_files)
+z <- concatipede_prepare(fasta_files)
+z
 
 }

@@ -8,7 +8,7 @@
 # TODO Move dependencies for this file to the Suggests field of DESCRIPTION
 # instead of Imports?
 
-### * auto_match() @export
+### * auto_match_seqs() @export
 
 #' Build a template table with automatically matched sequence names
 #'
@@ -56,7 +56,7 @@
 #'     the end of the table, so that the output table columns contain all the
 #'     unique sequence names present in the corresponding column of the input
 #'     table. The first column, "name", contains a suggested name for the row
-#'     (not guaranteed to be unique). If a path was provided to hte \code{xlsx}
+#'     (not guaranteed to be unique). If a path was provided to the \code{xlsx}
 #'     argument, an Excel file is saved and the table is returned invisibly.
 #'
 #' @importFrom stats na.omit
@@ -67,20 +67,22 @@
 #' xlsx_file <- system.file("extdata", "sequences-test-matching.xlsx",
 #'                          package = "concatipede")
 #' xlsx_template <- readxl::read_xlsx(xlsx_file)
-#' auto_match(xlsx_template)
+#' auto_match_seqs(xlsx_template)
 #' \dontrun{
-#'   auto_match(xlsx_template, xlsx = "my-automatic-output.xlsx")
+#'   auto_match_seqs(xlsx_template, xlsx = "my-automatic-output.xlsx")
 #' }
 #'
 #' @export
 
-auto_match <- function(x, method = "lv", xlsx) {
+auto_match_seqs <- function(x, method = "lv", xlsx) {
     seqtable <- tibble::as_tibble(x)
     if (!colnames(seqtable)[1] == "name") {
         stop("The first column must be called \"name\".")
     }
     stopifnot(ncol(seqtable) > 2)
     ffiles <- colnames(seqtable)[2:ncol(seqtable)]
+    # Store the dir_name attribute, if any
+    dir_name <- attr(x, "dir_name")
     # Build a tidy table with unique ids for each sequence name
     ftibs <- lapply(ffiles, function(f) {
         out <- tibble::tibble(fasta_file = f, seq_name = na.omit(unique(seqtable[[f]])))
@@ -218,6 +220,7 @@ auto_match <- function(x, method = "lv", xlsx) {
     }
     # Return
     out <- tibble::tibble(name = proposed_names, z)
+    attr(out, "dir_name") <- dir_name
     if (missing(xlsx)) return(out)
     writexl::write_xlsx(out, path = xlsx)
     return(invisible(out))
