@@ -44,15 +44,15 @@ The first step is to generate a template correspondence table with all the seque
 But first let's check what fasta files are in our directory:
 
 ```{r }
-list.files(pattern = "\\.fas")
+library(concatipede)
+find_fasta()
 ```
 
 Those are alignments for 4 markers of tardigrades from the family Macrobiotidae.
 With the function `concatipede_prepare()` we will generate an excel table with the sequence names in the order they are found in each alignment.
 
 ```{r }
-library(concatipede)
-concatipede_prepare()
+concatipede_prepare(out = "seqnames")
 ```
 
 Once it is done, an excel file should be saved in your working directory. The template excel file looks like this:
