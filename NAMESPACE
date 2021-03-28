@@ -3,6 +3,7 @@
 export(auto_match)
 export(concatipede)
 export(concatipede_prepare)
+export(find_fasta)
 export(get_genbank_table)
 export(rename_sequences)
 importFrom(grDevices,dev.off)
