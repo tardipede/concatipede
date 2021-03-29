@@ -4,6 +4,8 @@
 #' @param path Path of the file to be written (the ".fasta" extension is added automatically).
 #'
 #' @return The input \code{x} (invisibly).
+#'
+#' @export
 
 write_fasta <- function(x, path) {
     write.alignment(x, path, format = "fasta")
@@ -16,6 +18,8 @@ write_fasta <- function(x, path) {
 #' @param path Path of the file to be written (the ".nexus" extension is added automatically).
 #'
 #' @return The input \code{x} (invisibly).
+#'
+#' @export
 
 write_nexus <- function(x, path) {
     write.alignment(x, path, format = "nexus")
@@ -28,6 +32,8 @@ write_nexus <- function(x, path) {
 #' @param path Path of the file to be written (the ".phy" extension is added automatically).
 #'
 #' @return The input \code{x} (invisibly).
+#'
+#' @export
 
 write_phylip <- function(x, path) {
     write.alignment(x, path, format = "phylip")
