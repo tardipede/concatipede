@@ -118,3 +118,89 @@ What about storing the directory information? What are the functions that need a
 - `auto_match_seqs()` needs a tibble or an Excel file as an input.
 - `concatipede()` needs a directory information. If provided a tibble without a directory attribute, then the directory should be passed as an argument. If it loads the table from a file, then the directory should also be provided by the user. When directory information is missing, the function could assume that the current working directory should be used (but it should also issue a warning about that so that it is not silent, and there could be an option `use_current = TRUE` to remove the warning).
 
+## Testing the proposed functions
+
+```{r echo = FALSE, eval = TRUE}
+knitr::opts_chunk$set(fig.align = "center", eval =TRUE)
+```
+
+```{r message = FALSE}
+library(concatipede)
+```
+
+Let's use the example fasta files shipped with the package. The code chunks below go through the whole pipeline step-by-step:
+
+```{r }
+# Get the target folder containing the fasta files
+fasta_dir <- system.file("extdata", package = "concatipede")
+fasta_dir
+# Detect the fasta files
+fasta_files <- find_fasta(dir = fasta_dir)
+fasta_files
+# Prepare the template and save it as an xlsx file
+concatipede_prepare(fasta_files = fasta_files, out = "my-template")
+```
+
+At this stage, the template file could be modified by hand and provided as an input to `concatipede()`. Here, I will just load it again and use the automatic matching feature, without any manual correction (but this is just out of laziness for this example).
+
+```{r }
+# Load the template (unmodified from concatipede_prepare(), but in a real-life
+# example it would be adjusted using Excel outside of R)
+template <- read_xl("my-template.xlsx")
+template
+# Let's be lazy and use the auto-match
+matched <- auto_match_seqs(template)
+# Concatenate the sequences and save them as fasta
+concatipede(matched, dir = fasta_dir, out = "merged-seqs", format = "fasta")
+```
+
+All of this can also run in a single pipeline:
+```{r }
+merged <- fasta_dir %>%
+  find_fasta() %>%
+  concatipede_prepare() %>%
+  write_xl("template-for-later-check.xlsx") %>%
+  auto_match_seqs() %>%
+  write_xl("auto-matched-for-later-check.xlsx") %>%
+  concatipede() %>%
+  write_fasta("my-merged-seqs") %>%
+  write_nexus("my-merged-seqs")
+```
+
+At this stage, `merged` contains the merged alignment in the R session:
+```{r }
+merged
+```
+but during the pipeline the alignment was also saved as a fasta file and as a nexus file, and two Excel files were saved for some manual checks after the pipeline has completed.
+
+Note that this one-block pipeline only makes sense if the sequence names are good enough to allow the auto-match feature to do a perfect job. A more realistic pipeline is probably one with those two separate blocks:
+
+```{r eval = FALSE}
+# Prepare the xlsx template
+fasta_dir %>%
+  find_fasta() %>%
+  concatipede_prepare() %>%
+  auto_match_seqs() %>%
+  write_xl("auto-match-to-manually-fix.xlsx")
+
+# Then a manual step to check and fix the xlsx template outside of R
+
+# Concatenate the sequences
+read_xl("auto-match-manually-fixed.xlsx") %>%
+  concatipede(dir = fasta_dir) %>%
+  write_fasta()
+```
+
+Note that since the `fasta_dir` information is lost from the table when going out of R in Excel (to fix the sequence name matching), we have to specify the directory again in `concatipede()`. If we don't specify it, and the input table doesn't have the special attribute `dir_name` written by the `find_fasta()` function, then `concatipede()` will try to find the fasta files in the current directory by default.
+
+Finally, the basic building blocks of the pipeline can be combined to create some ready-made functions for the users, for example:
+
+```{r }
+concatipede_auto_prepare <- function(fasta_dir, out) {
+  fasta_dir %>%
+    find_fasta() %>%
+    concatipede_prepare() %>%
+    auto_match_seqs() %>%
+    write_xl(path = out)
+}
+```
