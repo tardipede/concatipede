@@ -2,6 +2,8 @@
 #'
 #' This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 #'
+#' TODO Change from warning to error when no dir info is provided, so that the current directory is never used without the explicit intent of the user?
+#' 
 #' @importFrom grDevices dev.off pdf
 #' @importFrom graphics image
 #' @importFrom utils read.table
@@ -14,7 +16,6 @@
 #' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
 #' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
 #' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
-#' @param exclude fasta files with this text in the working directory will be ingnored by the function
 #' @param out specify outputs filename
 #' 
 #' @return The concatenated alignment (invisibly if \code{out} is not NULL).
@@ -29,8 +30,7 @@ concatipede <- function(df = NULL,
                         out = NULL,
                         remove.gaps = TRUE,
                         write.outputs = TRUE,
-                        excel.sheet = 1,
-                        exclude = "concatenated"){
+                        excel.sheet = 1){
 
   # Check that exactly one of `filename` or `df` is provided
   if (is.null(df) & is.null(filename)) {
@@ -77,16 +77,11 @@ concatipede <- function(df = NULL,
       }
   }
 
-  #remove all the dataframe columns before the "name" columns
+  # Remove all the dataframe columns before the "name" columns
   df = df[,which(colnames(df)=="name"):ncol(df)]
 
-  #read files in the foldes and create a list
-  files=list.files(pattern = "\\.fas")
-
-  #exclude the files containing the "excluded" word in the filename
-  if (!is.null(exclude)){
-    toKeep=!grepl(exclude,files)
-    files=files[toKeep]}
+  # Take the file names for the column names of df
+  files <- colnames(df)[2:ncol(df)]
 
   # load the fasta alignments, do some quality check and rename them with the original file name
   l=list()
