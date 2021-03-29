@@ -13,8 +13,7 @@ concatipede(
   out = NULL,
   remove.gaps = TRUE,
   write.outputs = TRUE,
-  excel.sheet = 1,
-  exclude = "concatenated"
+  excel.sheet = 1
 )
 }
 \arguments{
@@ -35,12 +34,13 @@ concatipede(
 \item{write.outputs}{save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg}
 
 \item{excel.sheet}{specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
-
-\item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
 }
 \value{
 The concatenated alignment (invisibly if \code{out} is not NULL).
 }
 \description{
 This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
+}
+\details{
+TODO Change from warning to error when no dir info is provided, so that the current directory is never used without the explicit intent of the user?
 }
