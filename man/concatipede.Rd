@@ -5,28 +5,27 @@
 \title{Concatenate alignments}
 \usage{
 concatipede(
-  filename = NULL,
   df = NULL,
+  filename = NULL,
   format = c("fasta", "nexus", "phylip"),
-  plotimg = F,
-  return.aln = F,
+  dir,
+  plotimg = FALSE,
   out = NULL,
   remove.gaps = TRUE,
   write.outputs = TRUE,
-  excel.sheet = 1,
-  exclude = "concatenated"
+  excel.sheet = 1
 )
 }
 \arguments{
-\item{filename}{Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.}
-
 \item{df}{The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.}
+
+\item{filename}{Filename of input correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.}
 
 \item{format}{a string specifying in what formats you want the alignment}
 
-\item{plotimg}{return a graphical representation of the alignment in pdf format}
+\item{dir}{Optional, path to the directory containing the fasta files. This argument has an effect only if fasta files names are taken from the columns of the \code{df} argument, and that \code{df} does not have an attribute \code{dir_name} itself. If no \code{dir} is provided and \code{df} does not have a \code{dir_name} attribute, the current working directory is ued with a warning.}
 
-\item{return.aln}{return the concatenate alignment inside R workspace}
+\item{plotimg}{return a graphical representation of the alignment in pdf format}
 
 \item{out}{specify outputs filename}
 
@@ -35,12 +34,13 @@ concatipede(
 \item{write.outputs}{save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg}
 
 \item{excel.sheet}{specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
-
-\item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
 }
 \value{
-Can return alignment in the workspace if return.aln is set to TRUE
+The concatenated alignment (invisibly if \code{out} is not NULL).
 }
 \description{
 This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
+}
+\details{
+TODO Change from warning to error when no dir info is provided, so that the current directory is never used without the explicit intent of the user?
 }

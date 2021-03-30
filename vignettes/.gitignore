@@ -4,3 +4,9 @@ concatipede_test/
 Macrobiotidae_4genes*
 Macrobiotidae_COI*
 Macrobiotus_4genes*
+concatenated/
+merged-seqs/
+my-merged-seqs.*
+auto-matched-for-later-check.xlsx
+my-template.xlsx
+template-for-later-check.xlsx

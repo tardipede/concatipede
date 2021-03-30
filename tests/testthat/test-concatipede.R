@@ -11,37 +11,13 @@ example_files = list.files(system.file("extdata", package="concatipede"),
                            full.names = TRUE)
 file.copy(from = example_files, to = getwd())
 
-### * Test concatipede_prepare()
-
-test_that("concatipede_prepare() does not crash and can produce an xlsx file", {
-    # Check that the function completes without crashing
-    expect_error(concatipede_prepare(filename = "test-template"),
-                 NA)
-    # Check that the expected output file exists
-    expect_true(file.exists("test-template.xlsx"))
-})
-
-test_that("concatipede_prepare() can produce a tibble", {
-    # Check that the function completes without crashing
-    expect_error({z <- concatipede_prepare(tibble = TRUE)},
-                 NA)
-    # Check that the output is as expected
-    expect_s3_class(z, "tbl_df")
-    expect_true(all(dim(z) == c(13, 5)))
-    expect_true(setequal(colnames(z), c("name", "COI_Macrobiotidae.fas",
-                                        "ITS2_Macrobiotidae.fas",
-                                        "LSU_Macrobiotidae.fas",
-                                        "SSU_Macrobiotidae.fas")))
-    expect_true(colnames(z)[1] == "name")
-})
-
 ### * Test concatipede()
 
 test_that("concatipede() does not crash and can produce an output file", {
     # Check that the function completes without crashing
-    expect_error(concatipede(filename = "Macrobiotidae_seqnames.xlsx",
-                             out = "my-output"),
-                 NA)
+    expect_message(concatipede(filename = "Macrobiotidae_seqnames.xlsx",
+                               out = "my-output"),
+                   "Loading the fasta files from the current directory")
     # Check that an output folder was created
     expect_true(dir.exists("my-output"))
     expect_true(file.exists(file.path("my-output", "my-output.fasta")))
@@ -92,9 +68,9 @@ test_that("concatipede() can accept a tibble as an input", {
                                                    )),
                     row.names = c(NA, -13L), class = c("tbl_df", "tbl", "data.frame"))
     # Check that the function completes without crashing
-    expect_error(concatipede(df = df,
-                             out = "my-output-df"),
-                 NA)
+    expect_warning(concatipede(df = df,
+                               out = "my-output-df"),
+                   "The `df` input did not have a \"dir_name\" attribute and no `dir` argument was passed: loading the fasta files from the current directory by default")
     # Check that an output folder was created
     expect_true(dir.exists("my-output-df"))
     expect_true(file.exists(file.path("my-output-df", "my-output-df.fasta")))
@@ -109,24 +85,6 @@ test_that("concatipede() throws errors when the input is problematic", {
                  "Either `filename` or `df` must be provided.")
     expect_error(concatipede(filename = "my-file", df = mtcars, out = "my-output"),
                  "Only one of `filename` or `df` must be provided, not both.")
-})
-
-### * Test auto_match()
-
-test_that("auto_match() does not crash", {
-    xlsx_file <- system.file("extdata", "sequences-test-matching.xlsx",
-                             package = "concatipede")
-    xlsx_template <- readxl::read_xlsx(xlsx_file)
-    expect_error({z <- auto_match(xlsx_template)}, NA)
-    # Check that columns are in the same order
-    expect_true(all(colnames(xlsx_template) == colnames(z)))
-    # Check that no sequence name is lost
-    cols <- colnames(xlsx_template)
-    for (x in cols[cols != "name"]) {
-        input <- na.omit(unique(xlsx_template[[x]]))
-        output <- na.omit(unique(z[[x]]))
-        expect_true(setequal(input, output))
-    }
 })
 
 ### * Clean-up

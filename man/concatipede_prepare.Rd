@@ -5,25 +5,31 @@
 \title{Load alignments and prepare template correspondence table for concatenate () function}
 \usage{
 concatipede_prepare(
-  filename = "seqnames",
+  fasta_files,
+  out = "seqnames",
   excel = TRUE,
-  tibble = FALSE,
   exclude = "concatenated"
 )
 }
 \arguments{
-\item{filename}{filename of the saved correspondence table template}
+\item{fasta_files}{Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.}
 
-\item{excel}{logic indicating if saving the correspondence table template in the working directory in excel format (otherwise it is saved as text file)}
+\item{out}{Optional, a filename for the correspondence table template to save (without extension). No file is saved if \code{out} is not provided. In all cases, the function also returns a tibble with the correspondence table template (invisibly if \code{out} is provided).}
 
-\item{tibble}{Boolean, should the function return the correspondence table as a tibble instead of saving it as a file? Default is \code{FALSE}. If set to \code{TRUE}, the values of \code{filename} and \code{excel} are disregarded.}
+\item{excel}{Boolean, should the correspondence table template be saved in excel format? If \code{FALSE}, it is saved as a tab-separated text file instead. Default is \code{TRUE}. The correct file extension is automatically appended to the \code{out} argument. If \code{out} is missing, this argument has no effect.}
 
-\item{exclude}{fasta files with this text in the working directory will be ingnored by the function}
+\item{exclude}{If no \code{fasta_files} argument has been passed, fasta files matching the \code{exclude} pattern will be ignored by the function when it automatically detects fasta files in the working directory.}
 }
 \value{
-If \code{tibble} is \code{TRUE}, a tibble with the correspondence table template.
+A tibble with the correspondence table template (invisibly if an \code{out} argument was provided to save the table to a file).
 }
 \description{
-This function loads all the fasta files present in the working directory,
-creates a template correspondence table that is saved in the working directory.
+This function creates a template correspondence table that can also be saved in the working directory.
+}
+\examples{
+dir <- system.file("extdata", package = "concatipede")
+fasta_files <- find_fasta(dir)
+z <- concatipede_prepare(fasta_files)
+z
+
 }
