@@ -76,3 +76,10 @@ write.alignment=function(align,name,format=c("fasta","nexus","phylip")){
   return(y)
 }
 
+# This function cleans the new sequence names for the rename_sequences() function by removing eventual NA's at the beginning and _ at the beginning or end
+.clean.names = function(x){
+  if(substr(x,1,3)=="NA_"){x = substr(x,4,nchar(x))}
+  if(substr(x,1,1)=="_"){x = substr(x,2,nchar(x))}
+  if(substr(x,nchar(x),nchar(x))=="_"){x = substr(x,1,nchar(x)-1)}
+  return(x)
+}

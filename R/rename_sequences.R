@@ -2,7 +2,7 @@
 #'
 #' This function rename sequences in fasta files based on a correspondence table
 #'
-#'
+#' @param fasta_files Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.
 #' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param df The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.
 #' @param marker_names the name of the marker for each alignment to be appended at the end of the sequences names, in the same order as in the correspondence table
@@ -11,13 +11,30 @@
 #' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param unalign return unaligned fasta files as output
 #' @export
-rename_sequences = function(df = NULL,
+rename_sequences = function(fasta_files,
+                            df = NULL,
                             filename = NULL,
                             marker_names = NULL,
                             out = NULL,
                             format = "fasta",
                             excel.sheet = 1,
-                            unalign = F){
+                            unalign = F,
+                            exclude = "concatenated"){
+  # Read files in the foldes and create a list if needed
+  if (missing(fasta_files)) {
+    fasta_files <- find_fasta(dir = getwd(), exclude = exclude)
+  }
+  # Check that all fasta files share the same folder
+  dir_name <- unique(sapply(fasta_files, dirname))
+  if (length(dir_name) > 1) {
+    stop("All fasta files should be located in the same directory.")
+  }
+  # Extract basenames to use as column names later
+  fasta_cols <- sapply(fasta_files, basename)
+  if (anyDuplicated(fasta_cols)) {
+    stop("Some files share the same name (",
+         fasta_cols[anyDuplicated(fasta_cols)], ").")
+  }
 
 # Check that exactly one of `filename` or `df` is provided
 if (is.null(df) & is.null(filename)) {
@@ -50,20 +67,18 @@ if (!is.null(filename)) {
 #remove all the dataframe columns before the "name" columns
 df = df[,which(colnames(df)=="name"):ncol(df)]
 
-#read files in the foldes and create a list
-files=list.files(pattern = "\\.fas")
 
 # load the fasta alignments, do some quality check and rename them with the original file name
 l=list()
 maxlen=0
-for (i in 1:length(files)){
-  dataset=ape::read.FASTA(files[i])
+for (i in 1:length(fasta_files)){
+  dataset=ape::read.FASTA(fasta_files[i])
   a=sd(unlist(lapply(dataset,length)))
-  if(a!=0){cat("ATTENTION! In file ",files[i]," not all sequences of same length \n")}
-  l[[i]]=assign(files[i],dataset)
+  if(a!=0){cat("ATTENTION! In file ",fasta_files[i]," not all sequences of same length \n")}
+  l[[i]]=assign(fasta_files[i],dataset)
   if(length(names(dataset))>maxlen){maxlen=length(names(dataset))}
 }
-names(l)=files
+names(l)=fasta_cols
 
 alignments = l
 
@@ -75,7 +90,8 @@ lR=alignments[names(alignments) %in% colnames(df)[-1]]
 new_names = get_genbank_table(df)
 for (i in 2:ncol(new_names)){
   new_names[,i] = paste0(unlist(new_names[,i]),"_",unlist(new_names[,1]),"_",rep(marker_names[i-1],length(unlist(new_names[,1]))))
-  }  # Matthieu I have to find a tidy way to remove the first "NA_" that gets putted at the beginning of the name if there is not a genbank accession number
+  new_names[,i] = unlist(lapply(new_names[,i],.clean.names))
+  }
 
 
 #rename sequences in each alignment with the final sequence name based on the new_names table
@@ -111,10 +127,12 @@ dir.create(dir_name)
 
 # save renamed alignments and update the names of the alignments in the new_names dataframe that will be saved as new correspondence table
 for (i in 1:length(lR)){
- original_alignment_name = names(lR)[i]
- write.alignment(lR[[i]],name=paste0(dir_name,"/renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*")),format=format)
- colnames(new_names)[match(original_alignment_name,colnames(new_names))]=paste0("renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*"),".fasta")
+  original_alignment_name = names(lR)[i]
+  write.alignment(lR[[i]],name=paste0(dir_name,"/renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*")),format=format)
+  colnames(new_names)[match(original_alignment_name,colnames(new_names))]=paste0("renamed_",stringr::str_remove(names(lR)[[i]],".fas.*.*"),".fasta")
 }
+
+
 
 #save new correspondence table
 writexl::write_xlsx(new_names,paste0(dir_name,"/renamed_correspondence_table.xlsx"))
