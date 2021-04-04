@@ -9,7 +9,7 @@
 #' @param out Optional, a filename for the correspondence table template to save (without extension). No file is saved if \code{out} is not provided. In all cases, the function also returns a tibble with the correspondence table template (invisibly if \code{out} is provided).
 #' @param excel Boolean, should the correspondence table template be saved in excel format? If \code{FALSE}, it is saved as a tab-separated text file instead. Default is \code{TRUE}. The correct file extension is automatically appended to the \code{out} argument. If \code{out} is missing, this argument has no effect.
 #' @param exclude If no \code{fasta_files} argument has been passed, fasta files matching the \code{exclude} pattern will be ignored by the function when it automatically detects fasta files in the working directory.
-#' 
+#'
 #' @return A tibble with the correspondence table template (invisibly if an \code{out} argument was provided to save the table to a file).
 #'
 #' @examples
@@ -17,10 +17,10 @@
 #' fasta_files <- find_fasta(dir)
 #' z <- concatipede_prepare(fasta_files)
 #' z
-#' 
+#'
 #' @export
 
-concatipede_prepare <- function(fasta_files, out = "seqnames", excel = TRUE, exclude = "concatenated"){
+concatipede_prepare <- function(fasta_files, out = "seqnames", excel = TRUE, exclude){
     # Read files in the foldes and create a list if needed
     if (missing(fasta_files)) {
         fasta_files <- find_fasta(dir = getwd(), exclude = exclude)
@@ -36,7 +36,7 @@ concatipede_prepare <- function(fasta_files, out = "seqnames", excel = TRUE, exc
         stop("Some files share the same name (",
              fasta_cols[anyDuplicated(fasta_cols)], ").")
     }
-    
+
     # Load the fasta alignments, do some quality check and rename them with the original file name
     l <- list()
     maxlen <- 0
@@ -61,7 +61,7 @@ concatipede_prepare <- function(fasta_files, out = "seqnames", excel = TRUE, exc
         seqnames <- c(names(l[[i]]), rep("", maxlen-length(names(l[[i]]))))
         df[,i+1] <- seqnames
     }
-    
+
     # Save the template for the translation table as txt or excel file, as required
     if (!missing(out)) {
         if(excel) {

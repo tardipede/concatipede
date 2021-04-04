@@ -13,7 +13,7 @@ rename_sequences(
   format = "fasta",
   excel.sheet = 1,
   unalign = F,
-  exclude = "concatenated"
+  exclude
 )
 }
 \arguments{
@@ -32,6 +32,8 @@ rename_sequences(
 \item{excel.sheet}{specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).}
 
 \item{unalign}{return unaligned fasta files as output}
+
+\item{exclude}{Optional regular expression used to exclude some filenames from the list of detected files.}
 }
 \description{
 This function rename sequences in fasta files based on a correspondence table
