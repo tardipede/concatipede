@@ -5,16 +5,20 @@
 \title{Rename sequences}
 \usage{
 rename_sequences(
+  fasta_files,
   df = NULL,
   filename = NULL,
   marker_names = NULL,
   out = NULL,
   format = "fasta",
   excel.sheet = 1,
-  unalign = F
+  unalign = F,
+  exclude = "concatenated"
 )
 }
 \arguments{
+\item{fasta_files}{Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.}
+
 \item{df}{The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.}
 
 \item{filename}{Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.}

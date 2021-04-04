@@ -4,10 +4,18 @@
 \alias{get_genbank_table}
 \title{Extract GenBank accession number from correspondence table}
 \usage{
-get_genbank_table(corr_table, writetable = F, out = "", excel.sheet = 1)
+get_genbank_table(
+  df = NULL,
+  filename = NULL,
+  writetable = F,
+  out = "",
+  excel.sheet = 1
+)
 }
 \arguments{
-\item{corr_table}{a correlation table. Can be both a dataframe or a character string indicating the file path o the correspondence table in excel format}
+\item{df}{The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.}
+
+\item{filename}{Filename of input correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.}
 
 \item{writetable}{if TRUE save the Genbank table as excel file in the working directory}
 

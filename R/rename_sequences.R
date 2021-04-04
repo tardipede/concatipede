@@ -10,7 +10,7 @@
 #' @param format a string specifying in what formats you want the alignment. Can be "fasta", "phylip" and "nexus"
 #' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param unalign return unaligned fasta files as output
-#' @export
+#' @param exclude Optional regular expression used to exclude some filenames from the list of detected files.
 rename_sequences = function(fasta_files,
                             df = NULL,
                             filename = NULL,
@@ -19,7 +19,7 @@ rename_sequences = function(fasta_files,
                             format = "fasta",
                             excel.sheet = 1,
                             unalign = F,
-                            exclude = "concatenated"){
+                            exclude){
   # Read files in the foldes and create a list if needed
   if (missing(fasta_files)) {
     fasta_files <- find_fasta(dir = getwd(), exclude = exclude)
