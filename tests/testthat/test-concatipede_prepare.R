@@ -34,7 +34,7 @@ test_that("concatipede_prepare() can produce a tibble", {
                                         "SSU_Macrobiotidae.fas")))
     expect_true(colnames(z)[1] == "name")
     # Check that the output has an attribute with the directory name
-    expect_true(attr(z, "dir_name") == tmp_dir)
+    expect_true(normalizePath(attr(z, "dir_name")) == normalizePath(tmp_dir))
 })
 
 ### * Clean-up
