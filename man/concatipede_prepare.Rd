@@ -4,12 +4,7 @@
 \alias{concatipede_prepare}
 \title{Load alignments and prepare template correspondence table for concatenate () function}
 \usage{
-concatipede_prepare(
-  fasta_files,
-  out = "seqnames",
-  excel = TRUE,
-  exclude = "concatenated"
-)
+concatipede_prepare(fasta_files, out = "seqnames", excel = TRUE, exclude)
 }
 \arguments{
 \item{fasta_files}{Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.}
