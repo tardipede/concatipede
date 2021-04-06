@@ -2,7 +2,7 @@
 #'
 #' This function rename sequences in fasta files based on a correspondence table
 #'
-#' @param fasta_files Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.
+#' @param fasta_files Optional, a vector of paths to the fasta files that should be renamed. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.
 #' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param df The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.
 #' @param marker_names the name of the marker for each alignment to be appended at the end of the sequences names, in the same order as in the correspondence table

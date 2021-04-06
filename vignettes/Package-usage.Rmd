@@ -152,7 +152,7 @@ image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_CO
 Two accessory functions to help the sequences managment are present in the package (get_genbank_table and rename_sequences)  
 
 ## get_genbank_table()
-This function extract the GenBank accession numbers from the sequence names in a correspondence table and return a GenBank accession table.
+This function extract the GenBank accession numbers from the sequence names in a correspondence table and return a GenBank accession table. If the function cannot find a GenBank accession number in the sequence name it will return a NA.  
 
 It accepts both a path of the excel corresponcende table or a dataframe.
 
@@ -169,3 +169,13 @@ get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1) %>%
                            lengthMenu = list(c(nrow(.),25,50,-1),
                                              c(nrow(.),25,50,"All"))))
 ```
+
+
+## rename_sequences()
+This function rename the sequence in the fasta files provided based on a correspondence table and a vector of markers names.  
+The new sequence names will be composed by the GenBank accession number (if present), the name indicated in the correspondennce table and the marker name provided. The function creates a new directory where the renamed fasta files are saved, together with an updated correspondence table.  
+
+```{r }
+get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1, marker_names = c("COI","ITS2","LSU","SSU"))
+```
+
