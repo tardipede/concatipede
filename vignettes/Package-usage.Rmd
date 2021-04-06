@@ -148,3 +148,24 @@ par(mar=c(1,12,1,1))
 image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3),cex=0.5)
 ```
 
+# Accessory functions
+Two accessory functions to help the sequences managment are present in the package (get_genbank_table and rename_sequences)  
+
+## get_genbank_table()
+This function extract the GenBank accession numbers from the sequence names in a correspondence table and return a GenBank accession table.
+
+It accepts both a path of the excel corresponcende table or a dataframe.
+
+```{r }
+genbank.table = get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1)
+```
+
+```{r, echo=FALSE}
+get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1) %>% datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           rownames = F,
+                           buttons = c('excel'),
+                           scrollX=TRUE,
+                           lengthMenu = list(c(nrow(.),25,50,-1),
+                                             c(nrow(.),25,50,"All"))))
+```
