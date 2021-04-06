@@ -175,7 +175,7 @@ get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1) %>%
 This function rename the sequence in the fasta files provided based on a correspondence table and a vector of markers names.  
 The new sequence names will be composed by the GenBank accession number (if present), the name indicated in the correspondennce table and the marker name provided. The function creates a new directory where the renamed fasta files are saved, together with an updated correspondence table.  
 
-```{r }
+```{r eval = FALSE}
 get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1, marker_names = c("COI","ITS2","LSU","SSU"))
 ```
 
