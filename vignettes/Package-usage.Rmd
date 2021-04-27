@@ -194,6 +194,6 @@ find_fasta() %>%
   write_xl("template_automatched.xlsx") %>%
   concatipede() %>%
   write_fasta("merged-seqs.fasta") %>%
-  image()
+  image(cex=0.5)
 ```
 
