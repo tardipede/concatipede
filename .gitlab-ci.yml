@@ -9,7 +9,7 @@ buildAndTest:
     # Install the qpdf dependency using the Debian `apt-get` package manager
     - apt-get update && apt-get -y install qpdf libglpk-dev
     # Install package dependencies
-    - R -e 'install.packages(c("ape", "readxl", "writexl", "testthat", "stringdist", "qualV", "igraph", "DT"))'
+    - R -e 'install.packages(c("ape", "readxl", "writexl", "testthat", "stringdist", "qualV", "igraph", "DT","tidyverse"))'
     # Install pkgdown
     - R -e 'install.packages("pkgdown")'
     # Test package

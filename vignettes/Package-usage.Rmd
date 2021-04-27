@@ -45,6 +45,7 @@ But first let's check what fasta files are in our directory:
 
 ```{r }
 library(concatipede)
+library(tidyverse)
 find_fasta()
 ```
 
