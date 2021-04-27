@@ -179,3 +179,20 @@ The new sequence names will be composed by the GenBank accession number (if pres
 get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1, marker_names = c("COI","ITS2","LSU","SSU"))
 ```
 
+# Sequence names automatching  
+Concatipede also includes a function that tries to automatch the sequence names from different fasta files (auto_match_seqs).  
+If the sequence names are not "clean" the matching won't be perfect, so it is advisable to check the automatched excel file.  
+
+In this example it is also illustrated how to use the base concatipede function to customize the template preparation, sequence names matching and concatenation.  
+
+```{r}
+find_fasta() %>%
+  concatipede_prepare() %>%
+  write_xl("template.xslx") %>%
+  auto_match_seqs() %>%
+  write_xl("template_automatched.xlsx") %>%
+  concatipede() %>%
+  plot_align() %>%
+  write_fasta("merged-seqs.fasta")
+```
+
