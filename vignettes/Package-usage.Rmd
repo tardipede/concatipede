@@ -193,7 +193,7 @@ find_fasta() %>%
   auto_match_seqs() %>%
   write_xl("template_automatched.xlsx") %>%
   concatipede() %>%
-  image() %>%
-  write_fasta("merged-seqs.fasta")
+  write_fasta("merged-seqs.fasta") %>%
+  image()
 ```
 
