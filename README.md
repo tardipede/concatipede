@@ -5,9 +5,8 @@
 Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
 ==============================================================
 
-This package allows to concatenate sequences of multiple MSAs based on a translation table that can be edited in excel.
+This package allows to concatenate sequences from multiple Multiple Sequence Alignments based on a translation table.
 
-This is convenient in case of concatenation of no more than few hundred terminals and a few tens on markers. Once created the correspondence table it makes very easy and fast to include or exclude taxa and markers from the concatenated alignment, as well as update it with new sequences.  
 
 ## How to install concatipede
 
