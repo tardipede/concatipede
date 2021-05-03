@@ -5,7 +5,7 @@
 Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
 ==============================================================
 
-This package allows to concatenate sequences from multiple Multiple Sequence Alignments based on a translation table.
+This package allows to concatenate sequences from multiple Multiple Sequence Alignments based on a correspondence table.
 
 
 ## How to install concatipede
