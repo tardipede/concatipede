@@ -2,8 +2,7 @@
 #'
 #' This function concatenate sequences from alignments present in the working directory based on a correspondence table and saves the output in a new directory
 #'
-#' TODO Change from warning to error when no dir info is provided, so that the current directory is never used without the explicit intent of the user?
-#' 
+#'
 #' @importFrom grDevices dev.off pdf
 #' @importFrom graphics image
 #' @importFrom utils read.table
@@ -15,11 +14,18 @@
 #' @param plotimg return a graphical representation of the alignment in pdf format
 #' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
 #' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
-#' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
+#' @param save.partitions save in the concatenated alignmeent directory a text file with partitions limits for the concatenated alignment.
+#' @param excel.sheet specify what sheet from the excel spreadsheet has to be read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param out specify outputs filename
-#' 
+#'
 #' @return The concatenated alignment (invisibly if \code{out} is not NULL).
-#' 
+#'
+#' @examples
+#' dir <- system.file("extdata", package = "concatipede")
+#' fasta_files <- find_fasta(dir)
+#' z <- concatipede(filename = paste0(dir,"/Macrobiotidae_seqnames.xlsx"), fasta_files)
+#' z
+#'
 #' @export
 
 concatipede <- function(df = NULL,
@@ -30,6 +36,7 @@ concatipede <- function(df = NULL,
                         out = NULL,
                         remove.gaps = TRUE,
                         write.outputs = TRUE,
+                        save.partitions = TRUE,
                         excel.sheet = 1){
 
   # Check that exactly one of `filename` or `df` is provided
@@ -169,9 +176,10 @@ concatipede <- function(df = NULL,
 
 
   #Save partition lenghts table
+  if (save.partitions == TRUE){
   if(is.null(out)){filename=paste0(dir_name,"/length_summary.txt")}
   if(!is.null(out)){filename=paste0(dir_name,"/",out,"_length_summary.txt")}
-  write.table(len.df,file=filename,sep="\t",quote=FALSE,row.names=FALSE)
+  write.table(len.df,file=filename,sep="\t",quote=FALSE,row.names=FALSE)}
 
   #alignment plotting option
   if(is.null(out)){filename=paste0(dir_name,"/concatenated_alignment.pdf")}

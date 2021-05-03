@@ -186,7 +186,7 @@ If the sequence names are not "clean" the matching won't be perfect, so it is ad
 
 In this example it is also illustrated how to use the base concatipede function to customize the template preparation, sequence names matching and concatenation.  
 
-```{r}
+```{r, fig.width = 10, fig.height = 3}
 find_fasta() %>%
   concatipede_prepare() %>%
   write_xl("template.xslx") %>%
