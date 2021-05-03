@@ -22,8 +22,7 @@
 #'
 #' @examples
 #' dir <- system.file("extdata", package = "concatipede")
-#' fasta_files <- find_fasta(dir)
-#' z <- concatipede(filename = paste0(dir,"/Macrobiotidae_seqnames.xlsx"), fasta_files)
+#' z <- concatipede(filename = paste0(dir,"/Macrobiotidae_seqnames.xlsx"), dir = dir)
 #' z
 #'
 #' @export
