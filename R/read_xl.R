@@ -7,6 +7,7 @@
 #'
 #' @return A tibble.
 #'
+#' @keywords internal
 #' @export
 
 read_xl <- function(path, sheet = 1) {
