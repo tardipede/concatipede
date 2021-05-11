@@ -7,7 +7,6 @@
 #'
 #' @return The input table \code{x}, invisibly (so that the function can be part of a pipeline with the pipe operator).
 #'
-#' @keywords internal
 #' @export
 
 write_xl <- function(x, path) {
