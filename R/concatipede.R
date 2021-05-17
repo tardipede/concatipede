@@ -58,8 +58,12 @@ concatipede <- function(df = NULL,
       } else {
           stop("Input file format not recognized. `filename` must end with \".txt\" or \".xlsx\".")
       }
-      message("Loading the fasta files from the current directory (", getwd(), ").")
-      fasta_dir_name <- getwd()
+      if (missing(dir)) {
+          message("Loading the fasta files from the current directory (", getwd(), ").")
+          fasta_dir_name <- getwd()
+      } else {
+          fasta_dir_name <- dir
+      }
   } else {
       # Check: was `df` provided by the user?
       stopifnot(!is.null(df))
