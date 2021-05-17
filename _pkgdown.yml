@@ -21,6 +21,14 @@ toc:
 ### * navbar
 
 navbar:
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Example of package usage"
+      href: articles/Package-usage.html
+
   right:
     - icon: fa fa-gitlab fa-lg
       href: https://gitlab.com/tardipede/concatipede
