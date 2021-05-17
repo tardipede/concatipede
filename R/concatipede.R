@@ -11,18 +11,19 @@
 #' @param filename Filename of input correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
 #' @param format a string specifying in what formats you want the alignment
 #' @param dir Optional, path to the directory containing the fasta files. This argument has an effect only if fasta files names are taken from the columns of the \code{df} argument, and that \code{df} does not have an attribute \code{dir_name} itself. If no \code{dir} is provided and \code{df} does not have a \code{dir_name} attribute, the current working directory is ued with a warning.
-#' @param plotimg return a graphical representation of the alignment in pdf format
-#' @param remove.gaps remove gap only columns. Useful if not using all sequences in the alignments
-#' @param write.outputs save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg
-#' @param save.partitions save in the concatenated alignmeent directory a text file with partitions limits for the concatenated alignment.
+#' @param out specify outputs filenames
+#' @param plotimg Logical, save a graphical representation of the alignment in pdf format. Default: FALSE.
+#' @param remove.gaps Logical, remove gap only columns. Useful if not using all sequences in the alignments. Default: TRUE.
+#' @param write.outputs Logical, save concatenated alignment, partitions position table and graphical representation. If FALSE it overrides plotimg. Default: TRUE.
+#' @param save.partitions Logical, save in the concatenated alignmeent directory a text file with partitions limits for the concatenated alignment. Default: TRUE.
 #' @param excel.sheet specify what sheet from the excel spreadsheet has to be read. Either a string (the name of a sheet), or an integer (the position of the sheet).
-#' @param out specify outputs filename
 #'
 #' @return The concatenated alignment (invisibly if \code{out} is not NULL).
 #'
 #' @examples
 #' dir <- system.file("extdata", package = "concatipede")
-#' z <- concatipede(filename = paste0(dir,"/Macrobiotidae_seqnames.xlsx"), dir = dir)
+#' z <- concatipede(filename = paste0(dir,"/Macrobiotidae_seqnames.xlsx"), dir = dir,
+#'                  write.outputs = FALSE)
 #' z
 #'
 #' @export
@@ -57,8 +58,12 @@ concatipede <- function(df = NULL,
       } else {
           stop("Input file format not recognized. `filename` must end with \".txt\" or \".xlsx\".")
       }
-      message("Loading the fasta files from the current directory (", getwd(), ").")
-      fasta_dir_name <- getwd()
+      if (missing(dir)) {
+          message("Loading the fasta files from the current directory (", getwd(), ").")
+          fasta_dir_name <- getwd()
+      } else {
+          fasta_dir_name <- dir
+      }
   } else {
       # Check: was `df` provided by the user?
       stopifnot(!is.null(df))

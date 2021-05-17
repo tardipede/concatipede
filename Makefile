@@ -130,4 +130,6 @@ clean-vignettes:
 	@rm -f vignettes/template-for-later-check.xlsx
 	@rm -f vignettes/my-merged-seqs.*
 	@rm -f vignettes/my-template.xlsx
+	@rm -f vignettes/template.xlsx
+	@rm -f vignettes/template_automatched.xlsx
 	@rm -f vignettes/seqnames.xlsx
