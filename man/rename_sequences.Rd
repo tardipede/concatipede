@@ -17,7 +17,7 @@ rename_sequences(
 )
 }
 \arguments{
-\item{fasta_files}{Optional, a vector of paths to the fasta files that should be merged. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.}
+\item{fasta_files}{Optional, a vector of paths to the fasta files that should be renamed. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.}
 
 \item{df}{The user-defined correspondence table, as a data frame or equivalent. This is used only if no \code{filename} argument is provided.}
 
