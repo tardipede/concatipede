@@ -18,7 +18,7 @@ options(scipen = 6, width = 85)
 
 The concatipede package allows to concatenate sequences from different Multiple Sequence Alignments (MSAs) based on a correspondence table that indicates how sequences from different MSAs are linked to each other.  
 
-For this package to work, all the MSAs in fasta format should be placed in the same folder (that can be the working directory). Only the fasta files to be concatenate should be present in the directory. If other fasta files are present and you don´t want to include them, see the `concatipede_prepare(exclude = "")` option.
+For this package to work, all the MSAs in fasta format should be placed in the same folder (that can be the working directory). Only the fasta files to be concatenated should be present in the directory. If other fasta files are present and you don´t want to include them, see the `concatipede_prepare(exclude = "")` option.
 
 ![Concatipede workflow](concatipede_scheme.png "Concatipede workflow")
 
