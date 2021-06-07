@@ -1,0 +1,10 @@
+.alert-primary {
+    border: 1px #39c18c solid;
+    border-left: 15px #39c18c solid;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5px;
+}

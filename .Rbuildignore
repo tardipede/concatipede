@@ -6,7 +6,7 @@
 ^Meta$
 ^.run_check_and_get_badge.R$
 ^Makefile$
-^_pkgdown.yml$
+^pkgdown$
 ^R-CMD-check_badge\.svg$
 ^R-CMD-check_output\.txt$
 ^sandbox$
