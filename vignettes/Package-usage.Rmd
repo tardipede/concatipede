@@ -85,7 +85,8 @@ Now we input this excel to the `concatipede()` function:
 concatipede(filename = "Macrobiotidae_seqnames.xlsx", out = "Macrobiotidae_4genes", excel.sheet = 1)
 ```
 
-This will create a new folder with the concatenated alignment in different formats.
+This will create a new folder with the concatenated alignment in different formats.  
+Note that also a .txt file containing the start and ending positions of the different markers in the concatenated alignments is saved in the output directory.   
 
 Here is the concatenated alignment:
 ```{r, echo=FALSE, fig.width = 10, fig.height = 3}
