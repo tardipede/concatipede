@@ -45,7 +45,7 @@ The first step is to generate a template correspondence table with all the seque
 
 But first let's check what fasta files are in our directory:
 
-```{r }
+```{r message = FALSE}
 library(concatipede)
 library(tidyverse)
 find_fasta()
@@ -70,56 +70,63 @@ library(tidyverse)
 
 ## Modify the correspondence table
 
-Modify the generated excel correspondence table to reflect how you want to concatenate the sequences in the different alignments. It is important that the first cell of the first row (**name**) is not modified and the other column names are the filenames of the fasta alignments. In the **name** column you must set the name of the concatenated sequences.
+Each row of the correspondence table will be used to build one concatenated sequence, by extracting and concatenating the corresponding sequences from the input files. You can modify the template excel correspondence table to reflect how you want to concatenate the sequences from the different alignments.
 
-You can copy and save different versions of the correspondence table in different sheets of the excel file, they can be then selected with the specific option.
+It is important that the first cell of the first row (cell **A1**, **"name"**) is not modified; the other column names are the filenames of the fasta alignments. In the **name** column you must set the name of the concatenated sequences.
 
-The first sheet of the example excel file now looks like this:
+You can copy and save different versions of the correspondence table in different sheets of the excel file: they can be selected with an appropriate option in the R session later.
+
+After modifying the template to specify the correct matches for concatenation, the first sheet of our example excel file now looks like this:
 ![Edited 1](edited_1.png "Edited 1")
 
+<div class="alert-primary" role="alert">
+
+<b>Note:</b> If the names of the sequences in each input file are sufficiently consistent, you can also try to use the `auto_match_seqs()` function to ask the package to perform some automatic name-matching for you (which you can still review and correct before doing the actual concatenation). See the example at the end of this vignette for more details.
+
+</div>
 
 ## Concatenate the alignents
 
-Now we input this excel to the `concatipede()` function:
+Now we input this excel file to the `concatipede()` function:
 ```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx", out = "Macrobiotidae_4genes", excel.sheet = 1)
 ```
 
-This will create a new folder with the concatenated alignment in different formats.  
+This will create a new subfolder with the concatenated alignment in different formats.  
 Note that also a .txt file containing the start and ending positions of the different markers in the concatenated alignments is saved in the output directory.   
 
-Here is the concatenated alignment:
-```{r, echo=FALSE, fig.width = 10, fig.height = 3}
+Here is a visualization of the concatenated alignment:
+```{r, echo=FALSE, fig.width = 10, fig.height = 3, message = FALSE}
 par(mar=c(1,12,1,1))
 image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1),cex=0.5)
 ```
 
-We can also choose only a subset of the taxa from a correspondence table saved as separate sheet in the excel file.
+We can also choose a subset of the taxa from a correspondence table, stored as a separate sheet in the excel file. For example, we can ask `concatipede()` to use the second sheet of the Excel file below when performing the concatenation. This sheet only contains data for the Macrobiotus taxa.
 ![Edited 2](edited_2.png "Edited 2")
 
-```{r }
+```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
 ```
 
-```{r, echo=FALSE, fig.width = 10, fig.height = 1.5}
+```{r, echo=FALSE, fig.width = 10, fig.height = 1.5, message = FALSE}
 par(mar=c(1,12,1,1))
 image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2),cex=0.5)
 ```
 
-And another one but in this case we select only one marker:
+Here is another example in which we select only one marker, stored in the "COI" sheet of the Excel file:
 ![Edited 3](edited_3.png "Edited 3")
 
-```{r }
+```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
 ```
 
-```{r, echo=FALSE, fig.width = 10, fig.height = 3}
+```{r, echo=FALSE, fig.width = 10, fig.height = 3, message = FALSE}
 par(mar=c(1,12,1,1))
 image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3),cex=0.5)
 ```
 
 # Accessory functions
-Two accessory functions to help the sequences managment are present in the package (get_genbank_table and rename_sequences)  
+Two accessory functions to help with sequence management are present in the package (`get_genbank_table()` and `rename_sequences()`).
 
 ## get_genbank_table()
 This function extract the GenBank accession numbers from the sequence names in a correspondence table and return a GenBank accession table. If the function cannot find a GenBank accession number in the sequence name it will return a NA.  
@@ -142,20 +149,22 @@ get_genbank_table(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1) %>%
 
 
 ## rename_sequences()
-This function rename the sequence in the fasta files provided based on a correspondence table and a vector of markers names.  
-The new sequence names will be composed by the GenBank accession number (if present), the name indicated in the correspondennce table and the marker name provided. The function creates a new directory where the renamed fasta files are saved, together with an updated correspondence table.  
+This function renames the sequences in the provided fasta files based on a correspondence table and a vector of markers names.
+
+The new sequence names will be composed by the GenBank accession number (if present), the name indicated in the correspondennce table and the marker name provided. The function creates a new directory where the renamed fasta files are saved, together with an updated correspondence table.
 
 ```{r eval = FALSE}
 rename_sequences(filename = "Macrobiotidae_seqnames.xlsx", excel.sheet = 1, marker_names = c("COI","ITS2","LSU","SSU"))
 ```
 
 # Sequence names automatching  
-Concatipede also includes a function that tries to automatch the sequence names from different fasta files (auto_match_seqs).  
-If the sequence names are not "clean" the matching won't be perfect, so it is advisable to check the automatched excel file.  
+Concatipede also includes a function that tries to automatch the sequence names from different fasta files (`auto_match_seqs()`).
 
-In this example it is also illustrated how to use the base concatipede function to customize the template preparation, sequence names matching and concatenation.  
+If the sequence names are not "clean" the matching won't be perfect, so it is advisable to check the automatched excel file.
 
-```{r, fig.width = 10, fig.height = 3}
+In this example it is also illustrated how to use the base concatipede function to customize the template preparation, sequence names matching and concatenation.
+
+```{r, fig.width = 10, fig.height = 3, message = TRUE}
 find_fasta() %>%
   concatipede_prepare() %>%
   write_xl("template.xslx") %>%
