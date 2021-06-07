@@ -66,7 +66,9 @@ library(DT)
 library(tidyverse)
 ```
 
-![Template](template.png "Template")
+[![](template.png)](template.png)
+
+*(You can click on Excel screenshots to view them larger.)*
 
 ## Modify the correspondence table
 
@@ -77,7 +79,8 @@ It is important that the first cell of the first row (cell **A1**, **"name"**) i
 You can copy and save different versions of the correspondence table in different sheets of the excel file: they can be selected with an appropriate option in the R session later.
 
 After modifying the template to specify the correct matches for concatenation, the first sheet of our example excel file now looks like this:
-![Edited 1](edited_1.png "Edited 1")
+
+[![](edited_1.png)](edited_1.png)
 
 <div class="alert-primary" role="alert">
 
@@ -102,7 +105,8 @@ image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4g
 ```
 
 We can also choose a subset of the taxa from a correspondence table, stored as a separate sheet in the excel file. For example, we can ask `concatipede()` to use the second sheet of the Excel file below when performing the concatenation. This sheet only contains data for the Macrobiotus taxa.
-![Edited 2](edited_2.png "Edited 2")
+
+[![](edited_2.png)](edited_2.png)
 
 ```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
@@ -114,7 +118,8 @@ image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4gen
 ```
 
 Here is another example in which we select only one marker, stored in the "COI" sheet of the Excel file:
-![Edited 3](edited_3.png "Edited 3")
+
+[![](edited_3.png)](edited_3.png)
 
 ```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
@@ -162,9 +167,9 @@ Concatipede also includes a function that tries to automatch the sequence names 
 
 If the sequence names are not "clean" the matching won't be perfect, so it is advisable to check the automatched excel file.
 
-In this example it is also illustrated how to use the base concatipede function to customize the template preparation, sequence names matching and concatenation.
+In the example below it is also illustrated how to use base concatipede functions to customize the template preparation, sequence names matching and concatenation:
 
-```{r, fig.width = 10, fig.height = 3, message = TRUE}
+```{r, fig.width = 10, fig.height = 3, message = FALSE}
 find_fasta() %>%
   concatipede_prepare() %>%
   write_xl("template.xlsx") %>%
