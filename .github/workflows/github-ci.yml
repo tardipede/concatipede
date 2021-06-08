@@ -1,0 +1,129 @@
+### * Resources:
+
+# - https://github.com/maxheld83/ghactions
+# - https://github.com/r-lib/actions/tree/master/examples
+
+### * Setup
+
+name: pipeline
+on:
+  push:
+    branches:
+      - master
+
+### * Jobs
+      
+jobs:
+
+### ** build
+  
+  build:
+    runs-on: ubuntu-latest
+    container: rocker/verse
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the package
+        run: make install
+
+### ** test
+          
+  test:
+    runs-on: ubuntu-latest
+    container: rocker/verse
+    needs: build
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the package
+        run: make install
+      - name: Test the package
+        run: make test
+      - name: Determine coverage
+        run: |
+          R -e 'install.packages("here")'
+          make coverage
+          mv docs/coverage .
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-coverage
+          path: ./coverage/
+
+### ** check
+        
+  check:
+    runs-on: ubuntu-latest
+    container: rocker/verse
+    needs: build
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the package
+        run: make install
+      - name: Check the package (R CMD check)
+        run: |
+          make check
+          mkdir -p check-results/
+          mv R-CMD-check_badge.svg R-CMD-check_output.txt check-results/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: check-results
+          path: ./check-results/
+
+### ** pkgdown
+        
+  pkgdown:
+    runs-on: ubuntu-latest
+    container: rocker/verse
+    needs: [test, check]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the package
+        run: make install
+      - name: Build the pkgdown website
+        run: |
+          make pkgdown
+          cp .update-gh-pages.sh docs/
+      - uses: actions/download-artifact@v1
+        with:
+          name: test-coverage
+          path: ./coverage
+      - name: Add coverage results
+        run: mv coverage/ docs/
+      - uses: actions/download-artifact@v1
+        with:
+          name: check-results
+          path: ./check-results
+      - name: Add check results
+        run: mv check-results/ docs/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: pkgdown-docs
+          path: ./docs/
+    
+### ** update-gh-pages
+
+  update-gh-pages:
+    runs-on: ubuntu-latest
+    needs: pkgdown
+    steps:
+      - uses: actions/checkout@v1
+      - run: git checkout gh-pages
+      - run: |
+          pwd
+          ls
+          rm -fr ./*
+          ls
+          git branch -a
+      - uses: actions/download-artifact@v1
+        with:
+          name: pkgdown-docs
+          path: .
+      - run: |
+          pwd
+          ls
+          git branch -a
+          cat .update-gh-pages.sh
+          bash .update-gh-pages.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
