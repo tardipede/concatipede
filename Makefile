@@ -69,7 +69,24 @@ install: document
 	@printf "\n"
 	@printf "$(GREEN)*** Installing the package ***$(NC)\n"
 	@printf "\n"
-	@ Rscript -e 'devtools::install(upgrade = FALSE)'
+	@Rscript -e 'devtools::install(upgrade = FALSE)'
+
+### ** install-deps
+
+## install-deps : install dependencies needed for CI pipelines
+.PHONY: install-deps
+install-deps:
+	@printf "\n"
+	@printf "$(GREEN)*** Installing dependencies for continuous integration pipelines ***$(NC)\n"
+	@printf "\n"
+	@Rscript -e 'install.packages(c("ape", "readxl", "writexl", "testthat", "stringdist", "qualV", "igraph", "DT"))'
+	@Rscript -e 'install.packages(c("pkgdown", "covr"))'
+
+### ** install-with-deps
+
+## install-with-deps : run 'install-deps' and 'install'
+.PHONY: install-with-deps
+install-with-deps: install-deps install
 
 ### ** pkgdown
 
