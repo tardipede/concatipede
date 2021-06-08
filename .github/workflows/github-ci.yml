@@ -10,6 +10,7 @@ on:
   push:
     branches:
       - master
+      - turn-on-github-actions
 
 ### * Jobs
       
