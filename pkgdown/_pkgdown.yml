@@ -1,13 +1,13 @@
 ### * url
 
-url: https://tardipede.gitlab.io/concatipede/
+url: https://tardipede.github.io/concatipede/
 
 ### * home
 
 home:
   links:
     - text: Browse source code at
-      href: https://gitlab.com/tardipede/concatipede
+      href: https://github.com/tardipede/concatipede
 
 ### * template and toc
       
@@ -30,5 +30,5 @@ navbar:
       href: articles/Package-usage.html
 
   right:
-    - icon: fa fa-gitlab fa-lg
-      href: https://gitlab.com/tardipede/concatipede
+    - icon: fa fa-github fa-lg
+      href: https://github.com/tardipede/concatipede
