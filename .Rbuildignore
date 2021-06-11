@@ -11,3 +11,4 @@
 ^R-CMD-check_output\.txt$
 ^sandbox$
 ^\.github$
+^\.update-gh-pages\.sh$
