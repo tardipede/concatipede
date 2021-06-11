@@ -53,8 +53,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://gitlab.com/tardipede/concatipede">
-    <span class="fa fa fa fa-gitlab fa-lg"></span>
+  <a href="https://github.com/tardipede/concatipede">
+    <span class="fa fa fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -78,9 +78,9 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Example of package usage</h1>
             
-            <h4 class="date">2021-06-08</h4>
+            <h4 class="date">2021-06-11</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/tardipede/concatipede/blob/master/vignettes/Package-usage.Rmd"><code>vignettes/Package-usage.Rmd</code></a></small>
       <div class="hidden name"><code>Package-usage.Rmd</code></div>
 
     </div>
@@ -119,7 +119,7 @@
 <p>The first step is to generate a template correspondence table with all the sequence names. You can do this with the function <code><a href="../reference/concatipede_prepare.html">concatipede_prepare()</a></code>.</p>
 <p>But first let’s check what fasta files are in our directory:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">concatipede</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tardipede/concatipede">concatipede</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/find_fasta.html">find_fasta</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "/__w/concatipede/concatipede/vignettes/COI_Macrobiotidae.fas" 
@@ -177,8 +177,8 @@ Note that also a .txt file containing the start and ending positions of the diff
 <p>It accepts both a path of the excel corresponcende table or a dataframe.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genbank.table</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_genbank_table.html">get_genbank_table</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-feab2688e7b82d75bd7c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-feab2688e7b82d75bd7c">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-57665edde3eebeff0008" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-57665edde3eebeff0008">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="rename_sequences" class="section level2">
 <h2 class="hasAnchor">

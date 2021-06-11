@@ -3,8 +3,8 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   Package-usage: Package-usage.html
-last_built: 2021-06-08T16:13Z
+last_built: 2021-06-11T16:46Z
 urls:
-  reference: https://tardipede.gitlab.io/concatipede//reference
-  article: https://tardipede.gitlab.io/concatipede//articles
+  reference: https://tardipede.github.io/concatipede//reference
+  article: https://tardipede.github.io/concatipede//articles
 

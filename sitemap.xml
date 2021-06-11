@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//index.html</loc>
+    <loc>https://tardipede.github.io/concatipede//index.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/auto_match_seqs.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/auto_match_seqs.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/concatipede.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/concatipede.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/concatipede_prepare.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/concatipede_prepare.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/example-files-shipped-with-the-package.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/example-files-shipped-with-the-package.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/find_fasta.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/find_fasta.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/get_genbank_table.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/get_genbank_table.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/pipe.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/read_xl.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/read_xl.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/rename_sequences.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/rename_sequences.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/write_aln.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/write_aln.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//reference/write_xl.html</loc>
+    <loc>https://tardipede.github.io/concatipede//reference/write_xl.html</loc>
   </url>
   <url>
-    <loc>https://tardipede.gitlab.io/concatipede//articles/Package-usage.html</loc>
+    <loc>https://tardipede.github.io/concatipede//articles/Package-usage.html</loc>
   </url>
 </urlset>
