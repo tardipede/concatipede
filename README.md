@@ -15,7 +15,7 @@ For now you can install the package directly from Gitlab with:
 ```
 # Run inside an R session
 install.packages("devtools")
-devtools::install_gitlab("tardipede/concatipede")
+devtools::install_github("tardipede/concatipede")
 ```
 
 Please let us know if you encounter any issues during the package installation!
