@@ -4,7 +4,7 @@
 [![DOI](https://zenodo.org/badge/347698578.svg)](https://zenodo.org/badge/latestdoi/347698578)
 
 
-Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
+concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
 ==============================================================
 
 This package allows to concatenate sequences from multiple Multiple Sequence Alignments based on a correspondence table.
@@ -31,4 +31,4 @@ matteo.vecchi15@gmail.com
 
 ## Citation
 Please cite this package as:
-Vecchi M. & Bruneaux M. (2021). Concatipede: an R package to concatenate fasta sequences easily (Version v1.0.0). http://doi.org/10.5281/zenodo.5130604
+Vecchi M. & Bruneaux M. (2021). concatipede: an R package to concatenate fasta sequences easily (Version v1.0.0). http://doi.org/10.5281/zenodo.5130604
