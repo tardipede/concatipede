@@ -1,6 +1,8 @@
 [![GitHub Actions status](https://github.com/tardipede/concatipede/workflows/pipeline/badge.svg)](https://github.com/tardipede/concatipede/actions?workflow=pipeline)
 [![R_CMD_CHECK](https://tardipede.github.io/concatipede/check-results/R-CMD-check_badge.svg)](https://tardipede.github.io/concatipede/check-results/R-CMD-check_output.txt)
 [![Lifecycle Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/)
+[![DOI](https://zenodo.org/badge/347698578.svg)](https://zenodo.org/badge/latestdoi/347698578)
+
 
 Concatipede: an R package to concatenate fasta sequences easily  <img src="man/figures/concatipede_hexagon.png" width="120" align="right" />
 ==============================================================
@@ -26,3 +28,7 @@ You can get started with this [example vignette](https://tardipede.github.io/con
 
 ## Contact
 matteo.vecchi15@gmail.com
+
+## Citation
+Please cite this package as:
+Vecchi M. & Bruneaux M. (2021). Concatipede: an R package to concatenate fasta sequences easily (Version v1.0.0). http://doi.org/10.5281/zenodo.5130604
