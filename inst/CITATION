@@ -1,7 +1,7 @@
 citHeader("To cite concatipede in publications use:")
 
 bibentry(
-  bibtype = "Article",
+  bibtype = "Misc",
   doi = "110.5281/zenodo.5130604",
   url = "https://zenodo.org/record/5130604#.YPskk-1RV-U",
   year = "2021",
