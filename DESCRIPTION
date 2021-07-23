@@ -16,7 +16,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-6997-192X")))
 Description: This package allows to concatenate sequences of multiple MSAs based on a correspondence table that can be edited in Excel.
 License: MIT + file LICENSE
-DOI: 110.5281/zenodo.5130604
+doi: 110.5281/zenodo.5130604
 URL: https://github.com/tardipede/concatipede, https://tardipede.github.io/concatipede/
 BugReports: https://github.com/tardipede/concatipede/issues
 Encoding: UTF-8
