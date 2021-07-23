@@ -4,8 +4,3 @@
 
 * NOTES
 
-**  checking package subdirectories ... NOTE
-Found the following CITATION file in a non-standard place:
-  inst/extdata/CITATION
-Most likely ‘inst/CITATION’ should be used instead. 
-
