@@ -12,3 +12,4 @@
 ^sandbox$
 ^\.github$
 ^\.update-gh-pages\.sh$
+^cran-comments\.md$
