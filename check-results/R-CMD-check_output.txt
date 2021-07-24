@@ -4,6 +4,3 @@
 
 * NOTES
 
-**  checking DESCRIPTION meta-information ... NOTE
-Malformed Description field: should contain one or more complete sentences. 
-
