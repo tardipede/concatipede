@@ -14,7 +14,7 @@ Authors@R: c(
            role = c("aut"),
            email = "matthieu.bruneaux@gmail.com",
            comment = c(ORCID = "0000-0001-6997-192X")))
-Description: This package allows to concatenate sequences of multiple sequence alignments based on a correspondence table that can be edited in Excel. <doi:110.5281/zenodo.5130604>
+Description: This package allows to concatenate sequences of multiple sequence alignments based on a correspondence table that can be edited in Excel <doi:110.5281/zenodo.5130604>.
 License: MIT + file LICENSE
 URL: https://github.com/tardipede/concatipede, https://tardipede.github.io/concatipede/
 BugReports: https://github.com/tardipede/concatipede/issues
