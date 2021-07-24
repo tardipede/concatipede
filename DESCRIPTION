@@ -1,8 +1,8 @@
 Package: concatipede
-Title: concatipede: an R package to concatenate fasta sequences easily
+Title: Concatipede: An R Package to Concatenate Fasta Sequences Easily
 Version: 1.0.0
-Date: 2021-02-21
-year: 2021
+Date: 2021-07-24
+Year: 2021
 Authors@R: c(
     person(given = "Matteo",
            family = "Vecchi",
@@ -14,9 +14,8 @@ Authors@R: c(
            role = c("aut"),
            email = "matthieu.bruneaux@gmail.com",
            comment = c(ORCID = "0000-0001-6997-192X")))
-Description: This package allows to concatenate sequences of multiple MSAs based on a correspondence table that can be edited in Excel.
+Description: This package allows to concatenate sequences of multiple sequence alignments based on a correspondence table that can be edited in Excel. <doi:110.5281/zenodo.5130604>
 License: MIT + file LICENSE
-doi: <110.5281/zenodo.5130604>
 URL: https://github.com/tardipede/concatipede, https://tardipede.github.io/concatipede/
 BugReports: https://github.com/tardipede/concatipede/issues
 Encoding: UTF-8
