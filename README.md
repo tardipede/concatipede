@@ -31,4 +31,4 @@ matteo.vecchi15@gmail.com
 
 ## Citation
 Please cite this package as:
-Vecchi M. & Bruneaux M. (2021). concatipede: an R package to concatenate fasta sequences easily (Version v1.0.0). http://doi.org/10.5281/zenodo.5130604
+Vecchi M. & Bruneaux M. (2021). concatipede: an R package to concatenate fasta sequences easily. http://doi.org/10.5281/zenodo.5130604
