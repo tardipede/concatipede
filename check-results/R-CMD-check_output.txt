@@ -4,7 +4,3 @@
 
 * NOTES
 
-**  checking top-level files ... NOTE
-Non-standard file/directory found at top level:
-  ‘cran-comments.md’ 
-
