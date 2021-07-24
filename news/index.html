@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find fasta files present in a folder — find_fasta • concatipede</title>
+<title>Changelog • concatipede</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Find fasta files present in a folder — find_fasta" />
-<meta property="og:description" content="Find fasta files present in a folder" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -61,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,63 +112,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find fasta files present in a folder</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tardipede/concatipede/blob/master/R/find_fasta.R'><code>R/find_fasta.R</code></a></small>
-    <div class="hidden name"><code>find_fasta.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/tardipede/concatipede/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Find fasta files present in a folder</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>find_fasta</span><span class='op'>(</span><span class='va'>dir</span>, pattern <span class='op'>=</span> <span class='st'>"\\.fa$|\\.fas$|\\.fasta$"</span>, <span class='va'>exclude</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>dir</th>
-      <td><p>Path to the directory which should be examined. If not provided,
-the current working directory (as returned by <code><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></code>) is
-used.</p></td>
-    </tr>
-    <tr>
-      <th>pattern</th>
-      <td><p>Regular expression used by <code><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></code> to detect
-the fasta files. The default is to list all files ending in ".fa",
-".fas", and ".fasta".</p></td>
-    </tr>
-    <tr>
-      <th>exclude</th>
-      <td><p>Optional regular expression used to exclude some filenames
-from the list of detected files.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A vector with the full paths to the found files.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Get the directory containing the package example files</span>
-<span class='va'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"concatipede"</span><span class='op'>)</span>
-<span class='co'># List the fasta files containing in that directory</span>
-<span class='fu'>find_fasta</span><span class='op'>(</span><span class='va'>dir</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/COI_Macrobiotidae.fas" 
-#&gt; [2] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/ITS2_Macrobiotidae.fas"
-#&gt; [3] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/LSU_Macrobiotidae.fas" 
-#&gt; [4] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/SSU_Macrobiotidae.fas" </div><div class='input'><span class='co'># Exclude some files</span>
-<span class='fu'>find_fasta</span><span class='op'>(</span><span class='va'>dir</span>, exclude <span class='op'>=</span> <span class='st'>"COI"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/ITS2_Macrobiotidae.fas"
-#&gt; [2] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/LSU_Macrobiotidae.fas" 
-#&gt; [3] "/tmp/RtmpU5Vt8X/temp_libpath1d98b08a6b/concatipede/extdata/SSU_Macrobiotidae.fas" </div><div class='input'>
-</div></pre>
+    <div id="concatipede-01" class="section level1">
+<h1 class="page-header" data-toc-text="0.1">
+<a href="#concatipede-01" class="anchor"></a>concatipede 0.1</h1>
+<ul>
+<li>First release.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
