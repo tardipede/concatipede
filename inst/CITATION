@@ -3,7 +3,7 @@ citHeader("To cite concatipede in publications use:")
 bibentry(
   bibtype = "Misc",
   doi = "110.5281/zenodo.5130604",
-  url = "https://zenodo.org/record/5130604#.YPskk-1RV-U",
+  url = "https://tardipede.github.io/concatipede",
   year = "2021",
   author = "Matteo Vecchi and Matthieau Bruneaux",
   title = "concatipede: an R package to concatenate fasta sequences easily",
