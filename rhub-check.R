@@ -13,33 +13,90 @@ library(rhub)
 # The first time rhub is used on your machine, you should validate your email
 # with:
 #   validate_email()
+EMAIL <- "matthieu.bruneaux@gmail.com"
+
+### * Functions
+
+### ** start_report()
+
+#' Open a file for report writing
+#' @param name File name to which a timestamp and the ".md" extension are appended.
+#' @return A file descriptor to the file `name`, located in the project root directory.
+start_report <- function(name = "rhub-report") {
+    name <- paste0(name, "_", format(Sys.time(), "%Y-%m-%d-%H%M%S"), ".md")
+    file <- file(here::here(name), open = "w")
+    cat("# Rhub check report, started on", format(Sys.time()), "\n", file = file)
+    cat("\n", file = file)
+    return(file)
+}
+
+### ** check_and_report()
+
+#' Run a rhub check for one platform and save the report to an open file
+check_and_report <- function(platform, file) {
+    run <- check_and_wait(platform = platform)
+    cat("\n## Check for", platform, file = file)
+    write_report(run = run, file = file)
+}
+
+### ** close_report()
+
+#' Close report file
+close_report <- function(file) {
+    close(file)
+}
+
+### ** check_and_wait()
+
+#' Submit a check to rhub and wait for the run to complete
+#'
+#' @return Output from `check_for_cran()`
+check_and_wait <- function(platform) {
+    run <- check_for_cran(platform = platform, email = EMAIL, show_status = FALSE)
+    completed <- FALSE
+    while (!completed) {
+        completed <- tryCatch(run$cran_summary(),
+                              error = function(e) {
+                                  if (grepl("At least one of the builds has not finished yet", e$message)) {
+                                      message("Results not ready yet, pausing for 60 seconds.")
+                                      Sys.sleep(60)
+                                      return(FALSE)
+                                  } else if (grepl("Timeout was reached", e$message)) {
+                                      message("Timeout issue, pausing for 60 seconds.")
+                                      Sys.sleep(60)
+                                      return(FALSE)
+                                  } else {
+                                      return(TRUE)
+                                  }})
+        if (typeof(completed) == "environment") {
+            completed <- TRUE
+        }
+    }
+    return(run)
+}
+
+### ** write_report()
+
+#' Write report for one check
+write_report <- function(run, file) {
+    z <- run$cran_summary()
+    cat(crayon::strip_style(capture.output(z$print())),
+        file = file, sep = "\n")    
+}
 
 ### * Check
 
 # List platforms
 platforms()
 
-# Check
-cran_prep <- check(platform = c("fedora-clang-devel",
-                                "windows-x86_64-devel",
-                                "macos-highsierra-release",
-                                "ubuntu-gcc-release"),
-                   email = "matthieu.bruneaux@gmail.com")
-completed <- FALSE
+# Platforms selected for check
+targets <- c("fedora-clang-devel",
+             "windows-x86_64-devel",
+             "macos-highsierra-release",
+             "ubuntu-gcc-release")
 
-while (!completed) {
-    tryCatch({
-        notes <- cran_prep$cran_summary()
-        completed <- TRUE },
-      error = function(e) {
-          message("Results not ready yet, waiting 60 seconds before next try.")
-          Sys.sleep(60)
-          e
-      })
+report <- start_report()
+for (x in targets[2:4]) {
+    check_and_report(platform = x, file = report)
 }
-
-fo <- here::here(paste0("rhub-check_", format(Sys.time(), "%Y-%m-%d-%H%M%S"), ".md"))
-fo <- file(fo, open = "w")
-cat(strip_style(capture.output(notes$print())), file = fo, sep = "\n")
-cat("\n")
-close(fo)
+close_report(report)
