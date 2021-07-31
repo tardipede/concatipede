@@ -1,8 +1,6 @@
 Package: concatipede
-Title: Concatipede: An R Package to Concatenate Fasta Sequences Easily
+Title: Easy Concatenation of Fasta Sequences
 Version: 1.0.0
-Date: 2021-07-24
-Year: 2021
 Authors@R: c(
     person(given = "Matteo",
            family = "Vecchi",
