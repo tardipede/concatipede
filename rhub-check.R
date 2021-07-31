@@ -26,7 +26,6 @@ start_report <- function(name = "rhub-report") {
     name <- paste0(name, "_", format(Sys.time(), "%Y-%m-%d-%H%M%S"), ".md")
     file <- file(here::here(name), open = "w")
     cat("# Rhub check report, started on", format(Sys.time()), "\n", file = file)
-    cat("\n", file = file)
     return(file)
 }
 
@@ -35,7 +34,7 @@ start_report <- function(name = "rhub-report") {
 #' Run a rhub check for one platform and save the report to an open file
 check_and_report <- function(platform, file) {
     run <- check_and_wait(platform = platform)
-    cat("\n## Check for", platform, file = file)
+    cat("\n## Check for", platform, "\n", file = file)
     write_report(run = run, file = file)
 }
 
@@ -43,6 +42,7 @@ check_and_report <- function(platform, file) {
 
 #' Close report file
 close_report <- function(file) {
+    cat("\n# End of report,", format(Sys.time()), "\n", file = file)
     close(file)
 }
 
@@ -54,6 +54,7 @@ close_report <- function(file) {
 check_and_wait <- function(platform) {
     run <- check_for_cran(platform = platform, email = EMAIL, show_status = FALSE)
     completed <- FALSE
+    Sys.sleep(15)
     while (!completed) {
         completed <- tryCatch(run$cran_summary(),
                               error = function(e) {
@@ -96,7 +97,12 @@ targets <- c("fedora-clang-devel",
              "ubuntu-gcc-release")
 
 report <- start_report()
-for (x in targets[2:4]) {
+for (x in targets) {
     check_and_report(platform = x, file = report)
 }
 close_report(report)
+
+### * Alternative check on Windows
+
+# For an alternative check on windows, one can run:
+# devtools::check_win_devel(email = EMAIL)
