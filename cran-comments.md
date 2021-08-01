@@ -14,8 +14,8 @@
 
     ❯ checking examples ... NOTE
     Examples with CPU (user + system) or elapsed time > 5s
-                   user system elapsed
-    auto_match_seqs 7.421  0.227    1.91
+                     user system elapsed
+    auto_match_seqs 6.931  0.167   1.781
     ```
 * rhub::check_for_cran(), platform Windows Server 2008 R2 SP1, R-devel, 32/64 bit
   - 0 errors | 0 warnings | 1 note
