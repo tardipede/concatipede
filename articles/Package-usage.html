@@ -130,8 +130,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede_prepare.html">concatipede_prepare</a></span><span class="op">(</span>out <span class="op">=</span> <span class="st">"seqnames"</span><span class="op">)</span></code></pre></div>
 <p>Once it is done, an excel file should be saved in your working directory. The template excel file looks like this:</p>
-<p><a href="template.png"><img src="template.png"></a></p>
-<p><em>(You can click on Excel screenshots to view them larger.)</em></p>
+<div class="figure">
+<img src="template.png" alt=""><p class="caption">template</p>
+</div>
 </div>
 <div id="modify-the-correspondence-table" class="section level2">
 <h2 class="hasAnchor">
@@ -140,7 +141,9 @@
 <p>It is important that the first cell of the first row (cell <strong>A1</strong>, <strong>“name”</strong>) is not modified; the other column names are the filenames of the fasta alignments. In the <strong>name</strong> column you must set the name of the concatenated sequences.</p>
 <p>You can copy and save different versions of the correspondence table in different sheets of the excel file: they can be selected with an appropriate option in the R session later.</p>
 <p>After modifying the template to specify the correct matches for concatenation, the first sheet of our example excel file now looks like this:</p>
-<p><a href="edited_1.png"><img src="edited_1.png"></a></p>
+<div class="figure">
+<img src="edited_1.png" alt=""><p class="caption">edited_1</p>
+</div>
 <div class="alert-primary" role="alert">
 <p><b>Note:</b> If the names of the sequences in each input file are sufficiently consistent, you can also try to use the <code><a href="../reference/auto_match_seqs.html">auto_match_seqs()</a></code> function to ask the package to perform some automatic name-matching for you (which you can still review and correct before doing the actual concatenation). See the example at the end of this vignette for more details.</p>
 </div>
@@ -155,12 +158,16 @@
 Note that also a .txt file containing the start and ending positions of the different markers in the concatenated alignments is saved in the output directory.</p>
 <p>Here is a visualization of the concatenated alignment: <img src="Package-usage_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;"></p>
 <p>We can also choose a subset of the taxa from a correspondence table, stored as a separate sheet in the excel file. For example, we can ask <code><a href="../reference/concatipede.html">concatipede()</a></code> to use the second sheet of the Excel file below when performing the concatenation. This sheet only contains data for the Macrobiotus taxa.</p>
-<p><a href="edited_2.png"><img src="edited_2.png"></a></p>
+<div class="figure">
+<img src="edited_2.png" alt=""><p class="caption">edited_2</p>
+</div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>,out<span class="op">=</span><span class="st">"Macrobiotus_4genes"</span>,excel.sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="Package-usage_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
 <p>Here is another example in which we select only one marker, stored in the “COI” sheet of the Excel file:</p>
-<p><a href="edited_3.png"><img src="edited_3.png"></a></p>
+<div class="figure">
+<img src="edited_3.png" alt=""><p class="caption">edited_3</p>
+</div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>,out<span class="op">=</span><span class="st">"Macrobiotidae_COI"</span>,excel.sheet <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="Package-usage_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;"></p>
@@ -177,8 +184,8 @@ Note that also a .txt file containing the start and ending positions of the diff
 <p>It accepts both a path of the excel corresponcende table or a dataframe.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genbank.table</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_genbank_table.html">get_genbank_table</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-f35ebb6ee8aa9e101674" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f35ebb6ee8aa9e101674">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8b72107c3a17f05ed8e7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8b72107c3a17f05ed8e7">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="rename_sequences" class="section level2">
 <h2 class="hasAnchor">
