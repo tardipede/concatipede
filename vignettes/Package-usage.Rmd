@@ -66,9 +66,7 @@ library(DT)
 library(tidyverse)
 ```
 
-[![](template.png)](template.png)
-
-*(You can click on Excel screenshots to view them larger.)*
+![template](template.png)
 
 ## Modify the correspondence table
 
@@ -80,7 +78,7 @@ You can copy and save different versions of the correspondence table in differen
 
 After modifying the template to specify the correct matches for concatenation, the first sheet of our example excel file now looks like this:
 
-[![](edited_1.png)](edited_1.png)
+![edited_1](edited_1.png)
 
 <div class="alert-primary" role="alert">
 
@@ -106,7 +104,7 @@ image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4g
 
 We can also choose a subset of the taxa from a correspondence table, stored as a separate sheet in the excel file. For example, we can ask `concatipede()` to use the second sheet of the Excel file below when performing the concatenation. This sheet only contains data for the Macrobiotus taxa.
 
-[![](edited_2.png)](edited_2.png)
+![edited_2](edited_2.png)
 
 ```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4genes",excel.sheet = 2)
@@ -119,7 +117,7 @@ image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotus_4gen
 
 Here is another example in which we select only one marker, stored in the "COI" sheet of the Excel file:
 
-[![](edited_3.png)](edited_3.png)
+![edited_3](edited_3.png)
 
 ```{r message = FALSE}
 concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_COI",excel.sheet = 3)
