@@ -116,6 +116,7 @@ clean: clean-man clean-docs clean-vignettes
 	@printf "\n"
 	@printf "$(GREEN)*** Cleaned automatically generated files and folders ***$(NC)\n"
 	@printf "\n"
+	rm -f rhub-report_*
 
 ### ** clean-man
 

@@ -13,3 +13,5 @@
 ^\.github$
 ^\.update-gh-pages\.sh$
 ^cran-comments\.md$
+^rhub-check
+^rhub-report
