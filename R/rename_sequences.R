@@ -18,7 +18,7 @@ rename_sequences = function(fasta_files,
                             out = NULL,
                             format = "fasta",
                             excel.sheet = 1,
-                            unalign = F,
+                            unalign = FALSE,
                             exclude){
   # Read files in the foldes and create a list if needed
   if (missing(fasta_files)) {
