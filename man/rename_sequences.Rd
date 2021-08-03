@@ -12,7 +12,7 @@ rename_sequences(
   out = NULL,
   format = "fasta",
   excel.sheet = 1,
-  unalign = F,
+  unalign = FALSE,
   exclude
 )
 }

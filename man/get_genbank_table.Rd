@@ -7,7 +7,7 @@
 get_genbank_table(
   df = NULL,
   filename = NULL,
-  writetable = F,
+  writetable = FALSE,
   out = "",
   excel.sheet = 1
 )
