@@ -3,6 +3,7 @@
 export("%>%")
 export(auto_match_seqs)
 export(concatipede)
+export(concatipede_example)
 export(concatipede_prepare)
 export(find_fasta)
 export(get_genbank_table)

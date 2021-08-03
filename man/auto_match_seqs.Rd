@@ -60,8 +60,7 @@ any pair of fasta files).
 }
 }
 \examples{
-xlsx_file <- system.file("extdata", "sequences-test-matching.xlsx",
-                         package = "concatipede")
+xlsx_file <- concatipede_example("sequences-test-matching.xlsx")
 xlsx_template <- readxl::read_xlsx(xlsx_file)
 auto_match_seqs(xlsx_template)
 \dontrun{
