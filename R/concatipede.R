@@ -50,7 +50,7 @@ concatipede <- function(df = NULL,
   if (!is.null(filename)) {
       # check if the translation table is in text format or in excel
       if(grepl(".txt$",filename)==TRUE){
-          df=read.table(filename,header=T,sep="\t",check.names=F)
+          df=read.table(filename,header=TRUE,sep="\t",check.names=F)
       } else if(grepl(".xlsx$",filename)==TRUE){
           df=readxl::read_xlsx(path=filename, sheet=excel.sheet, col_names=TRUE)
           colnames(df)=unlist(lapply(colnames(df),.colname.clean))
