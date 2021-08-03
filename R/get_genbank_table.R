@@ -12,7 +12,7 @@
 
 get_genbank_table = function(df = NULL,
                              filename = NULL,
-                             writetable = F,
+                             writetable = FALSE,
                              out = "",
                              excel.sheet = 1){
   # Check that exactly one of `filename` or `df` is provided
