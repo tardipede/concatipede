@@ -17,12 +17,12 @@ Several example files are shipped with the concatipede package. This function fa
 }
 \details{
 \describe{
-\item{COI_Macrobiotidae.fas}{TODO}
-\item{ITS2_Macrobiotidae.fas}{TODO}
-\item{LSU_Macrobiotidae.fas}{TODO}
-\item{SSU_Macrobiotidae.fas}{TODO}
+\item{COI_Macrobiotidae.fas}{Example fasta file.}
+\item{ITS2_Macrobiotidae.fas}{Example fasta file.}
+\item{LSU_Macrobiotidae.fas}{Example fasta file.}
+\item{SSU_Macrobiotidae.fas}{Example fasta file.}
 \item{sequences-test-matching.xlsx}{This is an Excel file (extension .xlsx) typically used to test or demonstrate the automatic matching capabilities of the concatipede package. This file represents the Excel template that could be produced by \code{\link{concatipede_prepare}} after detecting the fasta files present in a working directory.}
-\item{Macrobiotidae_seqnames.xlsx}{TODO}
+\item{Macrobiotidae_seqnames.xlsx}{This is an Excel file (extension .xlsx) that contains the correspondence table that can be used to concatenate the sequences contained in the example fasta files COI_Macrobiotidae.fas, ITS2_Macrobiotidae.fas, LSU_Macrobiotidae.fas, and SSU_Macrobiotidae.fas.}
 }
 }
 \examples{
