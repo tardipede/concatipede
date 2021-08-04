@@ -3,12 +3,12 @@
 # Create a temporary folder to store the package fasta files
 tmp_dir <- tempfile()
 dir.create(tmp_dir)
-# Cd into this directory
+# Save old directory and cd into tmp directory
 old_dir <- getwd()
 setwd(tmp_dir)
 # Copy the package fasta files into this directory
 example_files <- list.files(system.file("extdata", package="concatipede"),
-                           full.names = TRUE)
+                            full.names = TRUE)
 file.copy(from = example_files, to = getwd())
 
 ### * Test
@@ -31,11 +31,12 @@ test_that("find_fasta() works as expected", {
     expect_true(length(z) == 4)
     z <- find_fasta(exclude = "SU")
     expect_true(length(z) == 2)
+    # Go back to old directory
     setwd(old_dir)
 })
 
 ### * Clean-up
 
-# Delete temporary directory
+# Go back to old directory and delete temporary directory
 setwd(old_dir)
 unlink(tmp_dir, recursive = TRUE)

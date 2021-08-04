@@ -110,6 +110,6 @@ test_that("Functions work well together (long pipeline)", {
 
 ### * Clean-up
 
-# Delete temporary directory
+# Go back to previous directory and delete temporary directory
 setwd(prev_dir)
 unlink(tmp_dir, recursive = TRUE)

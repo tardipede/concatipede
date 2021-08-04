@@ -3,7 +3,7 @@
 # Create a temporary folder to store the package fasta files
 tmp_dir <- tempfile()
 dir.create(tmp_dir)
-# Cd into this directory
+# Save old directory and cd into the tmp directory
 old_dir <- getwd()
 setwd(tmp_dir)
 # Copy the package fasta files into this directory
@@ -89,6 +89,6 @@ test_that("concatipede() throws errors when the input is problematic", {
 
 ### * Clean-up
 
-# Delete temporary directory
+# Go back to old directory and delete temporary directory
 setwd(old_dir)
 unlink(tmp_dir, recursive = TRUE)
