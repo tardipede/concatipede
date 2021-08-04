@@ -52,7 +52,15 @@ close_report <- function(file) {
 #'
 #' @return Output from `check_for_cran()`
 check_and_wait <- function(platform) {
-    run <- check_for_cran(platform = platform, email = EMAIL, show_status = FALSE)
+    env_vars <- c("_R_CHECK_FORCE_SUGGESTS_" = "true",
+                  "_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "true")
+    if (grepl("macos", platform)) {
+        warning("Spell check turned off for r-hub check on MacOS.",
+                "See https://github.com/r-hub/rhub/issues/472")
+        env_vars["_R_CHECK_CRAN_INCOMING_USE_ASPELL_"] <- "false"
+    }
+    run <- check_for_cran(platform = platform, email = EMAIL, env_vars = env_vars,
+                          show_status = FALSE)
     completed <- FALSE
     Sys.sleep(15)
     while (!completed) {
