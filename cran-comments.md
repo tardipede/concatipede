@@ -46,30 +46,31 @@
  * rhub checks return only minor notes.
  * implemented comment after first CRAN submission:
    -   
- ``` Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
-'F' as vector names.), e.g.:
-   man/get_genbank_table.Rd:
-        get_genbank_table(
-          df = NULL,
-          filename = NULL,
-          writetable = F,
-          out = "",
-          excel.sheet = 1
-        )
-   man/rename_sequences.Rd:
-        rename_sequences(
-          fasta_files,
-          df = NULL,
-          filename = NULL,
-          marker_names = NULL,
-          out = NULL,
-          format = "fasta",
-          excel.sheet = 1,
-          unalign = F,
-          exclude
-        )  
-        ```     
-   **DONE**
+       ``` 
+      Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
+     'F' as vector names.), e.g.:
+        man/get_genbank_table.Rd:
+            get_genbank_table(
+            df = NULL,
+             filename = NULL,
+             writetable = F,
+             out = "",
+             excel.sheet = 1
+           )
+        man/rename_sequences.Rd:
+           rename_sequences(
+             fasta_files,
+             df = NULL,
+             filename = NULL,
+             marker_names = NULL,
+             out = NULL,
+             format = "fasta",
+             excel.sheet = 1,
+             unalign = F,
+             exclude
+           )  
+      ```
+  **DONE**
 
 
 
