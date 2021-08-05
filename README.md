@@ -6,6 +6,7 @@ concatipede: an R package to concatenate fasta sequences easily  <img src="man/f
 [![R_CMD_CHECK](https://tardipede.github.io/concatipede/check-results/R-CMD-check_badge.svg)](https://tardipede.github.io/concatipede/check-results/R-CMD-check_output.txt)
 [![Lifecycle Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![DOI](https://img.shields.io/badge/DOI%3A-10.5281%2Fzenodo.5130603-blue)](https://zenodo.org/badge/latestdoi/347698578)
+[![DOI](https://img.shields.io/badge/DOI%20v1.0.0%3A-10.5281%2Fzenodo.5130604-blue)](https://zenodo.org/record/5130604)
 <!-- badges: end -->
 
 This package allows to concatenate sequences from multiple Multiple Sequence Alignments based on a correspondence table.
