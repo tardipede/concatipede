@@ -45,7 +45,7 @@
 ## Comments
  * rhub checks return only minor notes.
  * implemented comment after first CRAN submission:
-   -   
+   - 1
       ```
       Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
      'F' as vector names.), e.g.:
