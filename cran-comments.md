@@ -1,7 +1,7 @@
 ## Test environments
 * local macOS 11.4, R 4.0.2
   - 0 errors | 0 warnings | 0 notes
-* rhub::check_for_cran(), platform Fedora Linux, R-devel
+* rhub::check_for_cran(), platform **Fedora Linux, R-devel**
   - 0 errors | 0 warnings | 2 notes
     ```
     ❯ checking CRAN incoming feasibility ... NOTE
@@ -17,10 +17,10 @@
                    user system elapsed
      auto_match_seqs 7.495  0.181     1.9
     ```
-* rhub::check_for_cran(), platform Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+* rhub::check_for_cran(), platform **Windows Server 2008 R2 SP1, R-devel, 32/64 bit**
   - 0 errors | 0 warnings | 0 note
 
-* rhub::check_for_cran(), platform macOS 10.13.6 High Sierra, R-release, brew
+* rhub::check_for_cran(), platform **macOS 10.13.6 High Sierra, R-release, brew** (with spell-check turned off)
   - 0 errors | 0 warnings | 1 notes
     ```
     ❯ checking CRAN incoming feasibility ... NOTE
@@ -29,7 +29,7 @@
      New submission
     ```
 
-* rhub::check_for_cran(), platform Ubuntu Linux 20.04.1 LTS, R-release, GCC
+* rhub::check_for_cran(), platform **Ubuntu Linux 20.04.1 LTS, R-release, GCC**
   - 0 errors | 0 warnings | 1 note
     ```
     ❯ checking CRAN incoming feasibility ... NOTE
@@ -43,8 +43,9 @@
     
     
 ## Comments
- * rhub checks return only minor notes.
- * implemented comment after first CRAN submission:
+ * r-hub checks return only minor notes.
+ * We addressed all the comments received after the first CRAN submission (see below) and bumped the package version number to 1.0.1.
+ * Details of changes to address comments after first CRAN submission:
    - 1
      ```
      Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
@@ -85,7 +86,7 @@
         ```
      **DONE:** : Added a \value tag for rename_sequences(). 
                 Improved the import of magrittr's pipe so that it is properly documented. 
-                Added a function concatipede_example() to document in a clean way the example files shipped with the package.
+                Added a function concatipede_example() to document in a clean way the example files shipped with the package. There should be no missing Rd tags now.
     
    - 3
         ```
