@@ -45,9 +45,7 @@
 ## Comments
  * rhub checks return only minor notes.
  * implemented comment after first CRAN submission:
-   -   
-       ``` 
-      Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
+   -   Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
      'F' as vector names.), e.g.:
         man/get_genbank_table.Rd:
             get_genbank_table(
@@ -69,7 +67,6 @@
              unalign = F,
              exclude
            )  
-      ```
   **DONE**
 
 
