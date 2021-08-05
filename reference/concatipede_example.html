@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Example files shipped with the package — example-files-shipped-with-the-package • concatipede</title>
+<title>Get the path to one of concatipede example files — concatipede_example • concatipede</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Example files shipped with the package — example-files-shipped-with-the-package" />
-<meta property="og:description" content="Several example files are shipped with the concatipede package." />
+<meta property="og:title" content="Get the path to one of concatipede example files — concatipede_example" />
+<meta property="og:description" content="Several example files are shipped with the concatipede package. This function facilitates the access to those files." />
 
 
 
@@ -113,34 +113,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Example files shipped with the package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tardipede/concatipede/blob/master/R/extdata-doc.R'><code>R/extdata-doc.R</code></a></small>
-    <div class="hidden name"><code>example-files-shipped-with-the-package.Rd</code></div>
+    <h1>Get the path to one of concatipede example files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tardipede/concatipede/blob/master/R/concatipede_example.R'><code>R/concatipede_example.R</code></a></small>
+    <div class="hidden name"><code>concatipede_example.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Several example files are shipped with the concatipede package.</p>
+    <p>Several example files are shipped with the concatipede package. This function facilitates the access to those files.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>concatipede_example</span><span class='op'>(</span>example_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>example_file</th>
+      <td><p>Basename of the target example file. If <code>NULL</code> (the default), the basenames of the available files are listed.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="excel-file-sequences-test-matching-xlsx-"><a class="anchor" href="#excel-file-sequences-test-matching-xlsx-"></a>Excel file 'sequences-test-matching.xlsx'</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The full path to access the example file, or a list of available example files if no <code>example_file</code> argument was provided.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
+<dl>
+<dt>COI_Macrobiotidae.fas</dt><dd><p>Example fasta file.</p></dd>
+<dt>ITS2_Macrobiotidae.fas</dt><dd><p>Example fasta file.</p></dd>
+<dt>LSU_Macrobiotidae.fas</dt><dd><p>Example fasta file.</p></dd>
+<dt>SSU_Macrobiotidae.fas</dt><dd><p>Example fasta file.</p></dd>
+<dt>sequences-test-matching.xlsx</dt><dd><p>This is an Excel file (extension .xlsx) typically used to test or demonstrate the automatic matching capabilities of the concatipede package. This file represents the Excel template that could be produced by <code><a href='concatipede_prepare.html'>concatipede_prepare</a></code> after detecting the fasta files present in a working directory.</p></dd>
+<dt>Macrobiotidae_seqnames.xlsx</dt><dd><p>This is an Excel file (extension .xlsx) that contains the correspondence table that can be used to concatenate the sequences contained in the example fasta files COI_Macrobiotidae.fas, ITS2_Macrobiotidae.fas, LSU_Macrobiotidae.fas, and SSU_Macrobiotidae.fas.</p></dd>
 
+</dl>
 
-<p>This is an Excel file (extension .xlsx) typically used to test or
-demonstrate the automatic matching capabilities of the concatipede package.</p>
-<p>This file represents the Excel template that could be produced by
-<code><a href='concatipede_prepare.html'>concatipede_prepare</a></code> after detecting the fasta files present in a
-working directory.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Excel file 'sequences-test-matching.xlsx'</span>
+    <pre class="examples"><div class='input'><span class='fu'>concatipede_example</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "COI_Macrobiotidae.fas"        "ITS2_Macrobiotidae.fas"      
+#&gt; [3] "LSU_Macrobiotidae.fas"        "Macrobiotidae_seqnames.xlsx" 
+#&gt; [5] "sequences-test-matching.xlsx" "SSU_Macrobiotidae.fas"       </div><div class='input'><span class='va'>example</span> <span class='op'>&lt;-</span> <span class='fu'>concatipede_example</span><span class='op'>(</span><span class='st'>"sequences-test-matching.xlsx"</span><span class='op'>)</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"readxl"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"sequences-test-matching.xlsx"</span>,
-                      package <span class='op'>=</span> <span class='st'>"concatipede"</span><span class='op'>)</span>
-  <span class='va'>seqs</span> <span class='op'>&lt;-</span> <span class='fu'>readxl</span><span class='fu'>::</span><span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_xlsx</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
+  <span class='va'>seqs</span> <span class='op'>&lt;-</span> <span class='fu'>readxl</span><span class='fu'>::</span><span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_xlsx</a></span><span class='op'>(</span><span class='va'>example</span><span class='op'>)</span>
   <span class='va'>seqs</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 330 × 5</span>
@@ -156,7 +172,8 @@ working directory.</p>
 #&gt; <span style='color: #BCBCBC;'> 8</span>     0 EU266932_Minibiot… FJ435758_Minibio… EU244597_Paramac… KT935500_Macrob…
 #&gt; <span style='color: #BCBCBC;'> 9</span>     0 EU266933_Minibiot… FJ435759_Minibio… EU244598_Paramac… KX129795_Mesobi…
 #&gt; <span style='color: #BCBCBC;'>10</span>     0 EU266934_Minibiot… FJ435760_Minibio… EU244599_Paramac… KX810010_Macrob…
-#&gt; <span style='color: #949494;'># … with 320 more rows</span></div></pre>
+#&gt; <span style='color: #949494;'># … with 320 more rows</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
