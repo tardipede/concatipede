@@ -70,42 +70,42 @@
             exclude
           )
      ```
-  **DONE**
+     **DONE**
    - 2
-      ```
-      Please add \value to .Rd files regarding exported methods and explain
-      the functions results in the documentation. Please write about the
-      structure of the output (class) and also what the output means. (If a
-      function does not return a value, please document that too, e.g.
-      \value{No return value, called for side effects} or similar)
-      Missing Rd-tags:
-      example-files-shipped-with-the-package.Rd: \value
-      pipe.Rd: \arguments,  \value
-      rename_sequences.Rd: \value
-      ```
-  **DONE:** : Added a \value tag for rename_sequences(). 
-              Improved the import of magrittr's pipe so that it is properly documented. 
-              Added a function concatipede_example() to document in a clean way the example files shipped with the package.
-  
-   - 3
-      ```
-      Please always make sure to reset to user's options(), working directory
-      or par() after you changed it in examples and vignettes and demos.
-      e.g.:
-      oldpar <- par(mfrow = c(1,2))
-      ...
-      par(oldpar)
-      
-      old <- options(digits = 3)
-      ...
-      options(old)
-      
-      oldwd <- getwd()
-      ...
-      setwd(oldwd)
-      
-      e.g.: tests and vignette
-      ```
-  **DONE:** : Double-checked that the initial working directory was restored at the end of the tests. 
-              Made sure that options(), working directory, and par() are restored in the vignette
+        ```
+        Please add \value to .Rd files regarding exported methods and explain
+        the functions results in the documentation. Please write about the
+        structure of the output (class) and also what the output means. (If a
+        function does not return a value, please document that too, e.g.
+        \value{No return value, called for side effects} or similar)
+        Missing Rd-tags:
+        example-files-shipped-with-the-package.Rd: \value
+        pipe.Rd: \arguments,  \value
+        rename_sequences.Rd: \value
+        ```
+    **DONE:** : Added a \value tag for rename_sequences(). 
+                Improved the import of magrittr's pipe so that it is properly documented. 
+                Added a function concatipede_example() to document in a clean way the example files shipped with the package.
+    
+  - 3
+        ```
+        Please always make sure to reset to user's options(), working directory
+        or par() after you changed it in examples and vignettes and demos.
+        e.g.:
+        oldpar <- par(mfrow = c(1,2))
+        ...
+        par(oldpar)
+        
+        old <- options(digits = 3)
+        ...
+        options(old)
+        
+        oldwd <- getwd()
+        ...
+        setwd(oldwd)
+        
+        e.g.: tests and vignette
+        ```
+    **DONE:** : Double-checked that the initial working directory was restored at the end of the tests. 
+                Made sure that options(), working directory, and par() are restored in the vignette
 
