@@ -108,5 +108,5 @@
         e.g.: tests and vignette
         ```
      **DONE:** : Double-checked that the initial working directory was restored at the end of the tests. 
-                Made sure that options(), working directory, and par() are restored in the vignette
+                Made sure that options(), working directory, and par() are restored in the vignette.
 
