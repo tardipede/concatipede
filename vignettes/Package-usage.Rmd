@@ -10,7 +10,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(fig.align = "center")
-options(scipen = 6, width = 85)
+old_options <- options(scipen = 6, width = 85)
 ```
 
 # Concatipede requirements and workflow
@@ -28,6 +28,8 @@ For this package to work, all the MSAs in fasta format should be placed in the s
 All the fasta files of interest should be put in a target directory. Here, in order for this example to work, we first set up a `concatipede_test/` directory, copy the example fasta files shipped with the package in it and set it as working directory. The concatipede package functions automatically load and save files in the working directory, however options to direct them to different directories are present.  
 
 ```{r results = "hide"}
+# Save the path to the initial directory for later clean-up
+old_dir <- getwd()
 # Create a directory to put the fasta files for this example
 dir.create("concatipede_test")
 # Set it as the working directory
@@ -98,7 +100,7 @@ Note that also a .txt file containing the start and ending positions of the diff
 
 Here is a visualization of the concatenated alignment:
 ```{r, echo=FALSE, fig.width = 10, fig.height = 3, message = FALSE}
-par(mar=c(1,12,1,1))
+old_par <- par(mar=c(1,12,1,1))
 image(concatipede(filename = "Macrobiotidae_seqnames.xlsx",out="Macrobiotidae_4genes",excel.sheet = 1),cex=0.5)
 ```
 
@@ -176,4 +178,17 @@ find_fasta() %>%
   concatipede() %>%
   write_fasta("merged-seqs.fasta") %>%
   image(cex=0.3)
+```
+
+This is the end of this vignette! To go back to your initial directory, you can run:
+
+```{r }
+# Clean-up: go back to initial directory
+setwd(old_dir)
+```
+
+```{r echo = FALSE}
+# Invisible clean-up
+par(old_par)
+options(old_options)
 ```

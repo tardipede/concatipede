@@ -12,7 +12,7 @@ rename_sequences(
   out = NULL,
   format = "fasta",
   excel.sheet = 1,
-  unalign = F,
+  unalign = FALSE,
   exclude
 )
 }
@@ -35,6 +35,9 @@ rename_sequences(
 
 \item{exclude}{Optional regular expression used to exclude some filenames from the list of detected files.}
 }
+\value{
+No return value, called for side effect of saving a correspondence table.
+}
 \description{
-This function rename sequences in fasta files based on a correspondence table
+This function renames sequences in fasta files based on a correspondence table.
 }

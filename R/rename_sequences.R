@@ -1,6 +1,6 @@
 #' Rename sequences
 #'
-#' This function rename sequences in fasta files based on a correspondence table
+#' This function renames sequences in fasta files based on a correspondence table.
 #'
 #' @param fasta_files Optional, a vector of paths to the fasta files that should be renamed. If this argument is missing, the function automatically detects and uses all the fasta files present in the working directory.
 #' @param filename Filename of correspondence table. Alternatively, if no filename is provided, the user can provide their own correspondence table as the \code{df} argument.
@@ -11,6 +11,8 @@
 #' @param excel.sheet specify what sheet from the excel spreadsheet you wanna read. Either a string (the name of a sheet), or an integer (the position of the sheet).
 #' @param unalign return unaligned fasta files as output
 #' @param exclude Optional regular expression used to exclude some filenames from the list of detected files.
+#'
+#' @return No return value, called for side effect of saving a correspondence table.
 rename_sequences = function(fasta_files,
                             df = NULL,
                             filename = NULL,

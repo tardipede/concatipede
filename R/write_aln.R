@@ -18,7 +18,7 @@
 #' @examples
 #' \dontrun{
 #'   # Path to an example alignment file
-#'   pkg_aln <- system.file("extdata", "COI_Macrobiotidae.fas", package="concatipede")
+#'   pkg_aln <- concatipede_example("COI_Macrobiotidae.fas")
 #'   # Load the alignment into the R session
 #'   aln <- ape::read.FASTA(pkg_aln)
 #'   # Write the alignment in various formats
