@@ -82,9 +82,9 @@
       pipe.Rd: \arguments,  \value
       rename_sequences.Rd: \value
       ```
-  **DONE:** : Added a \value tag for rename_sequences() 
-              Improved the import of magrittr's pipe so that it is properly documented
-              Aded a function  concatipede_example() to document in a clean way the example files shipped with the package.
+  **DONE:** : Added a \value tag for rename_sequences(). 
+              Improved the import of magrittr's pipe so that it is properly documented. 
+              Added a function concatipede_example() to document in a clean way the example files shipped with the package.
   
    - 3
       ```
@@ -105,6 +105,6 @@
       
       e.g.: tests and vignette
       ```
-     **DONE:** : Double-checked that the initial working directory was restored at the end of the tests
-                 Made sure that options(), working directory, and par() are restored in the vignette
+  **DONE:** : Double-checked that the initial working directory was restored at the end of the tests. 
+              Made sure that options(), working directory, and par() are restored in the vignette
 
