@@ -2,7 +2,7 @@
 
 # concatipede 1.0.1
 
-* Fixed some minor issue for CRAN submission.
+* Fixed some minor issues for CRAN submission.
 
 # concatipede 1.0.0
 
