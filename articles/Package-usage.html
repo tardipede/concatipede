@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">concatipede</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -53,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tardipede/concatipede">
+  <a href="https://github.com/tardipede/concatipede" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -68,105 +70,152 @@
 
       
 
-      </header><script src="Package-usage_files/header-attrs-2.9/header-attrs.js"></script><script src="Package-usage_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="Package-usage_files/jquery-3.5.1/jquery.min.js"></script><link href="Package-usage_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="Package-usage_files/datatables-binding-0.18/datatables.js"></script><link href="Package-usage_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="Package-usage_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="Package-usage_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><script src="Package-usage_files/jszip-1.10.20/jszip.min.js"></script><link href="Package-usage_files/dt-ext-buttons-1.10.20/css/buttons.dataTables.min.css" rel="stylesheet">
-<script src="Package-usage_files/dt-ext-buttons-1.10.20/js/dataTables.buttons.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.10.20/js/buttons.flash.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.10.20/js/buttons.html5.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.10.20/js/buttons.colVis.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.10.20/js/buttons.print.min.js"></script><link href="Package-usage_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="Package-usage_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><div class="row">
+      </header><script src="Package-usage_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="Package-usage_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="Package-usage_files/datatables-binding-0.22/datatables.js"></script><link href="Package-usage_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="Package-usage_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="Package-usage_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><script src="Package-usage_files/jszip-1.11.3/jszip.min.js"></script><link href="Package-usage_files/dt-ext-buttons-1.11.3/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="Package-usage_files/dt-ext-buttons-1.11.3/js/dataTables.buttons.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.11.3/js/buttons.html5.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.11.3/js/buttons.colVis.min.js"></script><script src="Package-usage_files/dt-ext-buttons-1.11.3/js/buttons.print.min.js"></script><link href="Package-usage_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="Package-usage_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Example of package usage</h1>
             
-            <h4 class="date">2021-08-06</h4>
+            <h4 data-toc-skip class="date">2022-04-12</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tardipede/concatipede/blob/master/vignettes/Package-usage.Rmd"><code>vignettes/Package-usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tardipede/concatipede/blob/HEAD/vignettes/Package-usage.Rmd" class="external-link"><code>vignettes/Package-usage.Rmd</code></a></small>
       <div class="hidden name"><code>Package-usage.Rmd</code></div>
 
     </div>
 
     
     
-<div id="concatipede-requirements-and-workflow" class="section level1">
-<h1 class="hasAnchor">
-<a href="#concatipede-requirements-and-workflow" class="anchor"></a>Concatipede requirements and workflow</h1>
-<p>The concatipede package allows to concatenate sequences from different Multiple Sequence Alignments (MSAs) based on a correspondence table that indicates how sequences from different MSAs are linked to each other.</p>
-<p>For this package to work, all the MSAs in fasta format should be placed in the same folder (that can be the working directory). Only the fasta files to be concatenated should be present in the directory. If other fasta files are present and you don´t want to include them, see the <code><a href="../reference/concatipede_prepare.html">concatipede_prepare(exclude = "")</a></code> option.</p>
+<div class="section level2">
+<h2 id="concatipede-requirements-and-workflow">Concatipede requirements and workflow<a class="anchor" aria-label="anchor" href="#concatipede-requirements-and-workflow"></a>
+</h2>
+<p>The concatipede package allows to concatenate sequences from
+different Multiple Sequence Alignments (MSAs) based on a correspondence
+table that indicates how sequences from different MSAs are linked to
+each other.</p>
+<p>For this package to work, all the MSAs in fasta format should be
+placed in the same folder (that can be the working directory). Only the
+fasta files to be concatenated should be present in the directory. If
+other fasta files are present and you don´t want to include them, see
+the <code>concatipede_prepare(exclude = "")</code> option.</p>
 <div class="figure">
 <img src="concatipede_scheme.png" title="Concatipede workflow" alt=""><p class="caption">Concatipede workflow</p>
 </div>
 </div>
-<div id="how-to-use-concatipede" class="section level1">
-<h1 class="hasAnchor">
-<a href="#how-to-use-concatipede" class="anchor"></a>How to use concatipede</h1>
-<div id="prepare-the-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#prepare-the-files" class="anchor"></a>Prepare the files</h2>
-<p>All the fasta files of interest should be put in a target directory. Here, in order for this example to work, we first set up a <code>concatipede_test/</code> directory, copy the example fasta files shipped with the package in it and set it as working directory. The concatipede package functions automatically load and save files in the working directory, however options to direct them to different directories are present.</p>
+<div class="section level2">
+<h2 id="how-to-use-concatipede">How to use concatipede<a class="anchor" aria-label="anchor" href="#how-to-use-concatipede"></a>
+</h2>
+<div class="section level3">
+<h3 id="prepare-the-files">Prepare the files<a class="anchor" aria-label="anchor" href="#prepare-the-files"></a>
+</h3>
+<p>All the fasta files of interest should be put in a target directory.
+Here, in order for this example to work, we first set up a
+<code>concatipede_test/</code> directory, copy the example fasta files
+shipped with the package in it and set it as working directory. The
+concatipede package functions automatically load and save files in the
+working directory, however options to direct them to different
+directories are present.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Save the path to the initial directory for later clean-up</span>
-<span class="va">old_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">old_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># Create a directory to put the fasta files for this example</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"concatipede_test"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"concatipede_test"</span><span class="op">)</span>
 <span class="co"># Set it as the working directory</span>
-<span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"concatipede_test"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="st">"concatipede_test"</span><span class="op">)</span>
 <span class="co"># Copy the example fasta files shipped with the package into that directory</span>
-<span class="va">example_files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"concatipede"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">example_files</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Now all the data used in this vignette is copied in the working directory.</p>
+<span class="va">example_files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"concatipede"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">example_files</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Now all the data used in this vignette is copied in the working
+directory.</p>
 </div>
-<div id="set-up-the-template-for-the-correspondence-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#set-up-the-template-for-the-correspondence-table" class="anchor"></a>Set up the template for the correspondence table</h2>
-<p>The first step is to generate a template correspondence table with all the sequence names. You can do this with the function <code><a href="../reference/concatipede_prepare.html">concatipede_prepare()</a></code>.</p>
+<div class="section level3">
+<h3 id="set-up-the-template-for-the-correspondence-table">Set up the template for the correspondence table<a class="anchor" aria-label="anchor" href="#set-up-the-template-for-the-correspondence-table"></a>
+</h3>
+<p>The first step is to generate a template correspondence table with
+all the sequence names. You can do this with the function
+<code><a href="../reference/concatipede_prepare.html">concatipede_prepare()</a></code>.</p>
 <p>But first let’s check what fasta files are in our directory:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tardipede/concatipede">concatipede</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tardipede/concatipede" class="external-link">concatipede</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/find_fasta.html">find_fasta</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "/__w/concatipede/concatipede/vignettes/COI_Macrobiotidae.fas" 
-## [2] "/__w/concatipede/concatipede/vignettes/ITS2_Macrobiotidae.fas"
-## [3] "/__w/concatipede/concatipede/vignettes/LSU_Macrobiotidae.fas" 
-## [4] "/__w/concatipede/concatipede/vignettes/SSU_Macrobiotidae.fas"</code></pre>
-<p>Those are alignments for 4 markers of tardigrades from the family Macrobiotidae. With the function <code><a href="../reference/concatipede_prepare.html">concatipede_prepare()</a></code> we will generate an excel table with the sequence names in the order they are found in each alignment.</p>
+<pre><code><span class="co">## [1] "/__w/concatipede/concatipede/vignettes/COI_Macrobiotidae.fas" </span>
+<span class="co">## [2] "/__w/concatipede/concatipede/vignettes/ITS2_Macrobiotidae.fas"</span>
+<span class="co">## [3] "/__w/concatipede/concatipede/vignettes/LSU_Macrobiotidae.fas" </span>
+<span class="co">## [4] "/__w/concatipede/concatipede/vignettes/SSU_Macrobiotidae.fas"</span></code></pre>
+<p>Those are alignments for 4 markers of tardigrades from the family
+Macrobiotidae. With the function <code><a href="../reference/concatipede_prepare.html">concatipede_prepare()</a></code> we
+will generate an excel table with the sequence names in the order they
+are found in each alignment.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede_prepare.html">concatipede_prepare</a></span><span class="op">(</span>out <span class="op">=</span> <span class="st">"seqnames"</span><span class="op">)</span></code></pre></div>
-<p>Once it is done, an excel file should be saved in your working directory. The template excel file looks like this:</p>
+<p>Once it is done, an excel file should be saved in your working
+directory. The template excel file looks like this:</p>
 <div class="figure">
 <img src="template.png" alt=""><p class="caption">template</p>
 </div>
 </div>
-<div id="modify-the-correspondence-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#modify-the-correspondence-table" class="anchor"></a>Modify the correspondence table</h2>
-<p>Each row of the correspondence table will be used to build one concatenated sequence, by extracting and concatenating the corresponding sequences from the input files. You can modify the template excel correspondence table to reflect how you want to concatenate the sequences from the different alignments.</p>
-<p>It is important that the first cell of the first row (cell <strong>A1</strong>, <strong>“name”</strong>) is not modified; the other column names are the filenames of the fasta alignments. In the <strong>name</strong> column you must set the name of the concatenated sequences.</p>
-<p>You can copy and save different versions of the correspondence table in different sheets of the excel file: they can be selected with an appropriate option in the R session later.</p>
-<p>After modifying the template to specify the correct matches for concatenation, the first sheet of our example excel file now looks like this:</p>
+<div class="section level3">
+<h3 id="modify-the-correspondence-table">Modify the correspondence table<a class="anchor" aria-label="anchor" href="#modify-the-correspondence-table"></a>
+</h3>
+<p>Each row of the correspondence table will be used to build one
+concatenated sequence, by extracting and concatenating the corresponding
+sequences from the input files. You can modify the template excel
+correspondence table to reflect how you want to concatenate the
+sequences from the different alignments.</p>
+<p>It is important that the first cell of the first row (cell
+<strong>A1</strong>, <strong>“name”</strong>) is not modified; the other
+column names are the filenames of the fasta alignments. In the
+<strong>name</strong> column you must set the name of the concatenated
+sequences.</p>
+<p>You can copy and save different versions of the correspondence table
+in different sheets of the excel file: they can be selected with an
+appropriate option in the R session later.</p>
+<p>After modifying the template to specify the correct matches for
+concatenation, the first sheet of our example excel file now looks like
+this:</p>
 <div class="figure">
 <img src="edited_1.png" alt=""><p class="caption">edited_1</p>
 </div>
 <div class="alert-primary" role="alert">
-<p><b>Note:</b> If the names of the sequences in each input file are sufficiently consistent, you can also try to use the <code><a href="../reference/auto_match_seqs.html">auto_match_seqs()</a></code> function to ask the package to perform some automatic name-matching for you (which you can still review and correct before doing the actual concatenation). See the example at the end of this vignette for more details.</p>
+<p><b>Note:</b> If the names of the sequences in each input file are
+sufficiently consistent, you can also try to use the
+<code><a href="../reference/auto_match_seqs.html">auto_match_seqs()</a></code> function to ask the package to perform
+some automatic name-matching for you (which you can still review and
+correct before doing the actual concatenation). See the example at the
+end of this vignette for more details.</p>
 </div>
 </div>
-<div id="concatenate-the-alignents" class="section level2">
-<h2 class="hasAnchor">
-<a href="#concatenate-the-alignents" class="anchor"></a>Concatenate the alignents</h2>
-<p>Now we input this excel file to the <code><a href="../reference/concatipede.html">concatipede()</a></code> function:</p>
+<div class="section level3">
+<h3 id="concatenate-the-alignents">Concatenate the alignents<a class="anchor" aria-label="anchor" href="#concatenate-the-alignents"></a>
+</h3>
+<p>Now we input this excel file to the <code><a href="../reference/concatipede.html">concatipede()</a></code>
+function:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, out <span class="op">=</span> <span class="st">"Macrobiotidae_4genes"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p>This will create a new subfolder with the concatenated alignment in different formats.<br>
-Note that also a .txt file containing the start and ending positions of the different markers in the concatenated alignments is saved in the output directory.</p>
-<p>Here is a visualization of the concatenated alignment: <img src="Package-usage_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;"></p>
-<p>We can also choose a subset of the taxa from a correspondence table, stored as a separate sheet in the excel file. For example, we can ask <code><a href="../reference/concatipede.html">concatipede()</a></code> to use the second sheet of the Excel file below when performing the concatenation. This sheet only contains data for the Macrobiotus taxa.</p>
+<p>This will create a new subfolder with the concatenated alignment in
+different formats.<br>
+Note that also a .txt file containing the start and ending positions of
+the different markers in the concatenated alignments is saved in the
+output directory.</p>
+<p>Here is a visualization of the concatenated alignment:
+<img src="Package-usage_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;"></p>
+<p>We can also choose a subset of the taxa from a correspondence table,
+stored as a separate sheet in the excel file. For example, we can ask
+<code><a href="../reference/concatipede.html">concatipede()</a></code> to use the second sheet of the Excel file
+below when performing the concatenation. This sheet only contains data
+for the Macrobiotus taxa.</p>
 <div class="figure">
 <img src="edited_2.png" alt=""><p class="caption">edited_2</p>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>,out<span class="op">=</span><span class="st">"Macrobiotus_4genes"</span>,excel.sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="Package-usage_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
-<p>Here is another example in which we select only one marker, stored in the “COI” sheet of the Excel file:</p>
+<p>Here is another example in which we select only one marker, stored in
+the “COI” sheet of the Excel file:</p>
 <div class="figure">
 <img src="edited_3.png" alt=""><p class="caption">edited_3</p>
 </div>
@@ -175,49 +224,66 @@ Note that also a .txt file containing the start and ending positions of the diff
 <p><img src="Package-usage_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="accessory-functions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#accessory-functions" class="anchor"></a>Accessory functions</h1>
-<p>Two accessory functions to help with sequence management are present in the package (<code><a href="../reference/get_genbank_table.html">get_genbank_table()</a></code> and <code><a href="../reference/rename_sequences.html">rename_sequences()</a></code>).</p>
-<div id="get_genbank_table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get_genbank_table" class="anchor"></a>get_genbank_table()</h2>
-<p>This function extract the GenBank accession numbers from the sequence names in a correspondence table and return a GenBank accession table. If the function cannot find a GenBank accession number in the sequence name it will return a NA.</p>
-<p>It accepts both a path of the excel corresponcende table or a dataframe.</p>
+<div class="section level2">
+<h2 id="accessory-functions">Accessory functions<a class="anchor" aria-label="anchor" href="#accessory-functions"></a>
+</h2>
+<p>Two accessory functions to help with sequence management are present
+in the package (<code><a href="../reference/get_genbank_table.html">get_genbank_table()</a></code> and
+<code><a href="../reference/rename_sequences.html">rename_sequences()</a></code>).</p>
+<div class="section level3">
+<h3 id="get_genbank_table">get_genbank_table()<a class="anchor" aria-label="anchor" href="#get_genbank_table"></a>
+</h3>
+<p>This function extract the GenBank accession numbers from the sequence
+names in a correspondence table and return a GenBank accession table. If
+the function cannot find a GenBank accession number in the sequence name
+it will return a NA.</p>
+<p>It accepts both a path of the excel corresponcende table or a
+dataframe.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genbank.table</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_genbank_table.html">get_genbank_table</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-cbe233adc72fc809c501" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cbe233adc72fc809c501">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-28c59273eb1f26db4939" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-28c59273eb1f26db4939">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Macrobiotus_hannae","Macrobiotus_wandae","Macrobiotus_caelestis","Macrobiotus_polonicus","Macrobiotus_kamilae","Macrobiotus_noongaris","Sisubiotus_spectabilis","Mesobiotus_romani","Mesobiotus_harmsworthi","Mesobiotus_philippinicus","Mesobiotus_insanis","Paramacrobiotus_areolatus","Paramacrobiotus_fairbanksi"],["MH057764","MN482684","MK737922","MN888317","MK737920","MK737919","MN888324","MH195149","MH195150","KX129796","MF441491","MH675998","MH676011"],["MH063923","MN435120","MK737072","MN888338","MK737067","MK737066","MN888344","MH197150","MH197154","KX129795","MF441490","MH666080","MH666090"],["MH063924","MN435116","MK737071","MN888355","MK737064","MK737063","MN888364","MH197151","MH197264","KX129794","MF441489","MH664948","MH664950"],["MN435112","MH063922","MK737073","MN888369","MK737070","MK737069","MN888372","MH197158","MH197146","KX129793","MF441488","MH664931","MH664941"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>COI_Macrobiotidae.fas<\/th>\n      <th>ITS2_Macrobiotidae.fas<\/th>\n      <th>LSU_Macrobiotidae.fas<\/th>\n      <th>SSU_Macrobiotidae.fas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","rownames":false,"buttons":["excel"],"scrollX":true,"lengthMenu":[[13,25,50,-1],["13","25","50","All"]],"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="rename_sequences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rename_sequences" class="anchor"></a>rename_sequences()</h2>
-<p>This function renames the sequences in the provided fasta files based on a correspondence table and a vector of markers names.</p>
-<p>The new sequence names will be composed by the GenBank accession number (if present), the name indicated in the correspondennce table and the marker name provided. The function creates a new directory where the renamed fasta files are saved, together with an updated correspondence table.</p>
+<div class="section level3">
+<h3 id="rename_sequences">rename_sequences()<a class="anchor" aria-label="anchor" href="#rename_sequences"></a>
+</h3>
+<p>This function renames the sequences in the provided fasta files based
+on a correspondence table and a vector of markers names.</p>
+<p>The new sequence names will be composed by the GenBank accession
+number (if present), the name indicated in the correspondennce table and
+the marker name provided. The function creates a new directory where the
+renamed fasta files are saved, together with an updated correspondence
+table.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rename_sequences.html">rename_sequences</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span>, marker_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"COI"</span>,<span class="st">"ITS2"</span>,<span class="st">"LSU"</span>,<span class="st">"SSU"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/rename_sequences.html">rename_sequences</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Macrobiotidae_seqnames.xlsx"</span>, excel.sheet <span class="op">=</span> <span class="fl">1</span>, marker_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"COI"</span>,<span class="st">"ITS2"</span>,<span class="st">"LSU"</span>,<span class="st">"SSU"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="sequence-names-automatching" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sequence-names-automatching" class="anchor"></a>Sequence names automatching</h1>
-<p>Concatipede also includes a function that tries to automatch the sequence names from different fasta files (<code><a href="../reference/auto_match_seqs.html">auto_match_seqs()</a></code>).</p>
-<p>If the sequence names are not “clean” the matching won’t be perfect, so it is advisable to check the automatched excel file.</p>
-<p>In the example below it is also illustrated how to use base concatipede functions to customize the template preparation, sequence names matching and concatenation:</p>
+<div class="section level2">
+<h2 id="sequence-names-automatching">Sequence names automatching<a class="anchor" aria-label="anchor" href="#sequence-names-automatching"></a>
+</h2>
+<p>Concatipede also includes a function that tries to automatch the
+sequence names from different fasta files
+(<code><a href="../reference/auto_match_seqs.html">auto_match_seqs()</a></code>).</p>
+<p>If the sequence names are not “clean” the matching won’t be perfect,
+so it is advisable to check the automatched excel file.</p>
+<p>In the example below it is also illustrated how to use base
+concatipede functions to customize the template preparation, sequence
+names matching and concatenation:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/find_fasta.html">find_fasta</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/concatipede_prepare.html">concatipede_prepare</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/write_xl.html">write_xl</a></span><span class="op">(</span><span class="st">"template.xlsx"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/auto_match_seqs.html">auto_match_seqs</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/write_xl.html">write_xl</a></span><span class="op">(</span><span class="st">"template_automatched.xlsx"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/write_aln.html">write_fasta</a></span><span class="op">(</span><span class="st">"merged-seqs.fasta"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/find_fasta.html">find_fasta</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/concatipede_prepare.html">concatipede_prepare</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/write_xl.html">write_xl</a></span><span class="op">(</span><span class="st">"template.xlsx"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/auto_match_seqs.html">auto_match_seqs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/write_xl.html">write_xl</a></span><span class="op">(</span><span class="st">"template_automatched.xlsx"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/concatipede.html">concatipede</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/write_aln.html">write_fasta</a></span><span class="op">(</span><span class="st">"merged-seqs.fasta"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span>cex<span class="op">=</span><span class="fl">0.3</span><span class="op">)</span></code></pre></div>
 <p><img src="Package-usage_files/figure-html/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;"></p>
-<p>This is the end of this vignette! To go back to your initial directory, you can run:</p>
+<p>This is the end of this vignette! To go back to your initial
+directory, you can run:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Clean-up: go back to initial directory</span>
-<span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="va">old_dir</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">old_dir</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -232,11 +298,14 @@ Note that also a .txt file containing the start and ending positions of the diff
 
 
       <footer><div class="copyright">
-  <p>Developed by Matteo Vecchi, Mattieu Bruneaux.</p>
+  <p></p>
+<p>Developed by Matteo Vecchi, Mattieu Bruneaux.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
@@ -244,6 +313,8 @@ Note that also a .txt file containing the start and ending positions of the diff
 
   
 
+
+  
 
   </body>
 </html>

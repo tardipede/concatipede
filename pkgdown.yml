@@ -1,10 +1,10 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: 2.17.1.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   Package-usage: Package-usage.html
-last_built: 2021-08-06T07:57Z
+last_built: 2022-04-12T07:42Z
 urls:
-  reference: https://tardipede.github.io/concatipede//reference
-  article: https://tardipede.github.io/concatipede//articles
+  reference: https://tardipede.github.io/concatipede/reference
+  article: https://tardipede.github.io/concatipede/articles
 
